@@ -1,3 +1,7 @@
-body {
+/* body {
     background-color: skyblue;
+} */
+
+input {
+    border: 1px solid grey;
 }
