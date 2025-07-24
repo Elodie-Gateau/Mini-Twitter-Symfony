@@ -36,8 +36,8 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
             'stylesheets' => [$this, 'block_stylesheets'],
             'javascripts' => [$this, 'block_javascripts'],
             'importmap' => [$this, 'block_importmap'],
-            'body' => [$this, 'block_body'],
             'header' => [$this, 'block_header'],
+            'body' => [$this, 'block_body'],
         ];
     }
 
@@ -72,10 +72,16 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
         // line 16
         yield "\t</head>
 \t<body>
+
 \t\t";
-        // line 18
+        // line 19
+        yield from $this->unwrap()->yieldBlock('header', $context, $blocks);
+        // line 22
+        yield "
+\t\t";
+        // line 23
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 25
+        // line 24
         yield "\t</body>
 </html>
 ";
@@ -188,37 +194,7 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
         yield from [];
     }
 
-    // line 18
-    /**
-     * @return iterable<null|scalar|\Stringable>
-     */
-    public function block_body(array $context, array $blocks = []): iterable
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
-
-        // line 19
-        yield "
-\t\t\t";
-        // line 20
-        yield from $this->unwrap()->yieldBlock('header', $context, $blocks);
-        // line 23
-        yield "
-\t\t";
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-        yield from [];
-    }
-
-    // line 20
+    // line 19
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -231,11 +207,33 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "header"));
 
-        // line 21
-        yield "\t\t\t\t";
-        yield from $this->load("layout/header.html.twig", 21)->unwrap()->yield($context);
-        // line 22
+        // line 20
         yield "\t\t\t";
+        yield from $this->load("layout/header.html.twig", 20)->unwrap()->yield($context);
+        // line 21
+        yield "\t\t";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 23
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_body(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -258,7 +256,7 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  238 => 22,  235 => 21,  222 => 20,  210 => 23,  208 => 20,  205 => 19,  192 => 18,  178 => 13,  165 => 12,  154 => 15,  151 => 12,  138 => 11,  116 => 9,  92 => 6,  79 => 25,  77 => 18,  73 => 16,  71 => 11,  68 => 10,  66 => 9,  63 => 8,  61 => 6,  54 => 1,);
+        return array (  225 => 23,  214 => 21,  211 => 20,  198 => 19,  184 => 13,  171 => 12,  160 => 15,  157 => 12,  144 => 11,  122 => 9,  98 => 6,  85 => 24,  83 => 23,  80 => 22,  78 => 19,  73 => 16,  71 => 11,  68 => 10,  66 => 9,  63 => 8,  61 => 6,  54 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -280,13 +278,12 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
 \t\t{% endblock %}
 \t</head>
 \t<body>
-\t\t{% block body %}
 
-\t\t\t{% block header %}
-\t\t\t\t{% include 'layout/header.html.twig' %}
-\t\t\t{% endblock %}
-
+\t\t{% block header %}
+\t\t\t{% include 'layout/header.html.twig' %}
 \t\t{% endblock %}
+
+\t\t{% block body %}{% endblock %}
 \t</body>
 </html>
 ", "base.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\templates\\base.html.twig");

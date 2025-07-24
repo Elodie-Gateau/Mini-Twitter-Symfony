@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 #[Route('/tweet')]
 final class TweetController extends AbstractController
@@ -24,13 +25,13 @@ final class TweetController extends AbstractController
     }
 
     #[Route('/new', name: 'app_tweet_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
         $tweet = new Tweet();
         $form = $this->createForm(TweetType::class, $tweet);
         $form->handleRequest($request);
-        $time = new \DateTime();
-        $user = $security->getUser();
+        $tweet->setCreationTime(new \DateTime());
+        $tweet->setIdUser($security->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $imageFile = $form->get('media')->getData();

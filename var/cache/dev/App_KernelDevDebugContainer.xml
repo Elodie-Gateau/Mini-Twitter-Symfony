@@ -459,7 +459,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.rWQM0WU"/>
+      <argument type="service" id=".service_locator.jeRAKE1"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3489,7 +3489,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.rWQM0WU"/>
+      <argument type="service" id=".service_locator.jeRAKE1"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8179,18 +8179,19 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.gcNMxHR" method="withContext"/>
     </service>
-    <service id=".service_locator.mqZqLk1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator._A5GzU1" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="security" type="service_closure" id="security.helper"/>
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
-    <service id=".service_locator.mqZqLk1.App\Controller\TweetController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator._A5GzU1.App\Controller\TweetController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\TweetController::new()"/>
       <argument>App\Controller\TweetController::new()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.mqZqLk1" method="withContext"/>
+      <factory service=".service_locator._A5GzU1" method="withContext"/>
     </service>
     <service id=".service_locator.Dn4q.SE" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8272,7 +8273,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.WkfvUVe" method="withContext"/>
     </service>
-    <service id=".service_locator.rWQM0WU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.jeRAKE1" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -8290,7 +8291,7 @@
         <argument key="App\Controller\MediaController::edit" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::edit()"/>
         <argument key="App\Controller\MediaController::delete" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::delete()"/>
         <argument key="App\Controller\TweetController::index" type="service_closure" id=".service_locator.gcNMxHR.App\Controller\TweetController::index()"/>
-        <argument key="App\Controller\TweetController::new" type="service_closure" id=".service_locator.mqZqLk1.App\Controller\TweetController::new()"/>
+        <argument key="App\Controller\TweetController::new" type="service_closure" id=".service_locator._A5GzU1.App\Controller\TweetController::new()"/>
         <argument key="App\Controller\TweetController::show" type="service_closure" id=".service_locator.Dn4q.SE.App\Controller\TweetController::show()"/>
         <argument key="App\Controller\TweetController::edit" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::edit()"/>
         <argument key="App\Controller\TweetController::delete" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::delete()"/>
@@ -8312,7 +8313,7 @@
         <argument key="App\Controller\MediaController:edit" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::edit()"/>
         <argument key="App\Controller\MediaController:delete" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::delete()"/>
         <argument key="App\Controller\TweetController:index" type="service_closure" id=".service_locator.gcNMxHR.App\Controller\TweetController::index()"/>
-        <argument key="App\Controller\TweetController:new" type="service_closure" id=".service_locator.mqZqLk1.App\Controller\TweetController::new()"/>
+        <argument key="App\Controller\TweetController:new" type="service_closure" id=".service_locator._A5GzU1.App\Controller\TweetController::new()"/>
         <argument key="App\Controller\TweetController:show" type="service_closure" id=".service_locator.Dn4q.SE.App\Controller\TweetController::show()"/>
         <argument key="App\Controller\TweetController:edit" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::edit()"/>
         <argument key="App\Controller\TweetController:delete" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::delete()"/>
@@ -10563,7 +10564,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.rWQM0WU"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.jeRAKE1"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10615,7 +10616,7 @@
     <service id=".service_locator.GhMWvyo" alias=".service_locator.AA1LTqm"/>
     <service id=".service_locator._7xXf0o" alias=".service_locator.rpEF4Fp"/>
     <service id=".service_locator.hITybM0" alias=".service_locator.gcNMxHR"/>
-    <service id=".service_locator.cK72C9G" alias=".service_locator.mqZqLk1"/>
+    <service id=".service_locator.824WMlN" alias=".service_locator._A5GzU1"/>
     <service id=".service_locator.WARcOnK" alias=".service_locator.Dn4q.SE"/>
     <service id=".service_locator.xXidI3H" alias=".service_locator.KYWD9Jk"/>
     <service id=".service_locator.hNMhKaf" alias=".service_locator.OzEre6h"/>

@@ -15,12 +15,11 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% block body %}
 
-			{% block header %}
-				{% include 'layout/header.html.twig' %}
-			{% endblock %}
-
+		{% block header %}
+			{% include 'layout/header.html.twig' %}
 		{% endblock %}
+
+		{% block body %}{% endblock %}
 	</body>
 </html>

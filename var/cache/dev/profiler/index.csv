@@ -16,3 +16,10 @@ ee210c,127.0.0.1,GET,http://127.0.0.1:8000/event,1753281784,,404,request
 d953bf,127.0.0.1,GET,http://127.0.0.1:8000/register,1753340879,3c251d,404,request
 3c251d,127.0.0.1,GET,http://127.0.0.1:8000/register,1753340879,,404,request
 6854fe,127.0.0.1,GET,http://127.0.0.1:8000/,1753340886,,404,request
+170c08,127.0.0.1,GET,http://127.0.0.1:8000/tweet/new,1753352478,a939fb,500,request
+a939fb,127.0.0.1,GET,http://127.0.0.1:8000/tweet/new,1753352478,,500,request
+fc6b41,127.0.0.1,GET,http://127.0.0.1:8000/tweet/new,1753352844,,200,request
+25eb94,127.0.0.1,GET,http://127.0.0.1:8000/tweet/new,1753352902,af5a7b,500,request
+af5a7b,127.0.0.1,POST,http://127.0.0.1:8000/tweet/new,1753352902,,500,request
+fb6c28,127.0.0.1,GET,http://127.0.0.1:8000/tweet,1753352933,,200,request
+618a76,127.0.0.1,GET,http://127.0.0.1:8000/tweet,1753352933,,200,request
