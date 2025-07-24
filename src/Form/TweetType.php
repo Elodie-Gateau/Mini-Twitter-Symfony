@@ -18,7 +18,7 @@ class TweetType extends AbstractType
             ->add('creationTime')
             ->add('idUser', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }
