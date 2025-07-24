@@ -5,23 +5,31 @@ namespace App\Entity;
 use App\Repository\TweetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TweetRepository::class)]
 class Tweet
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+
     private ?string $content = null;
 
     #[ORM\Column]
     private ?\DateTime $creationTime = null;
-
+    #[Assert\Length(
+        min: 8,
+        max: 280,
+        minMessage: 'Le mot de passe doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'Le mot de passe doit contenir au maximum {{ limit }} caractères',
+    )]
     #[ORM\ManyToOne(inversedBy: 'tweets')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idUser = null;

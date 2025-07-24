@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tweet;
+use App\Entity\Media;
 use App\Form\TweetType;
 use App\Repository\TweetRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,13 +42,21 @@ final class TweetController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
                 $imageFile->move(
-                    $this->getParameter('medias_directory'),
+                    $this->getParameter('images_directory'),
                     $newFilename
                 );
-                $tweet->addMedium($newFilename);
+                $media = new Media;
+                $media->setUrlMedia($newFilename);
+                $media->setTweet($tweet);
             }
+
             $entityManager->persist($tweet);
             $entityManager->flush();
+
+            $entityManager->persist($media);
+            $entityManager->flush();
+
+            $tweet->addMedium($media);
 
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,7 +96,7 @@ final class TweetController extends AbstractController
     #[Route('/{id}', name: 'app_tweet_delete', methods: ['POST'])]
     public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tweet->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($tweet);
             $entityManager->flush();
         }
