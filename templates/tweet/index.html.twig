@@ -1,25 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tweet index{% endblock %}
+{% block title %}Social Pets{% endblock %}
 
 {% block body %}
-    <h1>Tweet index</h1>
+    <h1>Social Pets</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>CreationTime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<section class="timeline">    
+<a href="{{ path('app_tweet_new') }}">Créer un tweet</a>
         {% for tweet in tweets %}
+
+
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <img class="w-full" src="{{ tweet.media.url_media }}" alt="Media du tweet">
+  <div class="px-6 py-4">
+    <div>
+    <h2 class="font-bold text-xl mb-2">{{ tweet.user.name }}</h2>
+    <h3>{{ tweet.creationTime ? tweet.creationTime|date('d-m-Y H:i:s') : '' }}</h3>
+    </div>
+    <p class="text-gray-700 text-base">
+      {{ tweet.content }}
+    </p>
+  </div>
+  <div class="px-6 pt-4 pb-2">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+  </div>
+</div>
             <tr>
-                <td>{{ tweet.id }}</td>
+
                 <td>{{ tweet.content }}</td>
-                <td>{{ tweet.creationTime ? tweet.creationTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td></td>
                 <td>
                     <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">show</a>
                     <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">edit</a>
@@ -33,5 +44,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_tweet_new') }}">Create new</a>
+
+    </section>
 {% endblock %}
