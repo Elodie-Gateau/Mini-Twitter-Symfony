@@ -26,3 +26,12 @@ dafcfc,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352060,,200,request
 32a17a,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352062,,200,request
 9e5fff,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352167,,200,request
 d5ddbc,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352170,,200,request
+d07b29,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352471,,200,request
+ee1498,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352555,,200,request
+f45436,127.0.0.1,GET,http://127.0.0.1:8000/login,1753352557,,200,request
+e2a23c,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352559,,200,request
+645d76,127.0.0.1,GET,http://127.0.0.1:8000/login,1753353232,,200,request
+de5b20,127.0.0.1,GET,http://127.0.0.1:8000/register,1753353234,,200,request
+4275e0,127.0.0.1,GET,http://127.0.0.1:8000/register,1753356665,cd187f,500,request
+cd187f,127.0.0.1,POST,http://127.0.0.1:8000/register,1753356665,,500,request
+2bf426,127.0.0.1,GET,http://127.0.0.1:8000/register,1753356736,,200,request
