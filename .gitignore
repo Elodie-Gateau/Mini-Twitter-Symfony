@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
-##> symfony/framework-bundle ###
-=======
 ###> symfony/framework-bundle ###
->>>>>>> 56c14d590b512e8d11b9a77389b5b8685385bdbf
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -11,19 +7,6 @@
 /public/bundles/
 /var/
 /vendor/
-<<<<<<< HEAD
-##< symfony/framework-bundle ###
-
-##> phpunit/phpunit ###
-/phpunit.xml
-/.phpunit.cache/
-##< phpunit/phpunit ###
-
-##> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-##< symfony/asset-mapper ###
-=======
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -37,4 +20,3 @@
 ###< symfony/asset-mapper ###
 
 .DS_Store
->>>>>>> 56c14d590b512e8d11b9a77389b5b8685385bdbf

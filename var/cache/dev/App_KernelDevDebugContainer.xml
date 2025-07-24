@@ -359,6 +359,27 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Controller\MediaController" class="App\Controller\MediaController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\MediaController"/>
+      </call>
+    </service>
+    <service id="App\Controller\TweetController" class="App\Controller\TweetController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\TweetController"/>
+      </call>
+    </service>
+    <service id="App\Controller\UserController" class="App\Controller\UserController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\UserController"/>
+      </call>
+    </service>
     <service id="App\Entity\Comment" class="App\Entity\Comment" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
@@ -374,6 +395,15 @@
     <service id="App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
+    </service>
+    <service id="App\Form\TweetType" class="App\Form\TweetType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
+    </service>
+    <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
     <service id="App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -419,7 +449,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.F6vdjrP"/>
+      <argument type="service" id=".service_locator.U6H8wYh"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1371,9 +1401,13 @@
       <argument type="service" id="form.registry"/>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type</argument>
+        <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\MediaType</argument>
+        <argument>App\Form\TweetType</argument>
+        <argument>App\Form\UserType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
@@ -3452,7 +3486,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.F6vdjrP"/>
+      <argument type="service" id=".service_locator.U6H8wYh"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4044,7 +4078,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.9QYCuGc"/>
+      <argument type="service" id=".service_locator.CuUs8FT"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4141,7 +4175,11 @@
       <argument>validators</argument>
       <argument type="service" id="form.server_params"/>
       <argument>%form.type_extension.csrf.field_attr%</argument>
-      <argument>submit</argument>
+      <argument type="collection">
+        <argument key="App\Form\MediaType">submit</argument>
+        <argument key="App\Form\TweetType">submit</argument>
+        <argument key="App\Form\UserType">submit</argument>
+      </argument>
     </service>
     <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilder">
       <call method="setConstraintValidatorFactory">
@@ -7463,6 +7501,18 @@
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.generator"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\MediaController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TweetController" class="App\Controller\TweetController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TweetController" class="App\Controller\TweetController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\TweetController.0.App\Controller\TweetController" class="App\Controller\TweetController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\TweetController" class="App\Controller\TweetController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\UserController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Comment.0.App\Entity\Comment" class="App\Entity\Comment" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\Comment" class="App\Entity\Comment" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Media.0.App\Entity\Media" class="App\Entity\Media" autowire="true" abstract="true"/>
@@ -7471,6 +7521,12 @@
     <service id=".abstract.instanceof.App\Entity\Tweet" class="App\Entity\Tweet" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\User.0.App\Entity\User" class="App\Entity\User" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MediaType" class="App\Form\MediaType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TweetType" class="App\Form\TweetType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\TweetType" class="App\Form\TweetType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\MediaRepository" class="App\Repository\MediaRepository" autowire="true" abstract="true"/>
@@ -7997,15 +8053,198 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.zHyJIs5" method="withContext"/>
     </service>
-    <service id=".service_locator.F6vdjrP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Fi4Am7Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="mediaRepository" type="service_closure" id="App\Repository\MediaRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController::index()"/>
+      <argument>App\Controller\MediaController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Fi4Am7Q" method="withContext"/>
+    </service>
+    <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.egipcEH.App\Controller\MediaController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController::new()"/>
+      <argument>App\Controller\MediaController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.egipcEH" method="withContext"/>
+    </service>
+    <service id=".service_locator.AA1LTqm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="medium" type="service_closure" id="App\Entity\Media"/>
+      </argument>
+    </service>
+    <service id=".service_locator.AA1LTqm.App\Controller\MediaController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController::show()"/>
+      <argument>App\Controller\MediaController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.AA1LTqm" method="withContext"/>
+    </service>
+    <service id=".service_locator.rpEF4Fp" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="medium" type="service_closure" id="App\Entity\Media"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.rpEF4Fp.App\Controller\MediaController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController::edit()"/>
+      <argument>App\Controller\MediaController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.rpEF4Fp" method="withContext"/>
+    </service>
+    <service id=".service_locator.rpEF4Fp.App\Controller\MediaController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController::delete()"/>
+      <argument>App\Controller\MediaController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.rpEF4Fp" method="withContext"/>
+    </service>
+    <service id=".service_locator.gcNMxHR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="tweetRepository" type="service_closure" id="App\Repository\TweetRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gcNMxHR.App\Controller\TweetController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController::index()"/>
+      <argument>App\Controller\TweetController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.gcNMxHR" method="withContext"/>
+    </service>
+    <service id=".service_locator.egipcEH.App\Controller\TweetController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController::new()"/>
+      <argument>App\Controller\TweetController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.egipcEH" method="withContext"/>
+    </service>
+    <service id=".service_locator.Dn4q.SE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="tweet" type="service_closure" id="App\Entity\Tweet"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Dn4q.SE.App\Controller\TweetController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController::show()"/>
+      <argument>App\Controller\TweetController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Dn4q.SE" method="withContext"/>
+    </service>
+    <service id=".service_locator.KYWD9Jk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="tweet" type="service_closure" id="App\Entity\Tweet"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.KYWD9Jk.App\Controller\TweetController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController::edit()"/>
+      <argument>App\Controller\TweetController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.KYWD9Jk" method="withContext"/>
+    </service>
+    <service id=".service_locator.KYWD9Jk.App\Controller\TweetController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController::delete()"/>
+      <argument>App\Controller\TweetController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.KYWD9Jk" method="withContext"/>
+    </service>
+    <service id=".service_locator.OzEre6h" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.OzEre6h.App\Controller\UserController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController::index()"/>
+      <argument>App\Controller\UserController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.OzEre6h" method="withContext"/>
+    </service>
+    <service id=".service_locator.egipcEH.App\Controller\UserController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController::new()"/>
+      <argument>App\Controller\UserController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.egipcEH" method="withContext"/>
+    </service>
+    <service id=".service_locator.EWAQaZu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="user" type="service_closure" id="App\Entity\User"/>
+      </argument>
+    </service>
+    <service id=".service_locator.EWAQaZu.App\Controller\UserController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController::show()"/>
+      <argument>App\Controller\UserController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.EWAQaZu" method="withContext"/>
+    </service>
+    <service id=".service_locator.WkfvUVe" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="user" type="service_closure" id="App\Entity\User"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.WkfvUVe.App\Controller\UserController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController::edit()"/>
+      <argument>App\Controller\UserController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.WkfvUVe" method="withContext"/>
+    </service>
+    <service id=".service_locator.WkfvUVe.App\Controller\UserController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController::delete()"/>
+      <argument>App\Controller\UserController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.WkfvUVe" method="withContext"/>
+    </service>
+    <service id=".service_locator.U6H8wYh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\MediaController::index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
+        <argument key="App\Controller\MediaController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
+        <argument key="App\Controller\MediaController::show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
+        <argument key="App\Controller\MediaController::edit" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::edit()"/>
+        <argument key="App\Controller\MediaController::delete" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::delete()"/>
+        <argument key="App\Controller\TweetController::index" type="service_closure" id=".service_locator.gcNMxHR.App\Controller\TweetController::index()"/>
+        <argument key="App\Controller\TweetController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\TweetController::new()"/>
+        <argument key="App\Controller\TweetController::show" type="service_closure" id=".service_locator.Dn4q.SE.App\Controller\TweetController::show()"/>
+        <argument key="App\Controller\TweetController::edit" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::edit()"/>
+        <argument key="App\Controller\TweetController::delete" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::delete()"/>
+        <argument key="App\Controller\UserController::index" type="service_closure" id=".service_locator.OzEre6h.App\Controller\UserController::index()"/>
+        <argument key="App\Controller\UserController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\UserController::new()"/>
+        <argument key="App\Controller\UserController::show" type="service_closure" id=".service_locator.EWAQaZu.App\Controller\UserController::show()"/>
+        <argument key="App\Controller\UserController::edit" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::edit()"/>
+        <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::delete()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\MediaController:index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
+        <argument key="App\Controller\MediaController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
+        <argument key="App\Controller\MediaController:show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
+        <argument key="App\Controller\MediaController:edit" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::edit()"/>
+        <argument key="App\Controller\MediaController:delete" type="service_closure" id=".service_locator.rpEF4Fp.App\Controller\MediaController::delete()"/>
+        <argument key="App\Controller\TweetController:index" type="service_closure" id=".service_locator.gcNMxHR.App\Controller\TweetController::index()"/>
+        <argument key="App\Controller\TweetController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\TweetController::new()"/>
+        <argument key="App\Controller\TweetController:show" type="service_closure" id=".service_locator.Dn4q.SE.App\Controller\TweetController::show()"/>
+        <argument key="App\Controller\TweetController:edit" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::edit()"/>
+        <argument key="App\Controller\TweetController:delete" type="service_closure" id=".service_locator.KYWD9Jk.App\Controller\TweetController::delete()"/>
+        <argument key="App\Controller\UserController:index" type="service_closure" id=".service_locator.OzEre6h.App\Controller\UserController::index()"/>
+        <argument key="App\Controller\UserController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\UserController::new()"/>
+        <argument key="App\Controller\UserController:show" type="service_closure" id=".service_locator.EWAQaZu.App\Controller\UserController::show()"/>
+        <argument key="App\Controller\UserController:edit" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::edit()"/>
+        <argument key="App\Controller\UserController:delete" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::delete()"/>
       </argument>
     </service>
     <service id=".service_locator.HxALDTI" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8191,9 +8430,12 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.9QYCuGc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CuUs8FT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\MediaType" type="service_closure" id="App\Form\MediaType"/>
+        <argument key="App\Form\TweetType" type="service_closure" id="App\Form\TweetType"/>
+        <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service_closure" id="form.type.file"/>
@@ -8575,6 +8817,40 @@
         <argument key="translation.loader.json" type="service_closure" id="translation.loader.json"/>
       </argument>
     </service>
+    <service id=".service_locator.ZyP9f7K" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="router" type="service_closure" id="router.default" on-invalid="ignore"/>
+        <argument key="request_stack" type="service_closure" id="request_stack" on-invalid="ignore"/>
+        <argument key="http_kernel" type="service_closure" id="http_kernel" on-invalid="ignore"/>
+        <argument key="serializer" type="service_closure" id="debug.serializer" on-invalid="ignore"/>
+        <argument key="security.authorization_checker" type="service_closure" id="security.authorization_checker" on-invalid="ignore"/>
+        <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
+        <argument key="form.factory" type="service_closure" id="form.factory" on-invalid="ignore"/>
+        <argument key="security.token_storage" type="service_closure" id="security.token_storage" on-invalid="ignore"/>
+        <argument key="security.csrf.token_manager" type="service_closure" id="security.csrf.same_origin_token_manager" on-invalid="ignore"/>
+        <argument key="parameter_bag" type="service_closure" id="parameter_bag" on-invalid="ignore"/>
+        <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\MediaController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MediaController"/>
+      <argument>App\Controller\MediaController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\TweetController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TweetController"/>
+      <argument>App\Controller\TweetController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\UserController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UserController"/>
+      <argument>App\Controller\UserController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
     <service id=".service_locator.7jukgan" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8767,6 +9043,9 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\MediaController</argument>
+          <argument>App\Controller\TweetController</argument>
+          <argument>App\Controller\UserController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
       </call>
@@ -10200,7 +10479,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.F6vdjrP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.U6H8wYh"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10244,5 +10523,16 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.n_ENPtW" alias=".service_locator.zHyJIs5"/>
+    <service id=".service_locator.wnxb0le" alias=".service_locator.Fi4Am7Q"/>
+    <service id=".service_locator.5Vd5JYV" alias=".service_locator.egipcEH"/>
+    <service id=".service_locator.GhMWvyo" alias=".service_locator.AA1LTqm"/>
+    <service id=".service_locator._7xXf0o" alias=".service_locator.rpEF4Fp"/>
+    <service id=".service_locator.hITybM0" alias=".service_locator.gcNMxHR"/>
+    <service id=".service_locator.WARcOnK" alias=".service_locator.Dn4q.SE"/>
+    <service id=".service_locator.xXidI3H" alias=".service_locator.KYWD9Jk"/>
+    <service id=".service_locator.hNMhKaf" alias=".service_locator.OzEre6h"/>
+    <service id=".service_locator.JZ84LHK" alias=".service_locator.EWAQaZu"/>
+    <service id=".service_locator.hg8yQ1_" alias=".service_locator.WkfvUVe"/>
+    <service id=".service_locator.9nvaCmp" alias=".service_locator.ZyP9f7K"/>
   </services>
 </container>
