@@ -48,13 +48,14 @@ final class TweetController extends AbstractController
                 $media = new Media;
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
                 $media->setTweet($tweet);
-                $tweet->addMedium($media);
+
                 $entityManager->persist($media);
+                $entityManager->flush();
+                $tweet->addMedium($media);
             }
 
             $entityManager->persist($tweet);
             $entityManager->flush();
-
 
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
