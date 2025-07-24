@@ -1,26 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Social Pets{% endblock %}
+{% block title %}Tweet actus{% endblock %}
 
 {% block body %}
-    <h1>Social Pets</h1>
 
-<section class="timeline">    
-<a href="{{ path('app_tweet_new') }}">Créer un tweet</a>
+
+<section class="timeline">
+<a class="bg-blue-500 hover:bg-orange-500 text-white font-bold py-2 px-4 border border-blue-700 rounded" href="{{ path('app_tweet_new') }}">Créer un tweet</a>
         {% for tweet in tweets %}
 
 
 <div class="max-w-sm rounded overflow-hidden shadow-lg">
 {% if tweet.media|length > 0 %}
 {% for media in tweet.media %}
-<img src="" alt="">
+<img src="{{ media.urlMedia }}" alt="">
 
 {% endfor %}
 {% endif %}
-  <img class="w-full" src="{{ tweet.media }}" alt="Media du tweet">
   <div class="px-6 py-4">
     <div>
-    {# <h2 class="font-bold text-xl mb-2">{{ tweet.user.name }}</h2> #}
+    <h2 class="font-bold text-xl mb-2">{{ tweet.idUser.nickname }}</h2>
     <h3>{{ tweet.creationTime ? tweet.creationTime|date('d-m-Y H:i:s') : '' }}</h3>
     </div>
     <p class="text-gray-700 text-base">
@@ -31,24 +30,17 @@
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-  </div>
+  </div>                    
+  <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">{{ tweet.comment|length }} commentaires</a>
+  <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
 </div>
-            <tr>
-
-                <td>{{ tweet.content }}</td>
-                <td></td>
-                <td>
-                    {# <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">{{ tweet.comments|length }} commentaires</a> #}
-                    <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
-                </td>
-            </tr>
+           
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+
+                <p colspan="4">Aucun tweet trouvé</p>
+
         {% endfor %}
-        </tbody>
-    </table>
+
 
 
     </section>
