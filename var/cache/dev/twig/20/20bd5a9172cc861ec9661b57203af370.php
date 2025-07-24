@@ -104,6 +104,6 @@ class __TwigTemplate_b4d4f05c43c2f701d4e5920541ba98b0 extends Template
         </ul>
     </nav>
     
-</header>", "layout/header.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\templates\\layout\\header.html.twig");
+</header>", "layout/header.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\templates\\layout\\header.html.twig");
     }
 }

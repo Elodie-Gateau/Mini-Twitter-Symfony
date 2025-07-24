@@ -289,6 +289,6 @@ class __TwigTemplate_e58eb461d9993d0f51a307557ed9cde7 extends Template
 \t\t{% endblock %}
 \t</body>
 </html>
-", "base.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\templates\\base.html.twig");
+", "base.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\templates\\base.html.twig");
     }
 }
