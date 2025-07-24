@@ -34,18 +34,18 @@ final class TweetController extends AbstractController
         $tweet->setIdUser($security->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $imageFile = $form->get('media')->getData();
+            $imageFile = $form->get('media')->getData();
 
-            // if ($imageFile) {
-            //     $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            //     $safeFilename = $slugger->slug($originalFilename);
-            //     $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-            //     $imageFile->move(
-            //         $this->getParameter('medias_directory'),
-            //         $newFilename
-            //     );
-            //     $tweet->addMedium($newFilename);
-            // }
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('medias_directory'),
+                    $newFilename
+                );
+                $tweet->addMedium($newFilename);
+            }
             $entityManager->persist($tweet);
             $entityManager->flush();
 
