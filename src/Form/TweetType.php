@@ -44,6 +44,7 @@ class TweetType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Tweet::class,
+            'required' => false,
         ]);
     }
 }
