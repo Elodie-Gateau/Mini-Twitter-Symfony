@@ -1042,6 +1042,6 @@ class __TwigTemplate_8391a662c819cb8930d77d41c69ef6f7 extends Template
         </table>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\config.html.twig");
+", "@WebProfiler/Collector/config.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\config.html.twig");
     }
 }

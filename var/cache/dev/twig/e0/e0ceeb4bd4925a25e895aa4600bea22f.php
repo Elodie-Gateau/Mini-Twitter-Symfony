@@ -1635,6 +1635,6 @@ array_key_exists("type", $context)) ? (Twig\Extension\CoreExtension::default((is
     {%- endif -%}
     {{- parent() -}}
 {%- endblock form_help %}
-", "bootstrap_5_layout.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_5_layout.html.twig");
+", "bootstrap_5_layout.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_5_layout.html.twig");
     }
 }

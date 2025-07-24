@@ -2219,6 +2219,6 @@ class __TwigTemplate_4b40c442d3cdb7bab15b66703e3cd69a extends Template
         </tbody>
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/form.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\form.html.twig");
+", "@WebProfiler/Collector/form.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\form.html.twig");
     }
 }

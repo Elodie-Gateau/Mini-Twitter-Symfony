@@ -989,6 +989,6 @@ class __TwigTemplate_fb996d1ac00ad18754a4f4d446e1e676 extends Template
         </td>
     </tr>
 {% endmacro %}
-", "@DoctrineMigrations/Collector/migrations.html.twig", "C:\\xampp\\htdocs\\Arinfo\\symfony\\mini-twitter\\vendor\\doctrine\\doctrine-migrations-bundle\\templates\\Collector\\migrations.html.twig");
+", "@DoctrineMigrations/Collector/migrations.html.twig", "C:\\wamp64\\www\\Arinfo\\symfony\\mini-twitter\\vendor\\doctrine\\doctrine-migrations-bundle\\templates\\Collector\\migrations.html.twig");
     }
 }
