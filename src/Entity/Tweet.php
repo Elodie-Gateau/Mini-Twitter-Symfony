@@ -19,16 +19,6 @@ class Tweet
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(
-        message: 'Le contenu ne doit pas être vide',
-    )]
-    #[Assert\Length(
-        min: 8,
-        max: 280,
-        minMessage: 'Le contenu doit contenir au minimum {{ limit }} caractères',
-        maxMessage: 'Le contenu doit contenir au maximum {{ limit }} caractères',
-    )]
-
     private ?string $content = null;
 
     #[ORM\Column]
