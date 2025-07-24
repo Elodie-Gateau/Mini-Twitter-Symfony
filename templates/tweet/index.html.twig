@@ -32,8 +32,8 @@
                 <td>{{ tweet.content }}</td>
                 <td></td>
                 <td>
-                    <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">show</a>
-                    <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">edit</a>
+                    <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">{{ tweet.comments|length }} commentaires</a>
+                    <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
