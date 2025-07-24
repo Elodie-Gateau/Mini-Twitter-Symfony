@@ -359,6 +359,13 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Controller\CommentController" class="App\Controller\CommentController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\CommentController"/>
+      </call>
+    </service>
     <service id="App\Controller\MediaController" class="App\Controller\MediaController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -395,6 +402,9 @@
     <service id="App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
     <service id="App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
@@ -449,7 +459,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.U6H8wYh"/>
+      <argument type="service" id=".service_locator.nRf5rp_"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1405,6 +1415,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\CommentType</argument>
         <argument>App\Form\MediaType</argument>
         <argument>App\Form\TweetType</argument>
         <argument>App\Form\UserType</argument>
@@ -3486,7 +3497,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.U6H8wYh"/>
+      <argument type="service" id=".service_locator.nRf5rp_"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4078,7 +4089,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.CuUs8FT"/>
+      <argument type="service" id=".service_locator.EYV4930"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4176,6 +4187,7 @@
       <argument type="service" id="form.server_params"/>
       <argument>%form.type_extension.csrf.field_attr%</argument>
       <argument type="collection">
+        <argument key="App\Form\CommentType">submit</argument>
         <argument key="App\Form\MediaType">submit</argument>
         <argument key="App\Form\TweetType">submit</argument>
         <argument key="App\Form\UserType">submit</argument>
@@ -7501,6 +7513,10 @@
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.generator"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\CommentController.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\MediaController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
@@ -7521,6 +7537,8 @@
     <service id=".abstract.instanceof.App\Entity\Tweet" class="App\Entity\Tweet" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\User.0.App\Entity\User" class="App\Entity\User" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CommentType" class="App\Form\CommentType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MediaType" class="App\Form\MediaType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TweetType" class="App\Form\TweetType" autowire="true" abstract="true"/>
@@ -8053,6 +8071,61 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.zHyJIs5" method="withContext"/>
     </service>
+    <service id=".service_locator..zbb2WU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="commentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator..zbb2WU.App\Controller\CommentController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::index()"/>
+      <argument>App\Controller\CommentController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator..zbb2WU" method="withContext"/>
+    </service>
+    <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.egipcEH.App\Controller\CommentController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::new()"/>
+      <argument>App\Controller\CommentController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.egipcEH" method="withContext"/>
+    </service>
+    <service id=".service_locator.JRyFIf6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id="App\Entity\Comment"/>
+      </argument>
+    </service>
+    <service id=".service_locator.JRyFIf6.App\Controller\CommentController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::show()"/>
+      <argument>App\Controller\CommentController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.JRyFIf6" method="withContext"/>
+    </service>
+    <service id=".service_locator.Fbxi6sJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id="App\Entity\Comment"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::edit()"/>
+      <argument>App\Controller\CommentController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Fbxi6sJ" method="withContext"/>
+    </service>
+    <service id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::delete()"/>
+      <argument>App\Controller\CommentController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Fbxi6sJ" method="withContext"/>
+    </service>
     <service id=".service_locator.Fi4Am7Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8064,12 +8137,6 @@
       <argument>App\Controller\MediaController::index()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.Fi4Am7Q" method="withContext"/>
-    </service>
-    <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-      </argument>
     </service>
     <service id=".service_locator.egipcEH.App\Controller\MediaController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MediaController::new()"/>
@@ -8206,13 +8273,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.WkfvUVe" method="withContext"/>
     </service>
-    <service id=".service_locator.U6H8wYh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nRf5rp_" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\CommentController::index" type="service_closure" id=".service_locator..zbb2WU.App\Controller\CommentController::index()"/>
+        <argument key="App\Controller\CommentController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\CommentController::new()"/>
+        <argument key="App\Controller\CommentController::show" type="service_closure" id=".service_locator.JRyFIf6.App\Controller\CommentController::show()"/>
+        <argument key="App\Controller\CommentController::edit" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()"/>
+        <argument key="App\Controller\CommentController::delete" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()"/>
         <argument key="App\Controller\MediaController::index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
         <argument key="App\Controller\MediaController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
         <argument key="App\Controller\MediaController::show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
@@ -8230,6 +8302,11 @@
         <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::delete()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\CommentController:index" type="service_closure" id=".service_locator..zbb2WU.App\Controller\CommentController::index()"/>
+        <argument key="App\Controller\CommentController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\CommentController::new()"/>
+        <argument key="App\Controller\CommentController:show" type="service_closure" id=".service_locator.JRyFIf6.App\Controller\CommentController::show()"/>
+        <argument key="App\Controller\CommentController:edit" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()"/>
+        <argument key="App\Controller\CommentController:delete" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()"/>
         <argument key="App\Controller\MediaController:index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
         <argument key="App\Controller\MediaController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
         <argument key="App\Controller\MediaController:show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
@@ -8430,9 +8507,10 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.CuUs8FT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.EYV4930" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\CommentType" type="service_closure" id="App\Form\CommentType"/>
         <argument key="App\Form\MediaType" type="service_closure" id="App\Form\MediaType"/>
         <argument key="App\Form\TweetType" type="service_closure" id="App\Form\TweetType"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
@@ -8833,6 +8911,12 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\CommentController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController"/>
+      <argument>App\Controller\CommentController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
     <service id=".service_locator.ZyP9f7K.App\Controller\MediaController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MediaController"/>
       <argument>App\Controller\MediaController</argument>
@@ -9043,6 +9127,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\CommentController</argument>
           <argument>App\Controller\MediaController</argument>
           <argument>App\Controller\TweetController</argument>
           <argument>App\Controller\UserController</argument>
@@ -10479,7 +10564,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.U6H8wYh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.nRf5rp_"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10523,8 +10608,11 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.n_ENPtW" alias=".service_locator.zHyJIs5"/>
-    <service id=".service_locator.wnxb0le" alias=".service_locator.Fi4Am7Q"/>
+    <service id=".service_locator.614IGRF" alias=".service_locator..zbb2WU"/>
     <service id=".service_locator.5Vd5JYV" alias=".service_locator.egipcEH"/>
+    <service id=".service_locator._eqJQHt" alias=".service_locator.JRyFIf6"/>
+    <service id=".service_locator.kDLTfmn" alias=".service_locator.Fbxi6sJ"/>
+    <service id=".service_locator.wnxb0le" alias=".service_locator.Fi4Am7Q"/>
     <service id=".service_locator.GhMWvyo" alias=".service_locator.AA1LTqm"/>
     <service id=".service_locator._7xXf0o" alias=".service_locator.rpEF4Fp"/>
     <service id=".service_locator.hITybM0" alias=".service_locator.gcNMxHR"/>
