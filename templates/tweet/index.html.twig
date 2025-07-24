@@ -11,10 +11,10 @@
 
 
 <div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <img class="w-full" src="{{ tweet.media.url_media }}" alt="Media du tweet">
+  {# <img class="w-full" src="{{ tweet.media.url_media }}" alt="Media du tweet"> #}
   <div class="px-6 py-4">
     <div>
-    <h2 class="font-bold text-xl mb-2">{{ tweet.user.name }}</h2>
+    {# <h2 class="font-bold text-xl mb-2">{{ tweet.user.name }}</h2> #}
     <h3>{{ tweet.creationTime ? tweet.creationTime|date('d-m-Y H:i:s') : '' }}</h3>
     </div>
     <p class="text-gray-700 text-base">
@@ -32,7 +32,7 @@
                 <td>{{ tweet.content }}</td>
                 <td></td>
                 <td>
-                    <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">{{ tweet.comments|length }} commentaires</a>
+                    {# <a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">{{ tweet.comments|length }} commentaires</a> #}
                     <a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
                 </td>
             </tr>
