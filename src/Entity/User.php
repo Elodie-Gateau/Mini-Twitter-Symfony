@@ -45,6 +45,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
     private Collection $comments;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isAdmin = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActive = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $photo = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nickname = null;
+
+    #[ORM\Column]
+    private ?float $age = null;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
@@ -188,6 +209,90 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function isAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(?bool $isAdmin): static
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(?bool $isActive): static
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): static
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): static
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function getAge(): ?float
+    {
+        return $this->age;
+    }
+
+    public function setAge(float $age): static
+    {
+        $this->age = $age;
 
         return $this;
     }

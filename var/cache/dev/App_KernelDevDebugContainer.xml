@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.project_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</parameter>
+    <parameter key="kernel.project_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.runtime_mode">%env(query_string:default:container.runtime_mode:APP_RUNTIME_MODE)%</parameter>
@@ -9,9 +9,9 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev</parameter>
-    <parameter key="kernel.cache_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev</parameter>
-    <parameter key="kernel.logs_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/log</parameter>
+    <parameter key="kernel.build_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev</parameter>
+    <parameter key="kernel.cache_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev</parameter>
+    <parameter key="kernel.logs_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
@@ -28,51 +28,51 @@
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/framework-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="DoctrineBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
       </parameter>
       <parameter key="DoctrineMigrationsBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-migrations-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-migrations-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/debug-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\debug-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\DebugBundle</parameter>
       </parameter>
       <parameter key="TwigBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
       </parameter>
       <parameter key="WebProfilerBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/web-profiler-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\web-profiler-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\WebProfilerBundle</parameter>
       </parameter>
       <parameter key="StimulusBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/stimulus-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\stimulus-bundle</parameter>
         <parameter key="namespace">Symfony\UX\StimulusBundle</parameter>
       </parameter>
       <parameter key="TurboBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/ux-turbo</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo</parameter>
         <parameter key="namespace">Symfony\UX\Turbo</parameter>
       </parameter>
       <parameter key="TwigExtraBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/twig/extra-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\twig\extra-bundle</parameter>
         <parameter key="namespace">Twig\Extra\TwigExtraBundle</parameter>
       </parameter>
       <parameter key="SecurityBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\SecurityBundle</parameter>
       </parameter>
       <parameter key="MonologBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/monolog-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\monolog-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\MonologBundle</parameter>
       </parameter>
       <parameter key="MakerBundle" type="collection">
-        <parameter key="path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/maker-bundle</parameter>
+        <parameter key="path">C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\maker-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
       </parameter>
     </parameter>
@@ -115,19 +115,19 @@
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
     <parameter key="translator.logging">false</parameter>
-    <parameter key="translator.default_path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/translations</parameter>
+    <parameter key="translator.default_path">C:\wamp64\www\Arinfo\Symfony\mini-twitter/translations</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
-    <parameter key="router.cache_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev</parameter>
+    <parameter key="router.cache_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="serializer.mapping.cache.file">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.file">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/serialization.php</parameter>
     <parameter key=".serializer.named_serializers" type="collection"/>
-    <parameter key="cache.prefix.seed">_/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter.App_KernelDevDebugContainer</parameter>
+    <parameter key="cache.prefix.seed">_C:\wamp64\www\Arinfo\Symfony\mini-twitter.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
       <parameter key="cache_limiter" type="string">0</parameter>
@@ -143,11 +143,11 @@
       <parameter key="data-controller">csrf-protection</parameter>
     </parameter>
     <parameter key=".form.type_extension.csrf.token_id">submit</parameter>
-    <parameter key="validator.mapping.cache.file">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_main_requests">false</parameter>
-    <parameter key="profiler.storage.dsn">file:/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/profiler</parameter>
+    <parameter key="profiler.storage.dsn">file:C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/profiler</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -217,7 +217,7 @@
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">true</parameter>
-    <parameter key="doctrine.orm.proxy_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -225,7 +225,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
-    <parameter key="twig.default_path">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</parameter>
+    <parameter key="twig.default_path">C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="security.role_hierarchy.roles" type="collection"/>
@@ -359,6 +359,13 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Controller\CommentController" class="App\Controller\CommentController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\CommentController"/>
+      </call>
+    </service>
     <service id="App\Controller\MediaController" class="App\Controller\MediaController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -395,6 +402,9 @@
     <service id="App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
     <service id="App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
@@ -449,7 +459,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.U6H8wYh"/>
+      <argument type="service" id=".service_locator.nRf5rp_"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -533,7 +543,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/http_cache</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -543,7 +553,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -817,7 +827,7 @@
       </argument>
       <argument>UTF-8</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -853,7 +863,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="filesystem"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="setName">
         <argument>assets:install</argument>
       </call>
@@ -1039,7 +1049,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument>dev</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="setName">
         <argument>debug:dotenv</argument>
       </call>
@@ -1277,16 +1287,16 @@
       <argument type="service" id="translator.data_collector"/>
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/translations</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/translations</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations</argument>
       </argument>
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Email</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Form</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
       <argument type="collection"/>
       <call method="setName">
@@ -1303,16 +1313,16 @@
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
       <argument>en</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/translations</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/translations</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations</argument>
       </argument>
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Email</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Form</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
       <argument type="collection"/>
       <call method="setName">
@@ -1405,6 +1415,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\CommentType</argument>
         <argument>App\Form\MediaType</argument>
         <argument>App\Form\TweetType</argument>
         <argument>App\Form\UserType</argument>
@@ -1597,7 +1608,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1616,7 +1627,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/app</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -1785,16 +1796,16 @@
     <service id="asset_mapper.cached_mapped_asset_factory" class="Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory">
       <tag name="container.decorator" id="asset_mapper.mapped_asset_factory" inner="asset_mapper.cached_mapped_asset_factory.inner"/>
       <argument type="service" id="asset_mapper.cached_mapped_asset_factory.inner"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/asset_mapper</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/asset_mapper</argument>
       <argument>true</argument>
     </service>
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
       <argument type="collection">
-        <argument key="/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/ux-turbo/src/DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
-        <argument key="/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/stimulus-bundle/src/DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
+        <argument key="C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo\src\DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
+        <argument key="C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\stimulus-bundle\src\DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
         <argument key="assets/"></argument>
       </argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument type="collection">
         <argument>#^(?=[^\.]).*\.d\.ts$#</argument>
         <argument>#^(?=[^\.]).*.*/(?=[^\.])controllers\.json$#</argument>
@@ -1806,10 +1817,10 @@
       <argument>/assets/</argument>
     </service>
     <service id="asset_mapper.local_public_assets_filesystem" class="Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/public</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/public</argument>
     </service>
     <service id="asset_mapper.compiled_asset_mapper_config_reader" class="Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/public/assets</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/public/assets</argument>
     </service>
     <service id="asset_mapper.asset_package" class="Symfony\Component\AssetMapper\MapperAwareAssetPackage">
       <tag name="container.decorator" id="assets._default_package" inner="asset_mapper.asset_package.inner"/>
@@ -1833,7 +1844,7 @@
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="asset_mapper.importmap.generator"/>
       <argument type="service" id="asset_mapper.local_public_assets_filesystem"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument>true</argument>
       <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
       <call method="setName">
@@ -1848,7 +1859,7 @@
       <tag name="container.no_preload"/>
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="asset_mapper.repository"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="setName">
         <argument>debug:asset-map</argument>
       </call>
@@ -1877,7 +1888,7 @@
       <argument type="service" id="monolog.logger.asset_mapper"/>
     </service>
     <service id="asset_mapper.importmap.config_reader" class="Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/importmap.php</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/importmap.php</argument>
       <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
     </service>
     <service id="asset_mapper.importmap.manager" class="Symfony\Component\AssetMapper\ImportMap\ImportMapManager">
@@ -1892,7 +1903,7 @@
       <argument type="service" id="asset_mapper.importmap.config_reader"/>
     </service>
     <service id="asset_mapper.importmap.remote_package_storage" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/assets/vendor</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/assets/vendor</argument>
     </service>
     <service id="asset_mapper.importmap.remote_package_downloader" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader">
       <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
@@ -1929,7 +1940,7 @@
       <tag name="container.no_preload"/>
       <argument type="service" id="asset_mapper.importmap.manager"/>
       <argument type="service" id="asset_mapper.importmap.version_checker"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="setName">
         <argument>importmap:require</argument>
       </call>
@@ -1964,7 +1975,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="setName">
         <argument>importmap:install</argument>
       </call>
@@ -2169,331 +2180,331 @@
         </argument>
       </argument>
       <argument type="collection">
-        <argument key="cache_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/translations</argument>
+        <argument key="cache_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
           <argument key="af" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.af.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.af.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.af.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
           </argument>
           <argument key="ar" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ar.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ar.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ar.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
           </argument>
           <argument key="az" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.az.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.az.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.az.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.az.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.az.xlf</argument>
           </argument>
           <argument key="be" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.be.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.be.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.be.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.be.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.be.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.be.xlf</argument>
           </argument>
           <argument key="bg" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.bg.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.bg.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.bg.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
           </argument>
           <argument key="bs" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.bs.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.bs.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.bs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.bs.xlf</argument>
           </argument>
           <argument key="ca" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ca.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ca.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ca.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
           </argument>
           <argument key="cs" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.cs.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.cs.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.cs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
           </argument>
           <argument key="cy" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.cy.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.cy.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.cy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.cy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.cy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.cy.xlf</argument>
           </argument>
           <argument key="da" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.da.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.da.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.da.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
           </argument>
           <argument key="de" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.de.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.de.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.de.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
           </argument>
           <argument key="el" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.el.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.el.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.el.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
           </argument>
           <argument key="en" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.en.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.en.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.en.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
           </argument>
           <argument key="es" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.es.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.es.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.es.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
           </argument>
           <argument key="et" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.et.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.et.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.et.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.et.xlf</argument>
           </argument>
           <argument key="eu" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.eu.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.eu.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.eu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
           </argument>
           <argument key="fa" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.fa.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.fa.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.fa.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
           </argument>
           <argument key="fi" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.fi.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.fi.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.fi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
           </argument>
           <argument key="fr" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.fr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.fr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.fr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
           </argument>
           <argument key="gl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.gl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.gl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.gl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
           </argument>
           <argument key="he" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.he.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.he.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.he.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
           </argument>
           <argument key="hr" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.hr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.hr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.hr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
           </argument>
           <argument key="hu" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.hu.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.hu.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.hu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
           </argument>
           <argument key="hy" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.hy.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.hy.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.hy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.hy.xlf</argument>
           </argument>
           <argument key="id" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.id.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.id.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.id.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
           </argument>
           <argument key="it" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.it.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.it.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.it.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
           </argument>
           <argument key="ja" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ja.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ja.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ja.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
           </argument>
           <argument key="lb" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.lb.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.lb.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.lb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
           </argument>
           <argument key="lt" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.lt.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.lt.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.lt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
           </argument>
           <argument key="lv" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.lv.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.lv.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.lv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
           </argument>
           <argument key="mk" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.mk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.mk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.mk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.mk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.mk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.mk.xlf</argument>
           </argument>
           <argument key="mn" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.mn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.mn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.mn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
           </argument>
           <argument key="my" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.my.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.my.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.my.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.my.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.my.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.my.xlf</argument>
           </argument>
           <argument key="nb" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.nb.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.nb.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.nb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
           </argument>
           <argument key="nl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.nl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.nl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.nl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
           </argument>
           <argument key="nn" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.nn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.nn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.nn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.nn.xlf</argument>
           </argument>
           <argument key="no" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.no.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.no.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.no.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
           </argument>
           <argument key="pl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.pl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.pl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.pl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
           </argument>
           <argument key="pt" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.pt.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.pt.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.pt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
           </argument>
           <argument key="pt_BR" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.pt_BR.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.pt_BR.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.pt_BR.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
           </argument>
           <argument key="ro" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ro.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ro.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ro.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
           </argument>
           <argument key="ru" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ru.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ru.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ru.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
           </argument>
           <argument key="sk" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
           </argument>
           <argument key="sl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
           </argument>
           <argument key="sq" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sq.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sq.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sq.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sq.xlf</argument>
           </argument>
           <argument key="sr_Cyrl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sr_Cyrl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sr_Cyrl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sr_Cyrl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sr_Cyrl.xlf</argument>
           </argument>
           <argument key="sr_Latn" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sr_Latn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sr_Latn.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sr_Latn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
           </argument>
           <argument key="sv" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.sv.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.sv.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.sv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
           </argument>
           <argument key="th" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.th.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.th.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.th.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
           </argument>
           <argument key="tl" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.tl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.tl.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.tl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.tl.xlf</argument>
           </argument>
           <argument key="tr" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.tr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.tr.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.tr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
           </argument>
           <argument key="uk" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.uk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.uk.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.uk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
           </argument>
           <argument key="ur" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.ur.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.ur.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.ur.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.ur.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.ur.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.ur.xlf</argument>
           </argument>
           <argument key="uz" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.uz.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.uz.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.uz.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.uz.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.uz.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.uz.xlf</argument>
           </argument>
           <argument key="vi" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.vi.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.vi.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.vi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
           </argument>
           <argument key="zh_CN" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.zh_CN.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.zh_CN.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.zh_CN.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
           </argument>
           <argument key="zh_TW" type="collection">
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations/validators.zh_TW.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations/validators.zh_TW.xlf</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations/security.zh_TW.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
           </argument>
         </argument>
         <argument key="scanned_directories" type="collection">
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/validator/Resources/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-core/Resources/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/framework-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-migrations-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/debug-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/web-profiler-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/stimulus-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/ux-turbo/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/twig/extra-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/monolog-bundle/translations</argument>
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/maker-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\framework-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\debug-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\web-profiler-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\stimulus-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\twig\extra-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\monolog-bundle/translations</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\maker-bundle/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
-            <argument>vendor/symfony/validator/Resources/translations</argument>
-            <argument>vendor/symfony/form/Resources/translations</argument>
-            <argument>vendor/symfony/security-core/Resources/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\validator/Resources/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-core/Resources/translations</argument>
             <argument>translations</argument>
-            <argument>vendor/symfony/framework-bundle/translations</argument>
-            <argument>vendor/doctrine/doctrine-bundle/translations</argument>
-            <argument>vendor/doctrine/doctrine-migrations-bundle/translations</argument>
-            <argument>vendor/symfony/debug-bundle/translations</argument>
-            <argument>vendor/symfony/twig-bundle/translations</argument>
-            <argument>vendor/symfony/web-profiler-bundle/translations</argument>
-            <argument>vendor/symfony/stimulus-bundle/translations</argument>
-            <argument>vendor/symfony/ux-turbo/translations</argument>
-            <argument>vendor/twig/extra-bundle/translations</argument>
-            <argument>vendor/symfony/security-bundle/translations</argument>
-            <argument>vendor/symfony/monolog-bundle/translations</argument>
-            <argument>vendor/symfony/maker-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\framework-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\debug-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\web-profiler-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\stimulus-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\twig\extra-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\monolog-bundle/translations</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\maker-bundle/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -2830,7 +2841,7 @@
     <service id="debug.file_link_formatter" class="Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter">
       <argument>%env(default::SYMFONY_IDE)%</argument>
       <argument type="service" id="request_stack" on-invalid="ignore"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument type="service_closure" id="debug.file_link_formatter.url_format"/>
     </service>
     <service id="debug.stopwatch" class="Symfony\Component\Stopwatch\Stopwatch" public="true">
@@ -3177,14 +3188,6 @@
         <argument>-100</argument>
       </call>
       <call method="addListener">
-        <argument>Symfony\Component\Messenger\Event\WorkerRunningEvent</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="messenger.listener.dispatch_pcntl_signal_listener"/>
-          <argument>onWorkerRunning</argument>
-        </argument>
-        <argument>100</argument>
-      </call>
-      <call method="addListener">
         <argument>Symfony\Component\Messenger\Event\WorkerStartedEvent</argument>
         <argument type="collection">
           <argument type="service_closure" id="messenger.listener.stop_worker_on_restart_signal_listener"/>
@@ -3486,7 +3489,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.U6H8wYh"/>
+      <argument type="service" id=".service_locator.nRf5rp_"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3589,7 +3592,7 @@
       <argument type="service" id=".service_locator.euaNshl.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev</argument>
+        <argument key="cache_dir">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -3638,7 +3641,7 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.request" on-invalid="ignore"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -3665,7 +3668,7 @@
       <argument type="service" id="property_info.reflection_extractor" on-invalid="null"/>
     </service>
     <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
       <argument type="service" id="secrets.decryption_key" on-invalid="ignore"/>
       <argument>APP_SECRET</argument>
     </service>
@@ -3678,7 +3681,7 @@
       <argument>base64:default::SYMFONY_DECRYPTION_SECRET</argument>
     </service>
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/.env.dev.local</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/.env.dev.local</argument>
     </service>
     <service id="serializer.mapping.class_discriminator_resolver" class="Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata">
       <argument type="service" id="serializer.mapping.class_metadata_factory"/>
@@ -3788,10 +3791,10 @@
           <service class="Symfony\Component\Serializer\Mapping\Loader\AttributeLoader"/>
         </argument>
       </argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/serialization.php</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/serialization.php</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/serialization.php</argument>
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -3999,7 +4002,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/sessions</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -4078,7 +4081,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.CuUs8FT"/>
+      <argument type="service" id=".service_locator.EYV4930"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4176,6 +4179,7 @@
       <argument type="service" id="form.server_params"/>
       <argument>%form.type_extension.csrf.field_attr%</argument>
       <argument type="collection">
+        <argument key="App\Form\CommentType">submit</argument>
         <argument key="App\Form\MediaType">submit</argument>
         <argument key="App\Form\TweetType">submit</argument>
         <argument key="App\Form\UserType">submit</argument>
@@ -4196,7 +4200,7 @@
       </call>
       <call method="addXmlMappings">
         <argument type="collection">
-          <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/form/Resources/config/validation.xml</argument>
+          <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\form/Resources/config/validation.xml</argument>
         </argument>
       </call>
       <call method="enableAttributeMapping"/>
@@ -4219,10 +4223,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/validation.php</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/validation.php</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
@@ -4911,7 +4915,7 @@
       </call>
     </service>
     <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
-      <argument>file:/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/profiler</argument>
+      <argument>file:C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/profiler</argument>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -4991,7 +4995,7 @@
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
       <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/App_KernelDevDebugContainer</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/App_KernelDevDebugContainer</argument>
       <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
     </service>
     <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
@@ -5384,7 +5388,7 @@
       <tag name="doctrine.event_listener" event="onSchemaCreateTable"/>
       <argument type="tagged_iterator" tag="messenger.receiver"/>
     </service>
-    <service id=".1_ServiceLocator~epCA1BE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".1_ServiceLocator~8JcUlui" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <argument type="collection"/>
     </service>
     <service id="doctrine.orm.proxy_cache_warmer" class="Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer">
@@ -5593,7 +5597,7 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/doctrine/orm/Proxies</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -5630,16 +5634,13 @@
           <argument key="Doctrine\DBAL\Platforms\PostgreSQLPlatform">4</argument>
         </argument>
       </call>
-      <call method="enableNativeLazyObjects">
-        <argument>false</argument>
-      </call>
       <call method="setRepositoryFactory">
         <argument type="service" id="doctrine.orm.container_repository_factory"/>
       </call>
     </service>
     <service id="doctrine.orm.default_attribute_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AttributeDriver">
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/src/Entity</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\src\Entity</argument>
       </argument>
       <argument>true</argument>
     </service>
@@ -5705,7 +5706,7 @@
     <service id="doctrine.migrations.configuration" class="Doctrine\Migrations\Configuration\Configuration">
       <call method="addMigrationsDirectory">
         <argument>DoctrineMigrations</argument>
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/migrations</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/migrations</argument>
       </call>
       <call method="setAllOrNothing">
         <argument>false</argument>
@@ -5929,7 +5930,7 @@
         <argument key="source" type="service">
           <service class="Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider">
             <argument>UTF-8</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
             <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
           </service>
         </argument>
@@ -5951,7 +5952,7 @@
         <argument key="source" type="service">
           <service class="Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider">
             <argument>UTF-8</argument>
-            <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+            <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
             <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
           </service>
         </argument>
@@ -6016,7 +6017,7 @@
       <tag name="kernel.reset" method="resetGlobals"/>
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
-        <argument key="cache">/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/twig</argument>
+        <argument key="cache">C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -6141,10 +6142,10 @@
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator">
       <argument type="service" id="kernel"/>
       <argument type="collection">
-        <argument key="/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Email">email</argument>
-        <argument key="/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Form">null</argument>
+        <argument key="C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
+        <argument key="C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
       </argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
       <argument type="collection">
         <argument>*.twig</argument>
       </argument>
@@ -6159,76 +6160,76 @@
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
       <argument type="collection"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-bundle/templates</argument>
         <argument>Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-bundle/templates</argument>
         <argument>!Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-migrations-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>DoctrineMigrations</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/doctrine/doctrine-migrations-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
         <argument>!DoctrineMigrations</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/debug-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\debug-bundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/debug-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\debug-bundle/Resources/views</argument>
         <argument>!Debug</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/web-profiler-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\web-profiler-bundle/Resources/views</argument>
         <argument>WebProfiler</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/web-profiler-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\web-profiler-bundle/Resources/views</argument>
         <argument>!WebProfiler</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/ux-turbo/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo/templates</argument>
         <argument>Turbo</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/ux-turbo/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\ux-turbo/templates</argument>
         <argument>!Turbo</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>Security</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/security-bundle/Resources/views</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>!Security</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/maker-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\maker-bundle/templates</argument>
         <argument>Maker</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/maker-bundle/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\maker-bundle/templates</argument>
         <argument>!Maker</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Email</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>email</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Email</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>!email</argument>
       </call>
       <call method="addPath">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/vendor/symfony/twig-bridge/Resources/views/Form</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </call>
     </service>
     <service id="twig.loader.chain" class="Twig\Loader\ChainLoader"/>
@@ -6341,9 +6342,9 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="twig"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument>%kernel.bundles_metadata%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
       <call method="setName">
         <argument>debug:twig</argument>
@@ -6392,7 +6393,7 @@
       <argument type="service" id="twig"/>
       <argument>%data_collector.templates%</argument>
       <argument type="service" id="web_profiler.csp.handler"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
     </service>
     <service id="web_profiler.controller.router" class="Symfony\Bundle\WebProfilerBundle\Controller\RouterController" public="true">
       <argument type="service" id="profiler" on-invalid="null"/>
@@ -6435,7 +6436,7 @@
     <service id="twig.extension.code" class="Symfony\Bundle\WebProfilerBundle\Profiler\CodeExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="debug.file_link_formatter"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument>UTF-8</argument>
     </service>
     <service id="web_profiler.debug_toolbar" class="Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener">
@@ -6458,7 +6459,7 @@
       <argument type="service" id="stimulus.helper"/>
     </service>
     <service id="stimulus.asset_mapper.ux_package_reader" class="Symfony\UX\StimulusBundle\Ux\UxPackageReader">
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
     </service>
     <service id="stimulus.ux_controllers_twig_extension" class="Symfony\UX\StimulusBundle\Twig\UxControllersTwigExtension">
       <tag name="twig.extension"/>
@@ -6468,15 +6469,15 @@
       <argument type="service" id="stimulus.asset_mapper.controllers_map_generator"/>
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
     </service>
     <service id="stimulus.asset_mapper.controllers_map_generator" class="Symfony\UX\StimulusBundle\AssetMapper\ControllersMapGenerator">
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
       <argument type="collection">
-        <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/assets/controllers</argument>
+        <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/assets/controllers</argument>
       </argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/assets/controllers.json</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/assets/controllers.json</argument>
       <argument type="service" id="stimulus.asset_mapper.auto_import_locator" on-invalid="null"/>
     </service>
     <service id="stimulus.asset_mapper.auto_import_locator" class="Symfony\UX\StimulusBundle\AssetMapper\AutoImportLocator">
@@ -7279,7 +7280,7 @@
     <service id="monolog.processor.psr_log_message" class="Monolog\Processor\PsrLogMessageProcessor"/>
     <service id="monolog.handler.main" class="Monolog\Handler\StreamHandler">
       <tag name="kernel.reset" method="reset"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/log/dev.log</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\log/dev.log</argument>
       <argument>debug</argument>
       <argument>true</argument>
       <argument>null</argument>
@@ -7301,8 +7302,8 @@
       <argument type="service" id="filesystem"/>
       <argument type="service" id="maker.autoloader_util"/>
       <argument type="service" id="maker.file_link_formatter"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/templates</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/templates</argument>
     </service>
     <service id="maker.autoloader_finder" class="Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder">
       <argument>App</argument>
@@ -7479,7 +7480,7 @@
     </service>
     <service id="maker.maker.make_migration" class="Symfony\Bundle\MakerBundle\Maker\MakeMigration">
       <tag name="maker.command"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter</argument>
       <argument type="service" id="maker.file_link_formatter"/>
     </service>
     <service id="maker.maker.make_stimulus_controller" class="Symfony\Bundle\MakerBundle\Maker\MakeStimulusController">
@@ -7501,6 +7502,10 @@
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.generator"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\CommentController.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\MediaController.0.App\Controller\MediaController" class="App\Controller\MediaController" autowire="true" abstract="true"/>
@@ -7521,6 +7526,8 @@
     <service id=".abstract.instanceof.App\Entity\Tweet" class="App\Entity\Tweet" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\User.0.App\Entity\User" class="App\Entity\User" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CommentType" class="App\Form\CommentType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MediaType" class="App\Form\MediaType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\MediaType" class="App\Form\MediaType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TweetType" class="App\Form\TweetType" autowire="true" abstract="true"/>
@@ -8053,6 +8060,61 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.zHyJIs5" method="withContext"/>
     </service>
+    <service id=".service_locator..zbb2WU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="commentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator..zbb2WU.App\Controller\CommentController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::index()"/>
+      <argument>App\Controller\CommentController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator..zbb2WU" method="withContext"/>
+    </service>
+    <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.egipcEH.App\Controller\CommentController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::new()"/>
+      <argument>App\Controller\CommentController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.egipcEH" method="withContext"/>
+    </service>
+    <service id=".service_locator.JRyFIf6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id="App\Entity\Comment"/>
+      </argument>
+    </service>
+    <service id=".service_locator.JRyFIf6.App\Controller\CommentController::show()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::show()"/>
+      <argument>App\Controller\CommentController::show()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.JRyFIf6" method="withContext"/>
+    </service>
+    <service id=".service_locator.Fbxi6sJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id="App\Entity\Comment"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::edit()"/>
+      <argument>App\Controller\CommentController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Fbxi6sJ" method="withContext"/>
+    </service>
+    <service id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController::delete()"/>
+      <argument>App\Controller\CommentController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.Fbxi6sJ" method="withContext"/>
+    </service>
     <service id=".service_locator.Fi4Am7Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8064,12 +8126,6 @@
       <argument>App\Controller\MediaController::index()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.Fi4Am7Q" method="withContext"/>
-    </service>
-    <service id=".service_locator.egipcEH" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-      </argument>
     </service>
     <service id=".service_locator.egipcEH.App\Controller\MediaController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MediaController::new()"/>
@@ -8206,13 +8262,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.WkfvUVe" method="withContext"/>
     </service>
-    <service id=".service_locator.U6H8wYh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nRf5rp_" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\CommentController::index" type="service_closure" id=".service_locator..zbb2WU.App\Controller\CommentController::index()"/>
+        <argument key="App\Controller\CommentController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\CommentController::new()"/>
+        <argument key="App\Controller\CommentController::show" type="service_closure" id=".service_locator.JRyFIf6.App\Controller\CommentController::show()"/>
+        <argument key="App\Controller\CommentController::edit" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()"/>
+        <argument key="App\Controller\CommentController::delete" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()"/>
         <argument key="App\Controller\MediaController::index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
         <argument key="App\Controller\MediaController::new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
         <argument key="App\Controller\MediaController::show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
@@ -8230,6 +8291,11 @@
         <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.WkfvUVe.App\Controller\UserController::delete()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
+        <argument key="App\Controller\CommentController:index" type="service_closure" id=".service_locator..zbb2WU.App\Controller\CommentController::index()"/>
+        <argument key="App\Controller\CommentController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\CommentController::new()"/>
+        <argument key="App\Controller\CommentController:show" type="service_closure" id=".service_locator.JRyFIf6.App\Controller\CommentController::show()"/>
+        <argument key="App\Controller\CommentController:edit" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::edit()"/>
+        <argument key="App\Controller\CommentController:delete" type="service_closure" id=".service_locator.Fbxi6sJ.App\Controller\CommentController::delete()"/>
         <argument key="App\Controller\MediaController:index" type="service_closure" id=".service_locator.Fi4Am7Q.App\Controller\MediaController::index()"/>
         <argument key="App\Controller\MediaController:new" type="service_closure" id=".service_locator.egipcEH.App\Controller\MediaController::new()"/>
         <argument key="App\Controller\MediaController:show" type="service_closure" id=".service_locator.AA1LTqm.App\Controller\MediaController::show()"/>
@@ -8430,9 +8496,10 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.CuUs8FT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.EYV4930" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\CommentType" type="service_closure" id="App\Form\CommentType"/>
         <argument key="App\Form\MediaType" type="service_closure" id="App\Form\MediaType"/>
         <argument key="App\Form\TweetType" type="service_closure" id="App\Form\TweetType"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
@@ -8833,6 +8900,12 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\CommentController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController"/>
+      <argument>App\Controller\CommentController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
     <service id=".service_locator.ZyP9f7K.App\Controller\MediaController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MediaController"/>
       <argument>App\Controller\MediaController</argument>
@@ -9023,7 +9096,7 @@
     <service id="asset_mapper.cached_mapped_asset_factory.inner" class="Symfony\Component\AssetMapper\Factory\MappedAssetFactory">
       <argument type="service" id="asset_mapper.public_assets_path_resolver"/>
       <argument type="service" id="asset_mapper_compiler"/>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/assets/vendor</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter/assets/vendor</argument>
     </service>
     <service id="asset_mapper.asset_package.inner" class="Symfony\Component\Asset\PathPackage">
       <argument></argument>
@@ -9043,6 +9116,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\CommentController</argument>
           <argument>App\Controller\MediaController</argument>
           <argument>App\Controller\TweetController</argument>
           <argument>App\Controller\UserController</argument>
@@ -10229,94 +10303,94 @@
       </argument>
     </service>
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
-      <argument>3KmudEi1Eg</argument>
+      <argument>y8HuBvJEKy</argument>
       <argument>0</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/app</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
     </service>
     <service id="cache.system.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>uWnyBKwArh</argument>
+      <argument>vVfS5j44zM</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>kZ0RBtWcGX</argument>
+      <argument>ycoAPcK2zE</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>Ntu9NIEuna</argument>
+      <argument>-bYF6ZPpEg</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.property_info.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>klnQhCMnJR</argument>
+      <argument>033cEsQGhU</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.asset_mapper.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>PEPt6RBULg</argument>
+      <argument>DunpeJB5L3</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
-      <argument>yQKi8MMlqr</argument>
+      <argument>bOycnsB5WZ</argument>
       <argument>0</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/app</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
     </service>
     <service id="cache.validator_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>YGymY1mcjY</argument>
+      <argument>okMlBLDt3g</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.doctrine.orm.default.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.default.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.security_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>45QTrT4hCy</argument>
+      <argument>ezPHo8pbQh</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.security_is_granted_attribute_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>CKVIQ4AY1N</argument>
+      <argument>bXYTazPKzw</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.security_is_csrf_token_valid_attribute_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>1s4JTbn6Su</argument>
+      <argument>mAWhrzO8qY</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/Applications/XAMPP/xamppfiles/htdocs/arinfo/symfony/mini-twitter/var/cache/dev/pools/system</argument>
+      <argument>C:\wamp64\www\Arinfo\Symfony\mini-twitter\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10479,7 +10553,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.U6H8wYh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.nRf5rp_"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10523,8 +10597,11 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.n_ENPtW" alias=".service_locator.zHyJIs5"/>
-    <service id=".service_locator.wnxb0le" alias=".service_locator.Fi4Am7Q"/>
+    <service id=".service_locator.614IGRF" alias=".service_locator..zbb2WU"/>
     <service id=".service_locator.5Vd5JYV" alias=".service_locator.egipcEH"/>
+    <service id=".service_locator._eqJQHt" alias=".service_locator.JRyFIf6"/>
+    <service id=".service_locator.kDLTfmn" alias=".service_locator.Fbxi6sJ"/>
+    <service id=".service_locator.wnxb0le" alias=".service_locator.Fi4Am7Q"/>
     <service id=".service_locator.GhMWvyo" alias=".service_locator.AA1LTqm"/>
     <service id=".service_locator._7xXf0o" alias=".service_locator.rpEF4Fp"/>
     <service id=".service_locator.hITybM0" alias=".service_locator.gcNMxHR"/>
