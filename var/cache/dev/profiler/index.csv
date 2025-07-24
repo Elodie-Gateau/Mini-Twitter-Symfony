@@ -16,3 +16,13 @@ ee210c,127.0.0.1,GET,http://127.0.0.1:8000/event,1753281784,,404,request
 d953bf,127.0.0.1,GET,http://127.0.0.1:8000/register,1753340879,3c251d,404,request
 3c251d,127.0.0.1,GET,http://127.0.0.1:8000/register,1753340879,,404,request
 6854fe,127.0.0.1,GET,http://127.0.0.1:8000/,1753340886,,404,request
+9cfb05,127.0.0.1,GET,http://127.0.0.1:8000/user,1753351561,,200,request
+96e770,127.0.0.1,GET,http://127.0.0.1:8000/register,1753351573,,200,request
+f8b35a,127.0.0.1,GET,http://127.0.0.1:8000/register,1753351679,,200,request
+2b1db0,127.0.0.1,GET,http://127.0.0.1:8000/register,1753351687,,200,request
+ab6cd7,127.0.0.1,GET,http://127.0.0.1:8000/register,1753351794,,200,request
+f0fe97,127.0.0.1,GET,http://127.0.0.1:8000/register,1753351901,,200,request
+dafcfc,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352060,,200,request
+32a17a,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352062,,200,request
+9e5fff,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352167,,200,request
+d5ddbc,127.0.0.1,GET,http://127.0.0.1:8000/register,1753352170,,200,request
