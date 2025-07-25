@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau message{% endblock %}
+{% block title %}Nouveau tweet{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un message</h1>
+
+    <h1 class="mt-15 mb-2 text-4xl font-bold text-orange-500 text-center">Ajouter un tweet</h1>
 
     {{ include('tweet/_form.html.twig') }}
 
-    <a href="{{ path('app_tweet_index') }}">Retour à la liste</a>
 {% endblock %}
