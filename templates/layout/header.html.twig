@@ -28,13 +28,13 @@
 					<a href="{{ path('app_logout')}}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 lg:mt-0">Se déconnecter</a>
 				{% endif %}
 			</div>
-			{% for tweet in tweets %}
-				{% if tweet.idUser.photo %}
-		             <img class="w-10 h-10 rounded" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
+			{% if is_granted('ROLE_USER') %}
+				{% if app.user.photo %}
+		             <img class="w-10 h-10 rounded ml-5" src="{{ app.user.photo }}" alt="Photo de {{ app.user.name }}">
 				{% else %}
-					<img class="w-10 h-10 rounded" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
+					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de {{ app.user.name }}">
 				{% endif %}
-			{% endfor %}
+			{% endif %}
 
 		</div>
 	</nav>
