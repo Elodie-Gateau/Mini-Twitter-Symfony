@@ -12,16 +12,23 @@
 
 			{{ form_start(registrationForm) }}
 			<div class="block text-gray-700 text-sm font-bold mb-2">
-				{{ form_row(registrationForm.name) }}
+				{# Affichage de la photo de profil existante si elle existe #}
+				{# {% if user.photo %}
+									<div class="mb-4 text-center">
+										<label class="block text-gray-700 text-sm font-bold mb-2">Photo de profil actuelle :</label>
+										<img src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de profil" class="w-32 h-32 rounded-full mx-auto object-cover border-2 border-gray-300">
+									</div>
+								{% endif %} #}
 
+				{{ form_row(registrationForm.photo) }}
+				{{ form_row(registrationForm.name) }}
 				{{ form_row(registrationForm.firstname) }}
 				{{ form_row(registrationForm.nickname) }}
 				{{ form_row(registrationForm.age) }}
 				{{ form_row(registrationForm.email) }}
 				{{ form_row(registrationForm.plainPassword) }}
 				{{ form_row(registrationForm.agreeTerms) }}
-				<div class="flex justify-center mt-4">
-					<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
+					<div class="flex justify-center mt-4"> <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
 				</div>
 				{{ form_end(registrationForm) }}
 			</div>
