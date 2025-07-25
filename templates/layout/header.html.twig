@@ -1,8 +1,8 @@
 <header>
 	<nav class="flex items-center justify-between flex-wrap bg-orange-400 p-6">
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<img src="{{ asset('img/logo-txt.png') }}" alt="Description du logo" class="w-50 h-20"/>
-
+        <img src="{{ asset('img/logo-txt.png') }}" alt="Description du logo" class="w-50 h-20"/>
+		
 		</div>
 		<div class="block lg:hidden">
 			<button class="flex items-center px-3 py-2 border rounded text-orange-200 border-orange-400 hover:text-white hover:border-white">
@@ -30,12 +30,9 @@
 			</div>
 		
 			{% if is_granted('ROLE_USER') %}
-				{% if app.user.photo %}
-		             <img class="w-10 h-10 rounded ml-5" src="{{ app.user.photo }}" alt="Photo de {{ app.user.name }}">
+				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
 				{% else %}
-					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de {{ app.user.name }}">
+					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de profil">
 				{% endif %}
-			{% endif %}
-
 	</div>
 </nav></header>

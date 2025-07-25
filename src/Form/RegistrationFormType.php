@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class RegistrationFormType extends AbstractType
 {
@@ -23,7 +25,7 @@ class RegistrationFormType extends AbstractType
             ->add('name', null, [
                 'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
                 'label' => 'Nom :',
-                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']                
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
             ])
             ->add('firstname', null, [
                 'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
@@ -54,8 +56,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Accepter les conditions : ',
                 'label_attr' => ['class' => 'inline-flex items-center text-gray-700 text-sm font-bold my-2 cursor-pointer'],
-                'row_attr' => ['class' => 'flex items-center'], 
-                'label_html' => true, 
+                'row_attr' => ['class' => 'flex items-center'],
+                'label_html' => true,
                 'attr' => ['class' => 'ml-2'],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -80,6 +82,22 @@ class RegistrationFormType extends AbstractType
                 ],
                 'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
                 'label' => 'Mot de passe :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+            ])
+            ->add('photo', FileType::class, [
+                'label' => 'Photo de profil',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5000k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Image trop lourde',
+                    ])
+                ],
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
                 'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
             ])
         ;
