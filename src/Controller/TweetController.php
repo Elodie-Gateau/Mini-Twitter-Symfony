@@ -114,46 +114,51 @@ final class TweetController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tweet_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tweet $tweet, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(TweetType::class, $tweet);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        dump($tweet->getIdUser());
 
-            $entityManager->persist($tweet);
-            $entityManager->flush();
+        if ($security->getUser() == $tweet->getIdUser()) {
 
-            $imageFile = $form->get('media')->getData();
+            $form = $this->createForm(TweetType::class, $tweet);
+            $form->handleRequest($request);
 
-            // if ($tweet{id}) {
-                
-            // };
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('images_directory'),
-                    $newFilename
-                );
-                $media = new Media;
-                $media->setUrlMedia('/uploads/images/' . $newFilename);
-                $media->setTweet($tweet);
-
-                $entityManager->persist($media);
+                $entityManager->persist($tweet);
                 $entityManager->flush();
-                $tweet->addMedium($media);
+
+                $imageFile = $form->get('media')->getData();
+
+                if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                    $media = new Media;
+                    $media->setUrlMedia('/uploads/images/' . $newFilename);
+                    $media->setTweet($tweet);
+
+                    $entityManager->persist($media);
+                    $entityManager->flush();
+                    $tweet->addMedium($media);
+                }
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
             }
 
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('tweet/edit.html.twig', [
+                'tweet' => $tweet,
+                'form' => $form,
+            ]);
+        } else {
+            $this->addFlash('danger', "Vous n'avez pas le droit de consulter ou de modifier cette page");
+            return $this->redirectToRoute('app_tweet_index');
         }
-
-        return $this->render('tweet/edit.html.twig', [
-            'tweet' => $tweet,
-            'form' => $form,
-        ]);
     }
 
     #[Route('/{id}', name: 'app_tweet_delete', methods: ['POST'])]
