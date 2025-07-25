@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 
 
 
@@ -26,7 +26,7 @@ final class ProfileController extends AbstractController
             throw new AccessDeniedException('Vous n\'avez pas la permission de voir ce profil.');
         }
         return $this->render('profile/show.html.twig', [
-            'profile' => $user,
+            'user' => $user,
         ]);
     }
 
@@ -45,7 +45,7 @@ final class ProfileController extends AbstractController
         }
 
         return $this->render('profile/edit.html.twig', [
-            'profile' => $user,
+            'user' => $user,
             'form' => $form,
         ]);
     }
