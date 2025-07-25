@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Tweet{% endblock %}
+{% block title %}Mdofier le message{% endblock %}
 
 {% block body %}
-    <h1>Edit Tweet</h1>
+    <h1>Mdofier le message</h1>
 
     {{ include('tweet/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_tweet_index') }}">back to list</a>
+    <a href="{{ path('app_tweet_index') }}">Retour à la liste</a>
 
     {{ include('tweet/_delete_form.html.twig') }}
 {% endblock %}
