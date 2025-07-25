@@ -7,5 +7,6 @@
     <h1 class="mt-15 mb-2 text-4xl font-bold text-orange-500 text-center">Ajouter un tweet</h1>
 
     {{ include('tweet/_form.html.twig') }}
-
+    <a href="{{ path('app_tweet_index') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-5">Retour à la liste</a>
+</div></div>
 {% endblock %}

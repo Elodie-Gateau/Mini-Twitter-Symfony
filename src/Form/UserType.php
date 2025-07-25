@@ -17,14 +17,20 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', TextType::class, ['label' => 'Votre email',],)
+            ->add('email', TextType::class, [
+                'label' => 'Votre email',
+                'attr' => ['class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"]
+            ],)
             // ->add('roles')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'label' => 'Votre mot de passe',
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Entrez votre mot de passe ici!',
@@ -37,9 +43,18 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('name', TextType::class, ['label' => 'Votre nom',],)
-            ->add('firstName', TextType::class, ['label' => 'Votre prénom',],)
-            ->add('nickName', TextType::class, ['label' => 'Votre pseudo',],)
+            ->add('name', TextType::class, [
+                'label' => 'Votre nom',
+                'attr' => ['class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"]
+            ],)
+            ->add('firstName', TextType::class, [
+                'label' => 'Votre prénom',
+                'attr' => ['class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"]
+            ],)
+            ->add('nickName', TextType::class, [
+                'label' => 'Votre pseudo',
+                'attr' => ['class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"]
+            ],)
         ;
     }
 
