@@ -16,15 +16,15 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('dateTime')
-            ->add('tweet', EntityType::class, [
-                'class' => Tweet::class,
-                'choice_label' => 'id',
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('dateTime')
+            // ->add('tweet', EntityType::class, [
+            //     'class' => Tweet::class,
+            //     'choice_label' => 'id',
+            // ])
+            // ->add('user', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'id',
+            // ])
         ;
     }
 
