@@ -69,6 +69,10 @@ final class TweetController extends AbstractController
         $tweet->setIdUser($security->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($tweet);
+            $entityManager->flush();
+
             $imageFile = $form->get('media')->getData();
 
             if ($imageFile) {
@@ -88,7 +92,6 @@ final class TweetController extends AbstractController
                 $tweet->addMedium($media);
             }
 
-            $entityManager->persist($tweet);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);

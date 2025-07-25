@@ -21,9 +21,13 @@ class TweetType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
+                'label' => 'Message (280 caractères max.)',
+                'attr' => [
+                    'rows' => 5,
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Le contenu ne doit pas êtrer vide',
+                        'message' => 'Vous devez écrire du texte',
                     ]),
                     new Length([
                         'min' => 8,
@@ -35,17 +39,15 @@ class TweetType extends AbstractType
                 ],
             ])
             ->add('media', FileType::class, [
-                'label' => 'Image de l’article',
+                'label' => 'Ajouter un média',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '5000k',
                         'maxSizeMessage' => "L'image ne peut pas dépasser {{ limit }}",
-                        'mimeTypes' => [
-                            'media/*',
-                        ],
-                        'mimeTypesMessage' => 'Format invalide',
+                        'extensions' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4'],
+                        'extensionsMessage' => 'Veuillez choisir un fichier de format jpg, jpeg, png, gif, mp4 ou webp',
                     ]),
                 ],
             ]);
