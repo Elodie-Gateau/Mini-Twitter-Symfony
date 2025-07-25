@@ -17,7 +17,7 @@
 					{% if tweet.idUser.photo %}
 						<img class="w-10 h-10 rounded mr-2" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
     {% else %}
-<img class = "w-10 h-10 rounded" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
+<img class = "w-10 h-10 rounded mr-5" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
     {% endif %}
             {% else %}
             <img class="h-10 w-10 rounded mr-2" src="{{ asset('img/logo.png') }}" alt="Photo de {{ tweet.idUser.name }}">
