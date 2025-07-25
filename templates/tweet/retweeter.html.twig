@@ -1,0 +1,8 @@
+<form method="post" action="{{ path('app_tweet_retweeter', {'id': tweet.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir retweeter ce message ?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('retweeter' ~ tweet.id) }}">
+	<button class="bg-transparent font-semibold hover:text-white py-2 px-4 rounded cursor-pointer w-full mt-2">
+		<svg class="w-6 h-6 text-orange-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 20 18">
+			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 14 3-3m-3 3 3 3m-3-3h16v-3m2-7-3 3m3-3-3-3m3 3H3v3"></path>
+		</svg>
+	</button>
+</form>

@@ -29,7 +29,7 @@
 				{% endif %}
 			</div>
 		
-			{% if is_granted('ROLE_USER') %}
+			{% if is_granted('ROLE_USER') and app.user.photo is not empty %}
 				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
 				{% else %}
 					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de profil">
