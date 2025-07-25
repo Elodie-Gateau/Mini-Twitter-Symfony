@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-// use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -18,11 +18,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, ['label' => 'Votre email',],)
-            ->add('roles')
+            // ->add('roles')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                // 'mapped' => false,
+                'mapped' => false,
                 'label' => 'Votre mot de passe',
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
