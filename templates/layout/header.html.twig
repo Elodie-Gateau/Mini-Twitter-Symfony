@@ -1,9 +1,7 @@
 <header>
 	<nav class="flex items-center justify-between flex-wrap bg-orange-500 p-6">
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
-         <img src="../../public/logo.png" alt="Description du logo" class="w-20 h-20 rounded-full object-cover" />
-			<svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewbox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-			{# <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span> #}
+			<img src="{{ asset('img/logo.png') }}" alt="Description du logo" class="w-20 h-20"/>
 		</div>
 		<div class="block lg:hidden">
 			<button class="flex items-center px-3 py-2 border rounded text-orange-200 border-orange-400 hover:text-white hover:border-white">
@@ -27,7 +25,7 @@
 					<a href="{{ path('app_logout')}}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 lg:mt-0">Se déconnecter</a>
 				{% endif %}
 			</div>
-             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full" />
+			<img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full"/>
 		</div>
 	</nav>
 </header>
