@@ -32,7 +32,7 @@ final class TweetController extends AbstractController
     }
 
     #[Route('/{id}/comment', name: 'app_tweet_index_comment', methods: ['GET', 'POST'])]
-    public function index_comment(int $id, TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em): Response
+    public function index_comment(int $id, TweetRepository $tweetRepository, Request $request, EntityManagerInterface $em): Response
     {
         $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
         $selectedTweet = $tweetRepository->find($id);
@@ -125,7 +125,7 @@ final class TweetController extends AbstractController
             $imageFile = $form->get('media')->getData();
 
             // if ($tweet{id}) {
-                
+
             // };
 
             if ($imageFile) {
