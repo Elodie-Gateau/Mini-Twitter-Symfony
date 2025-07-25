@@ -1,24 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}S'inscire
+{% block title %}S'inscrire
 {% endblock %}
 
 {% block body %}
-	<h1>S'inscire</h1>
+	<div class="flex justify-center py-8">
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
 
-	{{ form_errors(registrationForm) }}
+			{{ form_errors(registrationForm) }}
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.name) }}
-	{{ form_row(registrationForm.firstname) }}
-    {{ form_row(registrationForm.nickname) }}
-	{{ form_row(registrationForm.age) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-	{{ form_row(registrationForm.agreeTerms) }}
+			{{ form_start(registrationForm) }}
+			<div class="block text-gray-700 text-sm font-bold mb-2">
+				{{ form_row(registrationForm.name) }}
 
-	<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscire</button>
-	{{ form_end(registrationForm) }}
+				{{ form_row(registrationForm.firstname) }}
+				{{ form_row(registrationForm.nickname) }}
+				{{ form_row(registrationForm.age) }}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.plainPassword) }}
+				{{ form_row(registrationForm.agreeTerms) }}
+				<div class="flex justify-center mt-4">
+					<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscire</button>
+				</div>
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</div>
 {% endblock %}

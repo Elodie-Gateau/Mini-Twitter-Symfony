@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -12,17 +13,38 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('firstname')
-            ->add('nickname')
-            ->add('age')
-            ->add('email')
+            ->add('name', null, [
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Nom :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']                
+            ])
+            ->add('firstname', null, [
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Prenom :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+            ])
+            ->add('nickname', null, [
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Surnom :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+            ])
+            ->add('age', null, [
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Age :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Email :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -30,6 +52,11 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'label' => 'Accepter les conditions : ',
+                'label_attr' => ['class' => 'inline-flex items-center text-gray-700 text-sm font-bold my-2 cursor-pointer'],
+                'row_attr' => ['class' => 'flex items-center'], 
+                'label_html' => true, 
+                'attr' => ['class' => 'ml-2'],
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -38,7 +65,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => "S'il vous plaît entrer un mot de passse",
                     ]),
                     new Length([
                         'min' => 8,
@@ -51,6 +78,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Your password must contain at least one uppercase letter, one lowercase letter, and one special character.',
                     ]),
                 ],
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                'label' => 'Mot de passe :',
+                'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
             ])
         ;
     }
