@@ -28,6 +28,7 @@
 					<a href="{{ path('app_logout')}}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 lg:mt-0">Se déconnecter</a>
 				{% endif %}
 			</div>
+		
 			{% if is_granted('ROLE_USER') %}
 				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
 				{% else %}

@@ -7,7 +7,10 @@
 
     {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_user_index') }}">Retour à la liste</a>
+    <div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <a href="{{ path('app_profile_show', {'id': app.user.id}) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
+            Retour au profil
+        </a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

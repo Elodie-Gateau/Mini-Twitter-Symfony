@@ -11,6 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use App\Entity\Tweet;
+use App\Entity\Media;
+use App\Entity\Comment;
+use App\Form\CommentType;
+use App\Form\TweetType;
+use App\Repository\TweetRepository;
+use App\Repository\CommentRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 
@@ -27,6 +36,10 @@ final class ProfileController extends AbstractController
         }
         return $this->render('profile/show.html.twig', [
             'user' => $user,
+        ]);
+    
+        return $this->render('tweet/show.html.twig', [
+            'tweet' => $tweet,
         ]);
     }
 
