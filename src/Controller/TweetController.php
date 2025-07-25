@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Tweet;
 use App\Entity\Media;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\TweetType;
 use App\Repository\TweetRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +21,41 @@ use Symfony\Bundle\SecurityBundle\Security;
 final class TweetController extends AbstractController
 {
     #[Route(name: 'app_tweet_index', methods: ['GET'])]
-    public function index(TweetRepository $tweetRepository): Response
+    public function index(TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request): Response
     {
+
+        $tweet = new Tweet();
+
         return $this->render('tweet/index.html.twig', [
-            'tweets' => $tweetRepository->findAll(),
+            'tweets' => $tweetRepository->findBy([], ['creationTime' => 'DESC']),
+        ]);
+    }
+
+    #[Route('/{id}/comment', name: 'app_tweet_index_comment', methods: ['GET', 'POST'])]
+    public function index_comment(int $id, TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
+        $selectedTweet = $tweetRepository->find($id);
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setTweet($selectedTweet);
+            $comment->setDateTime(new \DateTime());
+            $comment->setUser($this->getUser());
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Commentaire ajouté avec succès !');
+            return $this->redirectToRoute('app_tweet_index_comment', ['id' => $id]);
+        }
+
+        return $this->render('tweet/index.html.twig', [
+            'tweets' => $tweets,
+            'selectedTweet' => $selectedTweet,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -46,17 +80,16 @@ final class TweetController extends AbstractController
                     $newFilename
                 );
                 $media = new Media;
-                $media->setUrlMedia($newFilename);
+                $media->setUrlMedia('/uploads/images/' . $newFilename);
                 $media->setTweet($tweet);
+
+                $entityManager->persist($media);
+                $entityManager->flush();
+                $tweet->addMedium($media);
             }
 
             $entityManager->persist($tweet);
             $entityManager->flush();
-
-            $entityManager->persist($media);
-            $entityManager->flush();
-
-            $tweet->addMedium($media);
 
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -19,17 +19,11 @@ class Tweet
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-
     private ?string $content = null;
 
     #[ORM\Column]
     private ?\DateTime $creationTime = null;
-    #[Assert\Length(
-        min: 8,
-        max: 280,
-        minMessage: 'Le mot de passe doit contenir au minimum {{ limit }} caractères',
-        maxMessage: 'Le mot de passe doit contenir au maximum {{ limit }} caractères',
-    )]
+
     #[ORM\ManyToOne(inversedBy: 'tweets')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idUser = null;
