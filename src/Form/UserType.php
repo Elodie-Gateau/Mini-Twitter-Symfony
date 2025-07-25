@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
 {
@@ -40,6 +42,20 @@ class UserType extends AbstractType
             ->add('name', TextType::class, ['label' => 'Votre nom',],)
             ->add('firstName', TextType::class, ['label' => 'Votre prénom',],)
             ->add('nickName', TextType::class, ['label' => 'Votre pseudo',],)
+            // ->add('photo', FileType::class, [
+            //     'label' => 'Photo de profil',
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'constraints' => [
+            //         new File([
+            //             'maxSize' => '5000k',
+            //             'mimeTypes' => [
+            //                 'image/*',
+            //             ],
+            //             'mimeTypesMessage' => 'Image trop lourde',
+            //         ])
+            //     ],
+            // ])
         ;
     }
 
