@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de
+	{{user.name}}
+	{{user.firstName}}
+{% endblock %}
+
+{% block body %}
+	<h1>Profil de
+		{{user.nickname}}</h1>
+
+	<div>
+		<h2>Informations du profil</h2>
+		<p>
+			<strong>Photo de profil:</strong>
+			{{ user.photo }}</p>
+		<p>
+			<strong>Nom de l'utilisateur :</strong>
+			{{ user.name }}</p>
+		<p>
+			<strong>Prénom de l'utilisateur :</strong>
+			{{ user.firstName }}</p>
+		<p>
+			<strong>Pseudo de l'utilisateur :</strong>
+			{{ user.nickName }}</p>
+		<p>
+			<strong>Âge de l'utilisateur :</strong>
+			{{ user.age }}</p>
+		<p>
+			<strong>Email de l'utilisateur :</strong>
+			{{ user.email }}</p>
+		<p>
+			<strong>Utilisateur administrateur :</strong>
+			{{ user.isAdmin }}</p>
+	</div>
+
+     {# <hr>
+
+        <div>
+            <h2>Mes Tweets</h2>
+            <div id="tweet-list">
+               
+                {% include 'tweet/_tweet_list.html.twig' with {'tweets': tweets} %}
+            </div>
+           
+           
+        </div>
+
+        <hr> #}
+
+
+	<a href="{{ path('app_user_index') }}">Retour à la liste</a>
+
+	<a href="{{ path('app_profile_edit', {'id': user.id}) }}">Modifier</a>
+
+	{{ include('user/_delete_form.html.twig') }}
+{% endblock %}
