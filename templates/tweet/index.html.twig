@@ -12,7 +12,11 @@
 
 <div class="w-sm rounded-xl overflow-hidden shadow-lg p-5">
   <div class="flex p-3">
-    <img class = "w-10 rounded" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
+  {% if tweet.idUser.photo %}
+    <img class = "w-10 h-10 rounded" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
+    {% else %}
+<img class = "w-10 h-10 rounded" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
+    {% endif %}
     <div class="flex flex-col w-80">
       <h2 class="font-bold text-xl mb-2">{{ tweet.idUser.nickname }}</h2>
       <h3>{{ tweet.creationTime ? tweet.creationTime|date('d F, H:i', 'Europe/Paris', 'fr') : '' }}</h3>
