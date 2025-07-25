@@ -20,9 +20,26 @@
 				<div class="mt-2 mb-5 text-sm text-red-600">{{ error.message }}</div>
 			{% endfor %}
 
+			<div class="flex flex-row gap-5">
+
+				{% if tweet.media|length > 0 %}
+					{% for media in tweet.media %}
+						<div class="flex flex-row flex-wrap justify-center content-center my-5">
+							<img class="w-{{ tweet.media|length > 1 ? " 50" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+							<form method="post" action="{{ path('app_media_delete', {'id': media.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ media.id) }}">
+								<button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded cursor-pointer mt-2">Supprimer</button>
+							</form>
+						</div>
+					{% endfor %}
+				{% endif %}
+
+			</div>
+
 			{{ form_label(form.media, null, {
         'label_attr': {'class': 'block my-2 text-sm font-medium text-gray-900'}
     }) }}
+
 
 			{{ form_widget(form.media, {
         'attr': {
@@ -37,10 +54,6 @@
 		</div>
 
 
-		<button class="mb-5 cursor-pointer btn bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ button_label|default('Ajouter') }}</button>
+		<button class="cursor-pointer btn bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ button_label|default('Ajouter') }}</button>
 
-		<a href="{{ path('app_tweet_index') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Retour à la liste</a>
 		{{ form_end(form) }}
-	</div>
-
-</div>
