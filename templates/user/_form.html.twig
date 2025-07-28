@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class = "w-100 flex justify-center">
+    <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 my-5 mx-auto rounded-lg shadow-md transition duration-300 ease-in-out text-center">{{ button_label|default('Sauvegarder') }}</button>
+    </div>
+{{ form_end(form) }}

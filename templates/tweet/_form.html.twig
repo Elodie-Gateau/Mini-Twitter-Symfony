@@ -1,0 +1,47 @@
+{{ form_start(form) }}
+
+<div class="flex justify-center">
+
+	<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col flex-wrap justify-center w-150">
+
+		<div
+			class="mb-4">
+
+			{# Modification du contenu du message #}
+			{{ form_label(form.content, null, {
+        'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-900'}
+    }) }}
+
+			{{ form_widget(form.content, {
+        'attr': {
+            'class': 'block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+        }
+    }) }}
+
+			{% for error in form.content.vars.errors %}
+				<div class="mt-2 mb-5 text-sm text-red-600">{{ error.message }}</div>
+			{% endfor %}
+
+			{{ form_label(form.media, null, {
+        'label_attr': {'class': 'block my-2 text-sm font-medium text-gray-900'}
+    }) }}
+
+			{# Ajout d'un média #}
+			{{ form_widget(form.media, {
+        'attr': {
+            'class': 'block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded file:cursor-pointer file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100'
+        }
+    }) }}
+
+			{% for error in form.media.vars.errors %}
+				<div class="mt-2 mb-3 text-sm text-red-600">{{ error.message }}</div>
+			{% endfor %}
+
+		</div>
+
+
+		<button class="cursor-pointer btn bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ button_label|default('Ajouter') }}</button>
+
+		{{ form_end(form) }}
+
+		<div class="flex flex-row gap-5"></div>
