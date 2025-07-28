@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion!
+{% block title %}Connexion
 {% endblock %}
 
 {% block body %}
@@ -12,13 +12,18 @@
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
+
+		{# Si un utilisateur est déjà connecté, indique que l'utilisateur est connecté + bouton se déconnecter #}
+
 		{% if app.user %}
 			<div class="mb-3">
-				You are logged in as
+				Vous êtes connecté en tant que 
 				{{ app.user.userIdentifier }},
 				<a href="{{ path('app_logout') }}">Se déconnecter</a>
 			</div>
 		{% endif %}
+
+		{# Formulaire de connexion #}
 
 		<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 			<div class="mb-4">
