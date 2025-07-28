@@ -45,6 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Tweet>
      */
     #[ORM\OneToMany(targetEntity: Tweet::class, mappedBy: 'idUser')]
+    #[ORM\OrderBy(['creationTime' => 'DESC'])]
     private Collection $tweets;
 
     /**
@@ -144,7 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-        public function getPlainPassword(): ?string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
@@ -163,7 +164,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
