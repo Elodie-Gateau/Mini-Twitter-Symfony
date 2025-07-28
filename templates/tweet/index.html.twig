@@ -15,7 +15,6 @@
 
 			{% for tweet in tweets %}
 				{# Cards tweet #}
-
 				<div
 					class="w-100 rounded-xl shadow-lg p-5 flex flex-col items-center">
 
@@ -67,6 +66,9 @@
 
 									{% endif %}
 								</h3>
+								{% if tweet.isSignaled == true %}
+									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
+								{% endif %}
 							</div>
 
 						</div>
@@ -90,10 +92,10 @@
 
 
 					{# <div class="px-6 pt-4 pb-2">
-																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																						</div>  #}
+																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																											</div>  #}
 
 					{# Media du tweet #}
 					<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
