@@ -3,7 +3,7 @@
 {% block title %}Modifier le profil{% endblock %}
 
 {% block body %}
-    <h1>Modifier le profil</h1>
+    <h1 class="text-3xl font-extrabold text-center"> Profil de {{ user.name }} {{ user.firstname }}</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 

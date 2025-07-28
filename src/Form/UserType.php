@@ -57,6 +57,22 @@ class UserType extends AbstractType
                 'label' => 'Votre pseudo',
                 'attr' => ['class' => "block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"]
             ],)
+            ->add('photo', FileType::class, [
+                    'label' => 'Photo de profil',
+                    'mapped' => false,
+                    'required' => false,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '5000k',
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Image trop lourde',
+                            ])
+                        ],
+                        'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
+                        'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
+                        ])
         ;
     }
 
