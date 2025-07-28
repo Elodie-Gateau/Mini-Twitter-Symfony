@@ -70,57 +70,59 @@
 					</div>
 					{# Bouton modifier tweet #}
 					<div class="flex flex-row items-center gap-3">
-						{% if app.user.id == tweet.idUser.id %}
+						{% if app.user %}
+							{% if app.user.id == tweet.idUser.id %}
 							<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
 						{% endif %}
-            {# Bouton Retweeter #}
-						{{ include('tweet/retweeter.html.twig') }}
-					</div>
-				</div>
-
-				{# Contenu du tweet #}
-				<p class="text-gray-700 text-base self-start py-7">
-					{{ tweet.content }}
-				</p>
-
-
-				{# <div class="px-6 pt-4 pb-2">
-																    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																  </div>  #}
-
-				{# Media du tweet #}
-				<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
-					{% if tweet.media|length > 0 %}
-						{% for media in tweet.media %}
-
-							<img class="w-{{ tweet.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
-
-						{% endfor %}
 					{% endif %}
+					{# Bouton Retweeter #}
+					{{ include('tweet/retweeter.html.twig') }}
 				</div>
+			</div>
 
-				{# Commentaires #}
-				<div class="self-start p-7">
-					<a class="" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
-						{{ tweet.comment|length }}
-						commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
-					</a>
-				</div>
+			{# Contenu du tweet #}
+			<p class="text-gray-700 text-base self-start py-7">
+				{{ tweet.content }}
+			</p>
 
-				{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
-					<div class=" w-90 p-4 bg-gray-100 rounded">
-						<h4 class="font-semibold mb-2">Commentaires :</h4>
 
-						{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
-							<div class="mb-2 border-b pb-2">
-								<div class="flex justify-between">
-									<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
+			{# <div class="px-6 pt-4 pb-2">
+							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+							</div>  #}
 
-									{# Conversion du mois en français #}
-									{% set moisAnglais = comment.dateTime|date('F') %}
-									{% set moisFr = {
+			{# Media du tweet #}
+			<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
+				{% if tweet.media|length > 0 %}
+					{% for media in tweet.media %}
+
+						<img class="w-{{ tweet.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			{# Commentaires #}
+			<div class="self-start p-7">
+				<a class="" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
+					{{ tweet.comment|length }}
+					commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
+				</a>
+			</div>
+
+			{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
+				<div class=" w-90 p-4 bg-gray-100 rounded">
+					<h4 class="font-semibold mb-2">Commentaires :</h4>
+
+					{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
+						<div class="mb-2 border-b pb-2">
+							<div class="flex justify-between">
+								<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
+
+								{# Conversion du mois en français #}
+								{% set moisAnglais = comment.dateTime|date('F') %}
+								{% set moisFr = {
                   'January': 'Janvier',
                   'February': 'Février',
                   'March': 'Mars',
@@ -135,41 +137,40 @@
                   'December': 'Décembre'
                 } %}
 
-									<p class="text-sm text-gray-700 font-semibold">
-										{% if comment.dateTime %}
+								<p class="text-sm text-gray-700 font-semibold">
+									{% if comment.dateTime %}
 
-											{{ comment.dateTime|date('d') ~ 
+										{{ comment.dateTime|date('d') ~ 
 
                     ' ' ~ moisFr[moisAnglais] ~ ' '
                 
                     ~ comment.dateTime|date('H:i') }}
 
-										{% else %}
+									{% else %}
 
-											{{ '' }}
+										{{ '' }}
 
-										{% endif %}
-									</p>
+									{% endif %}
+								</p>
 
-								</div>
-								<p>{{ comment.content }}</p>
 							</div>
-						{% else %}
-							<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
-						{% endfor %}
+							<p>{{ comment.content }}</p>
+						</div>
+					{% else %}
+						<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
+					{% endfor %}
 
-						<h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
-						{{ include('comment/_form.html.twig') }}
-					</div>
-				{% endif %}
-			</div>
+					<h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
+					{{ include('comment/_form.html.twig') }}
+				</div>
+			{% endif %}
+		</div>
 
-		{% else %}
+	{% else %}
 
-			<p colspan="4">Aucun tweet trouvé</p>
+		<p colspan="4">Aucun tweet trouvé</p>
 
-		{% endfor %}
+	{% endfor %}
 
 
-	</section>
-{% endblock %}
+</section>{% endblock %}
