@@ -79,6 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->tweets = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->isActive = true;
     }
 
     public function getId(): ?int
