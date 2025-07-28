@@ -23,9 +23,11 @@
 			{% block flash %}
 
 				<div class="flex my-5 justify-center">
+				{# Fait apparaître le message flash s'il y en a #}
 					{% for label, messages in app.flashes %}
 						{% for message in messages %}
 							<div class="px-4 py-2 rounded text-sm
+							{# Modifie le style du message flash en fonction du type #}
 																{% if label == 'danger' %}
 																	bg-red-100 text-red-800
 																{% elseif label == 'success' %}

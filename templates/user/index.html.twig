@@ -9,12 +9,13 @@
         <thead>
             <tr>
                 {# <th>Id</th> #}
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Mot de passe</th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Pseudo</th>
+                <th>Photo de profil</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Mot de passe</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,12 +23,13 @@
         {% for user in users %}
             <tr>
                 {# <td>{{ user.id }}</td> #}
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.nickName}}</td>
+                <td>{{ user.photo }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>

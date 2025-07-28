@@ -21,20 +21,27 @@ use Symfony\Bundle\SecurityBundle\Security;
 final class TweetController extends AbstractController
 {
     #[Route(name: 'app_tweet_index', methods: ['GET'])]
-    public function index(TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request): Response
+    public function index(TweetRepository $tweetRepository, Request $request): Response
     {
 
-        $tweet = new Tweet();
+        $limit = 5;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $totalTweets = count($tweetRepository->findAll());
+        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC'], $limit, $offset);
 
         return $this->render('tweet/index.html.twig', [
-            'tweets' => $tweetRepository->findBy([], ['creationTime' => 'DESC']),
+            'tweets' => $tweets,
+            'currentPage' => $page,
+            'totalPages' => ceil($totalTweets / $limit),
         ]);
     }
 
     #[Route('/{id}/comment', name: 'app_tweet_index_comment', methods: ['GET', 'POST'])]
     public function index_comment(int $id, TweetRepository $tweetRepository, Request $request, EntityManagerInterface $em): Response
     {
-        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
+        // $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
         $selectedTweet = $tweetRepository->find($id);
 
         $comment = new Comment();
@@ -52,10 +59,19 @@ final class TweetController extends AbstractController
             return $this->redirectToRoute('app_tweet_index_comment', ['id' => $id]);
         }
 
+        $limit = 5;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $totalTweets = count($tweetRepository->findAll());
+        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC'], $limit, $offset);
+
         return $this->render('tweet/index.html.twig', [
             'tweets' => $tweets,
             'selectedTweet' => $selectedTweet,
             'form' => $form->createView(),
+            'currentPage' => $page,
+            'totalPages' => ceil($totalTweets / $limit),
         ]);
     }
 
@@ -170,5 +186,49 @@ final class TweetController extends AbstractController
         }
 
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}', name: 'app_tweet_retweeter', methods: ['GET', 'POST'])]
+    public function retweeter(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
+    {
+        $tweet = new Tweet();
+        $form = $this->createForm(TweetType::class, $tweet);
+        $form->handleRequest($request);
+        $tweet->setCreationTime(new \DateTime());
+        $tweet->setIdUser($security->getUser());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($tweet);
+            $entityManager->flush();
+
+            $imageFile = $form->get('media')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $media = new Media;
+                $media->setUrlMedia('/uploads/images/' . $newFilename);
+                $media->setTweet($tweet);
+
+                $entityManager->persist($media);
+                $entityManager->flush();
+                $tweet->addMedium($media);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('tweet/new.html.twig', [
+            'tweet' => $tweet,
+            'form' => $form,
+        ]);
     }
 }
