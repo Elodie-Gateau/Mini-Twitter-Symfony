@@ -15,7 +15,7 @@
 
 		{# Si un utilisateur est déjà connecté, indique que l'utilisateur est connecté + bouton se déconnecter #}
 
-		{% if app.user %}
+		{% if app.user and app.user.isActive %}
 			<div class="mb-3">
 				Vous êtes connecté en tant que 
 				{{ app.user.userIdentifier }},
