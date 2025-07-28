@@ -6,7 +6,7 @@
 
 
 	<section class="bg-gray-100 p-4 sm:p-6 md:p-8 lg:p-10"> 
-	{# Modification de body à section #}
+
 
 	{# Card Profil de l'user connecté #}
 		<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:flex">
@@ -20,15 +20,6 @@
 				<h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">Informations du profil</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
 
-				{# Suggestion ? Supprimer la photo de profil des infos puisqu'on la retrouve déjà sur le coté ? #}
-					{# <p>
-						<strong class="font-medium text-gray-900">Photo de profil:</strong>
-					{% if is_granted('ROLE_USER') and app.user.photo is not empty %}
-				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
-				{% else %}
-					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de profil">
-				{% endif %}
-					</p> #}
 					<p>
 						<strong class="font-medium text-gray-900">Nom de l'utilisateur :</strong>
 						{{ user.name }}</p>
@@ -41,7 +32,7 @@
 					<p>
 						<strong class="font-medium text-gray-900">Âge de l'utilisateur :</strong>
 						{{ user.age }} ans</p>
-						{# Ajout de "ans" #}
+
 					<p class="md:col-span-2">
 						<strong class="font-medium text-gray-900">Email de l'utilisateur :</strong>
 						{{ user.email }}</p>
@@ -49,7 +40,7 @@
 					{% if user.isAdmin %}
 					<p class="md:col-span-2">
 						<strong class="font-medium text-gray-900">Utilisateur administrateur :</strong>
-						{# Ajout d'une condition : si c'est admin ou pas #}
+
 						{{ user.isAdmin ? "Oui" : "Non" }}</p>
 					{% endif %}
 				</div>
@@ -83,8 +74,12 @@
 			<a href="{{ path('app_profile_edit', {'id': app.user.id}) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
 				Modifier le profil
 			</a>
-{# 
-			{{ include('user/_delete_form.html.twig') }} #}
+			<form action="{{ path('app_user_desactive', {'id': app.user.id}) }}" method = "POST">
+				<input class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center" type="submit" value= "Supprimer mon compte">
+
+			</form>
+
+
 		</div>
 
 	</section>
