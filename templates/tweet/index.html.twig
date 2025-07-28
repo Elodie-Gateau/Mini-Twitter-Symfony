@@ -75,8 +75,9 @@
 							<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
 						{% endif %}
 					{% endif %}
+
 					{# Bouton Retweeter #}
-					{{ include('tweet/retweeter.html.twig') }}
+					{# {{ include('tweet/retweeter.html.twig') }} #}
 				</div>
 			</div>
 
@@ -171,6 +172,26 @@
 		<p colspan="4">Aucun tweet trouvé</p>
 
 	{% endfor %}
+
+{# Pagination #}
+{% if totalPages > 1 %}
+  <div class="flex justify-center mt-10 gap-4">
+    {% if currentPage > 1 %}
+      <a href="{{ path('app_tweet_index', {'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+    {% endif %}
+
+    {% for p in 1..totalPages %}
+      <a href="{{ path('app_tweet_index', {'page': p}) }}"
+         class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+        {{ p }}
+      </a>
+    {% endfor %}
+
+    {% if currentPage < totalPages %}
+      <a href="{{ path('app_tweet_index', {'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+    {% endif %}
+  </div>
+{% endif %}
 
 
 </section>{% endblock %}
