@@ -23,7 +23,7 @@ final class TweetController extends AbstractController
     #[Route(name: 'app_tweet_index', methods: ['GET'])]
     public function index(TweetRepository $tweetRepository, Request $request): Response
     {
-
+   
         $limit = 5;
         $page = max(1, (int) $request->query->get('page', 1));
         $offset = ($page - 1) * $limit;
@@ -56,7 +56,7 @@ final class TweetController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Commentaire ajouté avec succès !');
-            return $this->redirectToRoute('app_tweet_index_comment', ['id' => $id]);
+            return $this->redirectToRoute('app_tweet_index');
         }
 
         $limit = 5;
