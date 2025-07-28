@@ -47,6 +47,19 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Email :',
                 'label_attr' => ['class' => 'block text-gray-700 text-sm font-bold my-2']
             ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions.',
+                    ]),
+                ],
+                'label' => 'Accepter les conditions : ',
+                'label_attr' => ['class' => 'inline-flex items-center text-gray-700 text-sm font-bold my-2 cursor-pointer'],
+                'row_attr' => ['class' => 'flex items-center'],
+                'label_html' => true,
+                'attr' => ['class' => 'ml-2'],
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -58,13 +71,13 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).*$/',
-                        'message' => 'Your password must contain at least one uppercase letter, one lowercase letter, and one special character.',
+                        'message' => 'Votre mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un caractère spécial.',
                     ]),
                 ],
                 'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
