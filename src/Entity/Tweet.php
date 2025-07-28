@@ -40,6 +40,9 @@ class Tweet
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet')]
     private Collection $comment;
 
+    #[ORM\Column]
+    private ?bool $isSignaled = false;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -143,6 +146,18 @@ class Tweet
                 $comment->setTweet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSignaled(): ?bool
+    {
+        return $this->isSignaled;
+    }
+
+    public function setIsSignaled(bool $isSignaled): static
+    {
+        $this->isSignaled = $isSignaled;
 
         return $this;
     }

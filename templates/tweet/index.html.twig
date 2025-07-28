@@ -90,10 +90,10 @@
 
 
 					{# <div class="px-6 pt-4 pb-2">
-												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-												</div>  #}
+																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																						</div>  #}
 
 					{# Media du tweet #}
 					<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
@@ -106,12 +106,17 @@
 						{% endif %}
 					</div>
 
+
 					{# Commentaires #}
-					<div class="self-start p-7">
-						<a class="" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
-							{{ tweet.comment|length }}
-							commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
-						</a>
+					<div class="w-full flex flex-row justify-between">
+						<div>
+							<a class="font-weight-medium" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
+								{{ tweet.comment|length }}
+								commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
+							</a>
+						</div>
+
+						{{ include('tweet/_signal_form.html.twig') }}
 					</div>
 
 					{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
