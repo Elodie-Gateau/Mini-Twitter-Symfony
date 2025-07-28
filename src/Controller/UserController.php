@@ -76,6 +76,6 @@ final class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_logout');
     }
 }
