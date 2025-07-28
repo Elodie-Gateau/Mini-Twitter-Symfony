@@ -122,7 +122,7 @@
 					</div>
 
 					{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
-						<div class=" w-90 p-4 bg-gray-100 rounded">
+						<div class="mt-4 w-90 p-4 bg-gray-100 rounded">
 							<h4 class="font-semibold mb-2">Commentaires :</h4>
 
 							{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
