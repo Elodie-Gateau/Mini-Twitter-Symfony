@@ -8,9 +8,8 @@
 {% block body %}
 	<body class="bg-gray-100 p-4 sm:p-6 md:p-8 lg:p-10">
 		<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:flex">
-			<div
-				class="md:flex-shrink-0 p-6 flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
-				<img class="h-24 w-24 rounded-full object-cover border-4 border-white shadow-md mb-4" src= {{ user.photo }} alt="Photo de profil de l'utilisateur">
+			<div class="md:flex-shrink-0 p-6 flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
+				<img class="h-24 w-24 rounded-full object-cover border-4 border-white shadow-md mb-4" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de profil de l'utilisateur">
 				<h1 class="text-3xl font-extrabold text-center">{{ user.name }}</h1>
 				<p class="text-lg font-light text-center opacity-90">@{{ user.nickname }}</p>
 			</div>
@@ -19,7 +18,12 @@
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
 					<p>
 						<strong class="font-medium text-gray-900">Photo de profil:</strong>
-						{{ user.photo }}</p>
+					{% if is_granted('ROLE_USER') and app.user.photo is not empty %}
+				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
+				{% else %}
+					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de profil">
+				{% endif %}
+					</p>
 					<p>
 						<strong class="font-medium text-gray-900">Nom de l'utilisateur :</strong>
 						{{ user.name }}</p>
@@ -42,37 +46,34 @@
 			</div>
 		</div>
 
-			<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mt-8 p-6 md:p-8">
-				<h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">Mes Tweets</h2>
+		<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mt-8 p-6 md:p-8">
+			<h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">Mes Tweets</h2>
 
-				{% if user.tweets is not empty %}
-					{% for tweet in user.tweets %}
-						<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
-							<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
-							<small class="text-gray-500 text-sm">Publié le
-								{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
-						</div>
-					{% endfor %}
-				{% else %}
-					<p class="text-gray-600 italic">Cet utilisateur n'a pas encore publié de tweets.</p>
-				{% endif %}
-			</div>
-
-		
+			{% if user.tweets is not empty %}
+				{% for tweet in user.tweets %}
+					<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
+						<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
+						<small class="text-gray-500 text-sm">Publié le
+							{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
+					</div>
+				{% endfor %}
+			{% else %}
+				<p class="text-gray-600 italic">Cet utilisateur n'a pas encore publié de tweets.</p>
+			{% endif %}
+		</div>
 
 
-			<div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-				<a href="{{ path('app_tweet_index')}}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
-					Retour à l'Accueil
-				</a>
+		<div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+			<a href="{{ path('app_tweet_index')}}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
+				Retour à l'Accueil
+			</a>
 
-				<a href="{{ path('app_profile_edit', {'id': app.user.id}) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
-					Modifier le profil
-				</a>
+			<a href="{{ path('app_profile_edit', {'id': app.user.id}) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
+				Modifier le profil
+			</a>
 
-				{{ include('user/_delete_form.html.twig') }}
-			</div>
+			{{ include('user/_delete_form.html.twig') }}
+		</div>
 
-		</body>
-	{% endblock %}
-
+	</body>
+{% endblock %}
