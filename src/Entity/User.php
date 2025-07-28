@@ -75,11 +75,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?float $age = null;
 
+    #[ORM\Column]
+    private ?bool $isBanned = null;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->isActive = true;
+        $this->isBanned = false;
     }
 
     public function getId(): ?int
@@ -316,6 +320,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAge(float $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function isBanned(): ?bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): static
+    {
+        $this->isBanned = $isBanned;
 
         return $this;
     }

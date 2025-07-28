@@ -27,11 +27,11 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
-        if (!$user->isActive()) {
+        if ($user->isBanned()) {
 
             throw new CustomUserMessageAuthenticationException(
 
-                'Le compte est inactif!'
+                'Le compte est désactivé! Contactez l\'administrateur pour plus d\'informations.'
 
             );
         }
