@@ -5,11 +5,12 @@
 
 {% block body %}
 
-
-	<section
-		class="timeline flex flex-col items-center gap-5 py-8">
+		{% if app.user %}
+	<section class="timeline flex flex-col items-center gap-5 py-8">
 		{# Bouton créer un tweet #}
-		<a class="bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 border border-orange-700 rounded" href="{{ path('app_tweet_new') }}">Créer un tweet</a>
+
+      <a class="bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 border border-orange-700 rounded" href="{{ path('app_tweet_new') }}">Créer un tweet</a>
+
 
 		{% for tweet in tweets %}
 			{# Cards tweet #}
@@ -20,8 +21,7 @@
 				{# Entête de card #}
 				<div class="flex w-100 justify-between p-5">
 
-					<div
-						class="flex gap-3 items-center">
+					<div class="flex gap-3 items-center">
 						{# Photo de profil #}
 						{% if tweet.idUser.photo %}
 							<img class="w-10 h-10 rounded mr-2" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
@@ -34,8 +34,8 @@
 							<h2 class="font-bold text-xl mb-1">{{ tweet.idUser.nickname }}</h2>
 
 							{# Conversion du mois en français #}
-							{% set moisAnglais = tweet.creationTime|date('F') %}
-							{% set moisFr = {
+							{% set enMonth = tweet.creationTime|date('F') %}
+							{% set frMonth = {
                 'January': 'Janvier',
                 'February': 'Février',
                 'March': 'Mars',
@@ -55,7 +55,7 @@
 
 									{{ tweet.creationTime|date('d') ~ 
 
-                  ' ' ~ moisFr[moisAnglais] ~ ' '
+                  ' ' ~ frMonth[enMonth] ~ ' '
                 
                 ~ tweet.creationTime|date('H:i') }}
 
@@ -73,8 +73,8 @@
 						{% if app.user %}
 							{% if app.user.id == tweet.idUser.id %}
 							<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
-						{% endif %}
-					{% endif %}
+						  {% endif %}
+					  {% endif %}
 
 					{# Bouton Retweeter #}
 					{# {{ include('tweet/retweeter.html.twig') }} #}
@@ -192,6 +192,10 @@
     {% endif %}
   </div>
 {% endif %}
+</section>
 
+{% else %}
 
-</section>{% endblock %}
+<p>Connectez-vous pour accéder à l'ensemble des tweets !</p>
+
+{% endif %}{% endblock %}
