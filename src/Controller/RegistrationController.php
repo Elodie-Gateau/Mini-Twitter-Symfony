@@ -31,6 +31,7 @@ class RegistrationController extends AbstractController
 
             // Récupération du fichier depuis le formulaire
             $photoFile = $form->get('photo')->getData();
+            
             // Si un fichier a été envoyé :
             if ($photoFile) {
                 // On travail le nom du fichier
