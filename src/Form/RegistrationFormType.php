@@ -173,8 +173,10 @@ class RegistrationFormType extends AbstractType
                 'label_html' => true,
                 'attr' => ['class' => 'ml-2'],
             ])
-        ;
-            ])
+
+
+            // CHAMP : PHOTO DE PROFIL
+
             ->add('photo', FileType::class, [
                 'label' => 'Photo de profil',
                 'mapped' => false,
