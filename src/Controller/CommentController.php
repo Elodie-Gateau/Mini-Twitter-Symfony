@@ -35,7 +35,7 @@ final class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($comment);
+            $entityManager->flush();
 
             $imageFile = $form->get('media')->getData();
 
@@ -43,37 +43,27 @@ final class CommentController extends AbstractController
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-
                 $imageFile->move(
                     $this->getParameter('images_directory'),
                     $newFilename
                 );
-
-                $media = new Media();
+                $media = new Media;
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
                 $media->setComment($comment);
-                $comment->addMedium($media);
 
                 $entityManager->persist($media);
+                $entityManager->flush();
+                $comment->addMedium($media);
             }
 
-            $entityManager->persist($comment);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('comment/new.html.twig', [
+        return $this->render('comment/edit.html.twig', [
             'comment' => $comment,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
-    public function show(Comment $comment): Response
-    {
-        return $this->render('comment/show.html.twig', [
-            'comment' => $comment,
         ]);
     }
 
