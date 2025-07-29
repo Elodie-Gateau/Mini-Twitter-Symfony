@@ -9,8 +9,7 @@
 	{{ include('tweet/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 	{{ include('tweet/_delete_form.html.twig') }}
 
-	<div
-		class="flex flex-row flex-wrap items-end justify-start gap-5 mt-10">
+	<div class="flex flex-row flex-wrap items-end justify-start gap-5 mt-10">
 
 		{# Fait apparaître les médias du tweet s'il y en a #}
 		{% if tweet.media %}
