@@ -1,4 +1,35 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="cursor-pointer bg-orange-500 text-white font-bold py-2 px-4 mt-5 rounded">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+
+			{# Modification du contenu du message #}
+			{{ form_label(form.content, null, {
+        'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-900'}
+    }) }}
+
+			{{ form_widget(form.content, {
+        'attr': {
+            'class': 'block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+        }
+    }) }}
+
+			{% for error in form.content.vars.errors %}
+				<div class="mt-2 mb-5 text-sm text-red-600">{{ error.message }}</div>
+			{% endfor %}
+
+			{{ form_label(form.media, null, {
+        'label_attr': {'class': 'block my-2 text-sm font-medium text-gray-900'}
+    }) }}
+
+			{# Ajout d'un média #}
+			{{ form_widget(form.media, {
+        'attr': {
+            'class': 'block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded file:cursor-pointer file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-5'
+        }
+    }) }}
+
+			{% for error in form.media.vars.errors %}
+				<div class="mt-2 mb-3 text-sm text-red-600">{{ error.message }}</div>
+			{% endfor %}
+
+            <button class="w-full cursor-pointer btn bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ button_label|default('Ajouter') }}</button>
+		
+		{{ form_end(form) }}

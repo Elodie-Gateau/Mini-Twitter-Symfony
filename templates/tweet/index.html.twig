@@ -67,10 +67,10 @@
 									{% endif %}
 								</h3>
 
-								{# Affiche si le tweet a déjà été signalé ou pas #}
-								{% if tweet.isSignaled == true %}
-									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
-								{% endif %}
+								{# Affiche si le tweet a déjà été signalé ou pas
+																																																																																																								{% if tweet.isSignaled == true %}
+																																																																																																									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
+																																																																																																								{% endif %} #}
 							</div>
 
 						</div>
@@ -92,10 +92,10 @@
 
 
 					{# <div class="px-6 pt-4 pb-2">
-																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																</div>  #}
+																																																																																												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																												<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																												</div>  #}
 
 					{# Media du tweet #}
 					<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
@@ -112,7 +112,7 @@
 					{# Commentaires #}
 					<div class="w-full flex flex-row justify-between">
 						<div>
-							<a class="font-weight-medium" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
+							<a id="comment-count-{{ tweet.id }}" class="font-weight-medium" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
 								{{ tweet.comment|length }}
 								commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
 							</a>
@@ -128,17 +128,21 @@
 							<h4 class="font-semibold mb-2">Commentaires :</h4>
 
 							{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
-								<div class="mb-2 border-b pb-2">
+								<div id="{{ comment.id }}" class="mb-2 border-b pb-2">
 									<div
-										class="flex justify-between">
-										{# Photo de profil #}
-										{% if comment.user.photo is not null %}
-											<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
-										{% else %}
-											<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
-										{% endif %}
-										<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
+										class="flex justify-between items-center my-4">
 
+										{# Photo de profil #}
+										<div class="flex flex-row gap-1 items-center">
+											{% if comment.user.photo is not null %}
+												<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
+											{% else %}
+												<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
+											{% endif %}
+
+											{# Peudonyme du commentateur #}
+											<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
+										</div>
 										{# Conversion du mois en français #}
 										{% set moisAnglais = comment.dateTime|date('F') %}
 										{% set moisFr = {
@@ -156,7 +160,7 @@
                   'December': 'Décembre'
                 } %}
 
-										<p class="text-sm text-gray-700 font-semibold">
+										<p class="text-sm text-gray-500 font-regular">
 											{% if comment.dateTime %}
 
 												{{ comment.dateTime|date('d') ~ 
@@ -173,7 +177,39 @@
 										</p>
 
 									</div>
-									<p>{{ comment.content }}</p>
+									<div
+										class="my-2">
+
+										{# Texte du commentaire #}
+										<p>{{ comment.content }}</p>
+
+										{# Médias du commentaire #}
+										<div class="flex justify-between flex-wrap gap-1">
+											{% if comment.media|length > 0 %}
+												{% for media in comment.media %}
+													<img class="py-2 w-{{ comment.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+												{% endfor %}
+											{% endif %}
+
+											<div
+												class="flex flex-row justify-end gap-2 py-1 w-full">
+												{# Bouton modifier le commentaire #}
+												{% if app.user %}
+													{% if app.user.id == comment.user.id %}
+														<a class="leading-none text-sm text-blue-600 font-medium cursor-pointer hover:text-blue-400 duration-200 ease-in-out" href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
+													{% endif %}
+												{% endif %}
+												{# Bouton supprimer le commentaire #}
+												{% if app.user %}
+													{% if app.user.id == comment.user.id %}
+														<div class="leading-none text-sm text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+															{{ include('comment/_delete_form.html.twig') }}
+														</div>
+													{% endif %}
+												{% endif %}
+											</div>
+										</div>
+									</div>
 								</div>
 							{% else %}
 								<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
