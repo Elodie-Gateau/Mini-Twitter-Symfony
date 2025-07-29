@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le profil{% endblock %}
+{% block title %}Modifier le profil
+{% endblock %}
 
 {% block body %}
-    <h1 class="text-3xl font-extrabold text-center my-7"> Profil de {{ user.name }} {{ user.firstname }}</h1>
+	<h1 class="text-3xl font-extrabold text-center my-7">
+		Profil de
+		{{ user.name }}
+		{{ user.firstname }}</h1>
 
-<div class="form flex flex-col items-center p-7">
+	<div class="form flex flex-col items-center p-7">
+		{{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
 </div>
     <div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
