@@ -30,11 +30,15 @@ final class CommentController extends AbstractController
     #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-        $comment = new Comment();
+        $tweet = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+        $comment->setCreationTime(new \DateTime());
+        $comment->setIdUser($security->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($comment);
             $entityManager->flush();
 
             $imageFile = $form->get('media')->getData();
@@ -49,7 +53,7 @@ final class CommentController extends AbstractController
                 );
                 $media = new Media;
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
-                $media->setComment($comment);
+                $media->setTweet($comment);
 
                 $entityManager->persist($media);
                 $entityManager->flush();
@@ -61,8 +65,8 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('comment/edit.html.twig', [
-            'comment' => $comment,
+        return $this->render('tweet/new.html.twig', [
+            'tweet' => $tweet,
             'form' => $form,
         ]);
     }
