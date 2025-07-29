@@ -43,10 +43,17 @@ class Tweet
     #[ORM\Column]
     private ?bool $isSignaled = false;
 
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'tweet')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +165,36 @@ class Tweet
     public function setIsSignaled(bool $isSignaled): static
     {
         $this->isSignaled = $isSignaled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setTweet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getTweet() === $this) {
+                $like->setTweet(null);
+            }
+        }
 
         return $this;
     }
