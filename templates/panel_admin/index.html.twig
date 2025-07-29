@@ -356,7 +356,10 @@
 																<div class="inline-flex items-center gap-2">
 																	<a href="{{ path('app_tweet_show', {'id': reportedTweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<a href="{{ path('app_tweet_unreport', {'id': reportedTweet.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir retirer le signalement de ce tweet ?');">Dé-signaler</a>
-																	<a href="{{ path('app_tweet_delete', {'id': reportedTweet.id}) }}" class="text-red-600 hover:text-red-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tweet ?');">Supprimer</a>
+																	<form action="{{ path('app_admin_tweet_delete', {'id': reportedTweet.id}) }}" method="post">
+																			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedTweet.id) }}">
+																			<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tweet ?');">Supprimer</button>
+																		</form>
 																</div>
 															</td>
 														</tr>
