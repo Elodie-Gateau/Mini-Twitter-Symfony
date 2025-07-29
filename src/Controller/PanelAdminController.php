@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Tweet;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\TweetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,5 +50,54 @@ final class PanelAdminController extends AbstractController
 
         return $this->redirectToRoute('app_panel_admin', ['section' => 'signalements']);
     }
+
+          // Vous aurez besoin d'une action pour "bannir" un utilisateur
+    #[Route('/user/{id}/ban', name: 'app_user_ban', methods: ['GET'])]
+    public function banUser(User $user, EntityManagerInterface $entityManager): Response
+    {
+        $user->setIsBanned(true);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', "L'utilisateur a été bannis avec succès.");
+
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
+    }
+
+              // Vous aurez besoin d'une action pour "débannir" un utilisateur
+    #[Route('/user/{id}/unban', name: 'app_user_unban', methods: ['GET'])]
+    public function unbanUser(User $user, EntityManagerInterface $entityManager): Response
+    {
+        $user->setIsBanned(false);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', "L'utilisateur a été débannis avec succès.");
+
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
+    }
     
+        #[Route('/user/{id}/delete', name: 'app_admin_user_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+        }
+
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
+    }
+
+            #[Route('/tweet/{id}/delete', name: 'app_admin_tweet_delete', methods: ['POST'])]
+    public function deleteTweet(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($tweet);
+            $entityManager->flush();
+            $this->addFlash('success', 'Tweet supprimé avec succès.');
+        }
+
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
+    }
 }

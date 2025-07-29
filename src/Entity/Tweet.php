@@ -31,7 +31,7 @@ class Tweet
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tweet')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tweet', cascade: ['persist', 'remove'])]
     private Collection $media;
 
     /**
