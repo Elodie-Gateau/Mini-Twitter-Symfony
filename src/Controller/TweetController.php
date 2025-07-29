@@ -128,6 +128,9 @@ final class TweetController extends AbstractController
         ]);
     }
 
+
+    // VOIR LE DÉTAIL D'UN TWEET
+
     #[Route('/{id}', name: 'app_tweet_show', methods: ['GET'])]
     public function show(Tweet $tweet): Response
     {
