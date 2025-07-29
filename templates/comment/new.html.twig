@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau commentaire{% endblock %}
+{% block title %}Nouveau commentaire
+{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un commentaire</h1>
+	<h1 class="mt-15 mb-2 text-4xl font-bold text-orange-500 text-center">Ajouter un commentaire</h1>
 
-    {{ include('comment/_form.html.twig') }}
+	<div class="flex justify-center">
 
-    <a href="{{ path('app_comment_index') }}">Retour à la liste</a>
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col flex-wrap justify-center w-150">
+
+			<div class="mb-4">
+
+				{{ include('comment/_form.html.twig') }}
+
+			</div>
+
+			<a href="{{ path('app_tweet_index') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-5">Retour à la liste</a>
+
+		</div>
+
+	</div>
+
 {% endblock %}

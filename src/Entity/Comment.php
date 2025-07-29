@@ -33,7 +33,8 @@ class Comment
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment', cascade: ['persist', 'remove'],
+    orphanRemoval: true)]
     private Collection $media;
 
     public function __construct()

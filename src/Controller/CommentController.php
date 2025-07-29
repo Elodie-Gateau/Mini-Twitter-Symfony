@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Entity\Media;
+use App\Entity\Tweet;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,14 +28,16 @@ final class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
+    #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function new(int $tweetId, Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-        $tweet = new Comment();
+        $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-        $comment->setCreationTime(new \DateTime());
-        $comment->setIdUser($security->getUser());
+        $tweet = $entityManager->getRepository(Tweet::class)->find($tweetId);
+        $comment->setTweet($tweet);
+        $comment->setUser($security->getUser());
+        $comment->setDateTime(new \DateTime());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -53,7 +56,7 @@ final class CommentController extends AbstractController
                 );
                 $media = new Media;
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
-                $media->setTweet($comment);
+                $media->setComment($comment);
 
                 $entityManager->persist($media);
                 $entityManager->flush();
@@ -65,8 +68,8 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('tweet/new.html.twig', [
-            'tweet' => $tweet,
+        return $this->render('comment/new.html.twig', [
+            'comment' => $comment,
             'form' => $form,
         ]);
     }
