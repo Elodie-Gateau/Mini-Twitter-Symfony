@@ -98,6 +98,6 @@ final class PanelAdminController extends AbstractController
             $this->addFlash('success', 'Tweet supprimé avec succès.');
         }
 
-        return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'tweets']);
     }
 }

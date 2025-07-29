@@ -17,7 +17,7 @@ class Media
     private ?string $urlMedia = null;
 
     #[ORM\ManyToOne(inversedBy: 'media')]
-    #[ORM\JoinColumn(nullable: true, onDelete:"CASCADE")]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Tweet $tweet = null;
 
     #[ORM\ManyToOne(inversedBy: 'media')]
