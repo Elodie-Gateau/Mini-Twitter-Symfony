@@ -45,6 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Tweet>
      */
     #[ORM\OneToMany(targetEntity: Tweet::class, mappedBy: 'idUser')]
+    #[ORM\OrderBy(['creationTime' => 'DESC'])]
     private Collection $tweets;
 
     /**
@@ -74,10 +75,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?float $age = null;
 
+    #[ORM\Column]
+    private ?bool $isBanned = null;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->isActive = true;
+        $this->isBanned = false;
     }
 
     public function getId(): ?int
@@ -144,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-        public function getPlainPassword(): ?string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
@@ -163,7 +169,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -314,6 +320,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAge(float $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function isBanned(): ?bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): static
+    {
+        $this->isBanned = $isBanned;
 
         return $this;
     }

@@ -5,37 +5,38 @@
 
 {% block body %}
 
-		{% if app.user %}
-	<section class="timeline flex flex-col items-center gap-5 py-8">
-		{# Bouton créer un tweet #}
+	{% if app.user %}
+		<section
+			class="timeline flex flex-col items-center gap-5 py-8">
+			{# Bouton créer un tweet #}
 
-      <a class="bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 border border-orange-700 rounded" href="{{ path('app_tweet_new') }}">Créer un tweet</a>
+			<a class="bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 border border-orange-700 rounded" href="{{ path('app_tweet_new') }}">Créer un tweet</a>
 
 
-		{% for tweet in tweets %}
-			{# Cards tweet #}
+			{% for tweet in tweets %}
+				{# Cards tweet #}
+				<div
+					class="w-100 rounded-xl shadow-lg p-5 flex flex-col items-center">
 
-			<div
-				class="w-100 rounded-xl shadow-lg p-5 flex flex-col items-center">
+					{# Entête de card #}
+					<div class="flex w-100 justify-between p-5">
 
-				{# Entête de card #}
-				<div class="flex w-100 justify-between p-5">
+						<div
+							class="flex gap-3 items-center">
+							{# Photo de profil #}
+							{% if tweet.idUser.photo is not null %}
+								<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
+							{% else %}
+								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
+							{% endif %}
 
-					<div class="flex gap-3 items-center">
-						{# Photo de profil #}
-						{% if tweet.idUser.photo %}
-							<img class="w-10 h-10 rounded mr-2" src="{{ tweet.idUser.photo }}" alt="Photo de {{ tweet.idUser.name }}">
-						{% else %}
-							<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
-						{% endif %}
+							{# Nom et date du tweet #}
+							<div class="flex flex-col">
+								<h2 class="font-bold text-xl mb-1">{{ tweet.idUser.nickname }}</h2>
 
-						{# Nom et date du tweet #}
-						<div class="flex flex-col">
-							<h2 class="font-bold text-xl mb-1">{{ tweet.idUser.nickname }}</h2>
-
-							{# Conversion du mois en français #}
-							{% set enMonth = tweet.creationTime|date('F') %}
-							{% set frMonth = {
+								{# Conversion du mois en français #}
+								{% set enMonth = tweet.creationTime|date('F') %}
+								{% set frMonth = {
                 'January': 'Janvier',
                 'February': 'Février',
                 'March': 'Mars',
@@ -50,80 +51,97 @@
                 'December': 'Décembre'
               } %}
 
-							<h3>
-								{% if tweet.creationTime %}
+								<h3>
+									{% if tweet.creationTime %}
 
-									{{ tweet.creationTime|date('d') ~ 
+										{{ tweet.creationTime|date('d') ~ 
 
                   ' ' ~ frMonth[enMonth] ~ ' '
                 
-                ~ tweet.creationTime|date('H:i') }}
+                ~ tweet.creationTime|date('H:i', false) }}
 
-								{% else %}
+									{% else %}
 
-									{{ '' }}
+										{{ '' }}
 
+									{% endif %}
+								</h3>
+
+								{# Affiche si le tweet a déjà été signalé ou pas #}
+								{% if tweet.isSignaled == true %}
+									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
 								{% endif %}
-							</h3>
+							</div>
+
+						</div>
+						{# Bouton modifier tweet #}
+						<div class="flex flex-row items-center gap-3">
+							{% if app.user %}
+								{% if app.user.id == tweet.idUser.id %}
+									<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
+								{% endif %}
+							{% endif %}
+
+						</div>
+					</div>
+
+					{# Contenu du tweet #}
+					<p class="text-gray-700 text-base self-start py-1">
+						{{ tweet.content }}
+					</p>
+
+
+					{# <div class="px-6 pt-4 pb-2">
+																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																</div>  #}
+
+					{# Media du tweet #}
+					<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
+						{% if tweet.media|length > 0 %}
+							{% for media in tweet.media %}
+
+								<img class="w-{{ tweet.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+
+							{% endfor %}
+						{% endif %}
+					</div>
+
+
+					{# Commentaires #}
+					<div class="w-full flex flex-row justify-between">
+						<div>
+							<a class="font-weight-medium" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
+								{{ tweet.comment|length }}
+								commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
+							</a>
 						</div>
 
+						{# Bouton Signaler #}
+						{{ include('tweet/_signal_form.html.twig') }}
 					</div>
-					{# Bouton modifier tweet #}
-					<div class="flex flex-row items-center gap-3">
-						{% if app.user %}
-							{% if app.user.id == tweet.idUser.id %}
-							<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
-						  {% endif %}
-					  {% endif %}
 
-					{# Bouton Retweeter #}
-					{# {{ include('tweet/retweeter.html.twig') }} #}
-				</div>
-			</div>
+					{# Section commentaires #}
+					{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
+						<div class="mt-4 w-90 p-4 bg-gray-100 rounded">
+							<h4 class="font-semibold mb-2">Commentaires :</h4>
 
-			{# Contenu du tweet #}
-			<p class="text-gray-700 text-base self-start py-7">
-				{{ tweet.content }}
-			</p>
+							{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
+								<div class="mb-2 border-b pb-2">
+									<div
+										class="flex justify-between">
+										{# Photo de profil #}
+										{% if comment.user.photo is not null %}
+											<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
+										{% else %}
+											<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
+										{% endif %}
+										<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
 
-
-			{# <div class="px-6 pt-4 pb-2">
-							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-							<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-							</div>  #}
-
-			{# Media du tweet #}
-			<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
-				{% if tweet.media|length > 0 %}
-					{% for media in tweet.media %}
-
-						<img class="w-{{ tweet.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
-
-					{% endfor %}
-				{% endif %}
-			</div>
-
-			{# Commentaires #}
-			<div class="self-start p-7">
-				<a class="" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
-					{{ tweet.comment|length }}
-					commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
-				</a>
-			</div>
-
-			{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
-				<div class=" w-90 p-4 bg-gray-100 rounded">
-					<h4 class="font-semibold mb-2">Commentaires :</h4>
-
-					{% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
-						<div class="mb-2 border-b pb-2">
-							<div class="flex justify-between">
-								<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
-
-								{# Conversion du mois en français #}
-								{% set moisAnglais = comment.dateTime|date('F') %}
-								{% set moisFr = {
+										{# Conversion du mois en français #}
+										{% set moisAnglais = comment.dateTime|date('F') %}
+										{% set moisFr = {
                   'January': 'Janvier',
                   'February': 'Février',
                   'March': 'Mars',
@@ -138,64 +156,64 @@
                   'December': 'Décembre'
                 } %}
 
-								<p class="text-sm text-gray-700 font-semibold">
-									{% if comment.dateTime %}
+										<p class="text-sm text-gray-700 font-semibold">
+											{% if comment.dateTime %}
 
-										{{ comment.dateTime|date('d') ~ 
+												{{ comment.dateTime|date('d') ~ 
 
                     ' ' ~ moisFr[moisAnglais] ~ ' '
                 
                     ~ comment.dateTime|date('H:i') }}
 
-									{% else %}
+											{% else %}
 
-										{{ '' }}
+												{{ '' }}
 
-									{% endif %}
-								</p>
+											{% endif %}
+										</p>
 
-							</div>
-							<p>{{ comment.content }}</p>
+									</div>
+									<p>{{ comment.content }}</p>
+								</div>
+							{% else %}
+								<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
+							{% endfor %}
+
+							<h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
+							{{ include('comment/_form.html.twig') }}
 						</div>
-					{% else %}
-						<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
+					{% endif %}
+				</div>
+
+			{% else %}
+
+				<p colspan="4">Aucun tweet trouvé</p>
+
+			{% endfor %}
+
+			{# Pagination #}
+			{% if totalPages > 1 %}
+				<div class="flex justify-center mt-10 gap-4">
+					{% if currentPage > 1 %}
+						<a href="{{ path('app_tweet_index', {'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+					{% endif %}
+
+					{% for p in 1..totalPages %}
+						<a href="{{ path('app_tweet_index', {'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+							{{ p }}
+						</a>
 					{% endfor %}
 
-					<h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
-					{{ include('comment/_form.html.twig') }}
+					{% if currentPage < totalPages %}
+						<a href="{{ path('app_tweet_index', {'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+					{% endif %}
 				</div>
 			{% endif %}
-		</div>
+		</section>
 
 	{% else %}
 
-		<p colspan="4">Aucun tweet trouvé</p>
+		<p>Connectez-vous pour accéder à l'ensemble des tweets !</p>
 
-	{% endfor %}
-
-{# Pagination #}
-{% if totalPages > 1 %}
-  <div class="flex justify-center mt-10 gap-4">
-    {% if currentPage > 1 %}
-      <a href="{{ path('app_tweet_index', {'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
-    {% endif %}
-
-    {% for p in 1..totalPages %}
-      <a href="{{ path('app_tweet_index', {'page': p}) }}"
-         class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
-        {{ p }}
-      </a>
-    {% endfor %}
-
-    {% if currentPage < totalPages %}
-      <a href="{{ path('app_tweet_index', {'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
-    {% endif %}
-  </div>
-{% endif %}
-</section>
-
-{% else %}
-
-<p>Connectez-vous pour accéder à l'ensemble des tweets !</p>
-
-{% endif %}{% endblock %}
+	{% endif %}
+{% endblock %}
