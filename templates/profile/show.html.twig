@@ -33,16 +33,24 @@
 						<strong class="font-medium text-gray-900">Âge de l'utilisateur :</strong>
 						{{ user.age }} ans</p>
 
-					<p class="md:col-span-2">
+					<p class="md:col-span-1">
 						<strong class="font-medium text-gray-900">Email de l'utilisateur :</strong>
 						{{ user.email }}</p>
 					
 					{% if user.isAdmin %}
-					<p class="md:col-span-2">
+					<p class="md:col-span-1">
 						<strong class="font-medium text-gray-900">Utilisateur administrateur :</strong>
 
 						{{ user.isAdmin ? "Oui" : "Non" }}</p>
 					{% endif %}
+
+
+				</div>
+				<div class="flex justify-center">
+   					 <a href="{{ path('app_profile_edit', {'id': app.user.id}) }}" 
+      					class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-3 mt-7 border border-blue-500 hover:border-transparent rounded text-center inline-block">
+       					 Modifier le profil
+    				</a>
 				</div>
 			</div>
 		</div>
@@ -59,20 +67,15 @@
 							<hr class="h-5 border-0"/>
 							<div class="space-y-1.5">
 
-								<a href="javascript:void(0)" class="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200">
-									<svg class="hi-mini hi-briefcase inline-block size-5 flex-none text-slate-300 group-hover:text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-										<path fill-rule="evenodd" d="M6 3.75A2.75 2.75 0 018.75 1h2.5A2.75 2.75 0 0114 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 016 4.193V3.75zm6.5 0v.325a41.622 41.622 0 00-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25zM10 10a1 1 0 00-1 1v.01a1 1 0 001 1h.01a1 1 0 001-1V11a1 1 0 00-1-1H10z" clip-rule="evenodd"/>
-										<path d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 01-9.274 0C3.985 17.585 3 16.402 3 15.055z"/>
-									</svg>
+								<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200">
+									<i class="fa-solid fa-message hi-mini hi-briefcase inline-block size-5 flex-none text-slate-300 group-hover:text-indigo-500"></i>
 									<span class="grow">Mes tweets</span>
-									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">1.2k</span>
+									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ app.user.tweets|length }}</span>
 								</a>
-								<a href="javascript:void(0)" class="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200">
-									<svg class="hi-mini hi-user-group inline-block size-5 flex-none text-slate-300 group-hover:text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-										<path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 01-2.07-.655zM16.44 15.98a4.97 4.97 0 002.07-.654.78.78 0 00.357-.442 3 3 0 00-4.308-3.517 6.484 6.484 0 011.907 3.96 2.32 2.32 0 01-.026.654zM18 8a2 2 0 11-4 0 2 2 0 014 0zM5.304 16.19a.844.844 0 01-.277-.71 5 5 0 019.947 0 .843.843 0 01-.277.71A6.975 6.975 0 0110 18a6.974 6.974 0 01-4.696-1.81z"/>
-									</svg>
+								<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200">
+									<i class="fa-solid fa-paw hi-mini hi-user-group inline-block size-5 flex-none text-slate-300 group-hover:text-indigo-500"></i>
 									<span class="grow">Mes Likes</span>
-									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">563</span>
+									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ app.user.likes|length }}</span>
 								</a>
 							</div>
 							<hr class="h-5 border-0"/>
@@ -81,7 +84,7 @@
 						<!-- END Navigation -->
 
 						<!-- Main Content -->
-			
+						{% if app.request.query.get('section') == 'tweets' or app.request.query.get('section') is null %}
 								<div class="overflow-hidden rounded-xl border border-slate-200 bg-white lg:col-span-9">
 									<div class="px-6 pt-6">
 										<h2 class="text-2xl font-bold">Mes tweets</h2>
@@ -93,10 +96,10 @@
 										class="p-6">
 										<!-- Responsive Table Container -->
 										<div
-											class="min-w-full overflow-x-auto rounded-sm">
+											class="min-w-full overflow-x-auto rounded-sm  flex flex-col gap-3">
 											<!-- Alternate Responsive Table -->
 											<table
-												class="min-w-full align-middle text-sm">
+												class="min-w-full align-middle text-sm  flex flex-col gap-3">
 												<!-- Table Body -->
 												<tbody>
 
@@ -107,12 +110,16 @@
 															<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
 															<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
 																<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
+																<div class="flex justify-between">
 																<small class="text-gray-500 text-sm">Publié le
 																	{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
+																<small class="text-gray-500 text-sm">{{ tweet.comment|length}} commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
+																<small class="text-gray-500 text-sm">	{{ tweet.likes|length }} <i class="fa-solid fa-paw "></i></small>
+																	</div>
 																	</div>
 															{% endfor %}
 															{% else %}
-															<p class="text-gray-600 italic">Cet utilisateur n'a pas encore publié de tweets.</p>
+															<p class="text-gray-600 italic">Vous n'avez pas encore publié de tweets.</p>
 															{% endif %}
 														</tr>
 						
@@ -125,6 +132,57 @@
 									<!-- END Responsive Table Container -->
 								</div>
 							</div>
+							{% elseif app.request.query.get('section') == 'likes' %}
+															<div class="overflow-hidden rounded-xl border border-slate-200 bg-white lg:col-span-9">
+									<div class="px-6 pt-6">
+										<h2 class="text-2xl font-bold">Mes likes</h2>
+										<h3
+											class="text-sm font-medium text-slate-500">
+										</h3>
+									</div>
+									<div
+										class="p-6">
+										<!-- Responsive Table Container -->
+										<div
+											class="min-w-full overflow-x-auto rounded-sm  flex flex-col gap-3">
+											<!-- Alternate Responsive Table -->
+											<table
+												class="min-w-full align-middle text-sm  flex flex-col gap-3">
+												<!-- Table Body -->
+												<tbody>
+
+														<tr class="group border-b border-slate-100">
+															{% if user.likes is not empty %}
+													{% for like in user.likes %}
+    												{% set tweet = like.tweet %}
+								{# Tri par ordre antichronologique : ajout d'un order by dans l'entité User sur relation Tweet #}
+															<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
+															<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
+																<p class="text-gray-800 mb-2"><strong>{{ tweet.idUser.nickname }}</strong></p>
+																<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
+																<div class="flex justify-between">
+																<small class="text-gray-500 text-sm">Publié le
+																	{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
+																	<small class="text-gray-500 text-sm">{{ tweet.comment|length}} commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
+																<small class="text-gray-500 text-sm">	{{ tweet.likes|length }} <i class="fa-solid fa-paw "></i></small>
+																	</div>
+																	</div>
+															{% endfor %}
+															{% else %}
+															<p class="text-gray-600 italic">Vous n'avez pas encore liké de tweets.</p>
+															{% endif %}
+														</tr>
+						
+												</tbody>
+												<!-- END Table Body -->
+											</tbody>
+										</table>
+										<!-- END Alternate Responsive Table -->
+									</div>
+									<!-- END Responsive Table Container -->
+								</div>
+								      {% endif %}
+							</div>
 						</div>
 
 					<!-- END Main Content -->
@@ -135,9 +193,7 @@
 				Retour à l'Accueil
 			</a>
 
-			<a href="{{ path('app_profile_edit', {'id': app.user.id}) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center">
-				Modifier le profil
-			</a>
+
 			<form action="{{ path('app_user_desactive', {'id': app.user.id}) }}" method = "POST">
 				<input class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-center" type="submit" value= "Supprimer mon compte">
 
