@@ -109,15 +109,18 @@
 					</div>
 
 
-					{# Commentaires #}
+					{# Commentaires, signaler et likes #}
 					<div class="w-full flex flex-row justify-between">
-						<div>
+					
+						{# Likes #}
+							{{ include('tweet/_like_form.html.twig') }}
+
+						{# Commentaires #}
 							<a class="font-weight-medium" href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}">
 								{{ tweet.comment|length }}
 								commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
 							</a>
-						</div>
-
+								
 						{# Bouton Signaler #}
 						{{ include('tweet/_signal_form.html.twig') }}
 					</div>

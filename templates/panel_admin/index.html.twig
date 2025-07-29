@@ -161,9 +161,9 @@
 														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
 															Status
 														</th>
-														{# <th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
 																													Banis
-																												</th> #}
+																												</th>
 														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Roles
 														</th>
@@ -200,13 +200,13 @@
 																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Désactivé</span>
 																{% endif %}
 															</td>
-															{# <td class="p-3 text-center">
-																															{% if user.isBanish %}
-																																<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Oui</span>
-																															{% else %}
-																																<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Non</span>
-																															{% endif %}
-																														</td> #}
+															<td class="p-3 text-center">
+															{% if user.isBanned %}
+																<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Oui</span>
+																{% else %}
+																<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Non</span>
+																{% endif %}
+															</td>
 															<td class="p-3 text-center">
 																{% for role in user.roles %}
 																	{% if role == 'ROLE_ADMIN' %}
