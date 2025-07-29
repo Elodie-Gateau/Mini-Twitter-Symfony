@@ -28,6 +28,8 @@
 			{% endfor %}
 		{% endif %}
 	</div>
-
-	<a href="{{ path('app_tweet_index') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-5">Retour à la liste</a>
+	<div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+		<button href="{{ path('app_profile_show', {'id': app.user.id}) }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded cursor-pointer mt-2">Retour au profil
+		<button href="{{ path('app_tweet_index') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded cursor-pointer mt-2">Retour à la liste</a>
+	</div>
 </div></div>{% endblock %}
