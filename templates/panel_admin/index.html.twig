@@ -280,8 +280,28 @@
 														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Date
 														</th>
+<<<<<<< HEAD
 														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Signalé
+=======
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+															Surnom
+														</th>
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+															Age
+														</th>
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+															Email
+														</th>
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+															Status
+														</th>
+														<th class="hidden px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase md:table-cell">
+															Banis
+														</th>
+														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Roles
+>>>>>>> 0ce5f72 (comments section)
 														</th>
 														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Actions
@@ -302,7 +322,44 @@
 																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Non</span>
 																{% endif %}
 															</td>
+<<<<<<< HEAD
 															<td class="p-3 text-end">
+=======
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.id }}</td>
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.name }}</td>
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.firstname }}</td>
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.nickname }}</td>
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.age }}</td>
+															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.email }}</td>
+															<td class="p-3 text-center">
+																{% if user.isActive %}
+																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Activé</span>
+																{% else %}
+																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Désactivé</span>
+																{% endif %}
+															</td>
+															<td class="p-3 text-center">
+																{% if user.isBanned %}
+																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Oui</span>
+																{% else %}
+																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Non</span>
+																{% endif %}
+															</td>
+															<td class="p-3 text-center">
+																{% for role in user.roles %}
+																	{% if role == 'ROLE_ADMIN' %}
+																		<span class="inline-block rounded-full border border-indigo-200 bg-indigo-50 px-2 py-1 text-xs leading-4 font-semibold text-indigo-700">Admin</span>
+																	{% elseif role == 'ROLE_USER' %}
+																		<span class="inline-block rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-xs leading-4 font-semibold text-blue-700">Utilisateur</span>
+																	{% else %}
+																		<span class="inline-block rounded-full border border-gray-200 bg-gray-50 px-2 py-1 text-xs leading-4 font-semibold text-gray-700">{{ role }}</span>
+																	{% endif %}
+																{% endfor %}
+															</td>
+															<td
+																class="p-3 text-end">
+																{# Add action buttons here, e.g., view, edit, delete #}
+>>>>>>> 0ce5f72 (comments section)
 																<div class="inline-flex items-center gap-2">
 																	<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<form action="{{ path('app_admin_tweet_delete', {'id': tweet.id}) }}" method="post">

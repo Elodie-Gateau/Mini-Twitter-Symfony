@@ -43,9 +43,27 @@
             </div>
 
 
-          </div>
-          </div>
-                      {# Bouton modifier tweet #}
+										{{ tweet.creationTime|date('d') ~ 
+
+                  ' ' ~ frMonth[enMonth] ~ ' '
+                
+                ~ tweet.creationTime|date('H:i', false) }}
+
+									{% else %}
+
+										{{ '' }}
+
+									{% endif %}
+								</h3>
+
+								{# Affiche si le tweet a déjà été signalé ou pas
+																																																																																																								{% if tweet.isSignaled == true %}
+																																																																																																									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
+																																																																																																								{% endif %} #}
+							</div>
+
+						</div>
+						{# Bouton modifier tweet #}
 						<div class="flex flex-row items-center gap-3">
 							{% if app.user %}
 								{% if app.user.id == tweet.idUser.id %}
@@ -102,29 +120,44 @@
 												<img class="w-8 h-8 rounded-full" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.isActive ? comment.user.name : "utilisateur anonyme" }}">
 											{% endif %}
 
-                    <span class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ comment.user.isActive ? comment.user.nickname : "Utilisateur anonyme" }}</span>
-                  </div>
-                  <span class="text-xs text-gray-500">
-                    {% set moisAnglais = comment.dateTime|date('F') %}
-                    {% set moisFr = {
-                      'January': 'Janvier','February': 'Février','March': 'Mars','April': 'Avril','May': 'Mai','June': 'Juin',
-                      'July': 'Juillet','August': 'Août','September': 'Septembre','October': 'Octobre','November': 'Novembre','December': 'Décembre'
-                    } %}
-                    {{ comment.dateTime|date('d') ~ ' ' ~ moisFr[moisAnglais] ~ ' ' ~ comment.dateTime|date('H:i') }}
-                  </span>
-                </div>
-                <p class="text-gray-700 dark:text-gray-300 mb-2">{{ comment.content }}</p>
-                {% if comment.media|length > 0 %}
-                  <div class="flex gap-2 flex-wrap">
-                    {% for media in comment.media %}
-                      <img class="rounded-lg object-cover w-{{ comment.media|length > 1 ? '40' : 'full' }}" src="{{ media.urlMedia }}">
-                    {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
-            {% else %}
-              <p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
-            {% endfor %}
+									</div>
+									<div
+										class="my-2">
+
+										{# Texte du commentaire #}
+										<p>{{ comment.content }}</p>
+
+										{# Médias du commentaire #}
+										<div class="flex justify-between flex-wrap gap-1">
+											{% if comment.media|length > 0 %}
+												{% for media in comment.media %}
+													<img class="py-2 w-{{ comment.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+												{% endfor %}
+											{% endif %}
+
+											<div
+												class="flex flex-row justify-end gap-2 py-1 w-full">
+												{# Bouton modifier le commentaire #}
+												{% if app.user %}
+													{% if app.user.id == comment.user.id %}
+														<a class="leading-none text-sm text-blue-600 font-medium cursor-pointer hover:text-blue-400 duration-200 ease-in-out" href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
+													{% endif %}
+												{% endif %}
+												{# Bouton supprimer le commentaire #}
+												{% if app.user %}
+													{% if app.user.id == comment.user.id %}
+														<div class="leading-none text-sm text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+															{{ include('comment/_delete_form.html.twig') }}
+														</div>
+													{% endif %}
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</div>
+							{% else %}
+								<p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
+							{% endfor %}
 
 	            <h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
             {{ include('comment/_add_form.html.twig') }}
