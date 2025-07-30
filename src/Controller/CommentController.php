@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Entity\Media;
+use App\Entity\Tweet;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,14 +28,20 @@ final class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
+    #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function new(int $tweetId, Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+        $tweet = $entityManager->getRepository(Tweet::class)->find($tweetId);
+        $comment->setTweet($tweet);
+        $comment->setUser($security->getUser());
+        $comment->setDateTime(new \DateTime());
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($comment);
             $entityManager->flush();
 
             $imageFile = $form->get('media')->getData();
@@ -61,7 +68,7 @@ final class CommentController extends AbstractController
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('comment/edit.html.twig', [
+        return $this->render('comment/new.html.twig', [
             'comment' => $comment,
             'form' => $form,
         ]);
@@ -117,6 +124,25 @@ final class CommentController extends AbstractController
         }
 
         // return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
+        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    // SIGNALER UN TWEET
+
+    #[Route('/{id}/signal', name: 'app_comment_signalComment', methods: ['POST'])]
+    public function signalComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+
+
+        if ($this->isCsrfTokenValid('signalComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+            
+            $comment->setIsSignaled(true);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ce commentaire a bien été signalé, il est en attente de modération !');
+        }
+
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
     }
 }

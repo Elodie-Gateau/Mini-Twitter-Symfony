@@ -16,12 +16,21 @@
       {% for tweet in tweets %}
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
         <!-- User info -->
-        <div class="flex items-center gap-3 mb-3">
-          <img class="w-12 h-12 rounded-full" src="{{ tweet.idUser.photo ? asset('uploads/photos/' ~ tweet.idUser.photo) : asset('img/personne.png') }}">
+        <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3 mb-3">
+          {# Photo de profil #}
+                    	{% if tweet.idUser.isActive and tweet.idUser.photo is not null %}
+												<img class="w-12 h-12 rounded-full" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
+											{% else %}
+												<img class="w-12 h-12 rounded-full" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : "utilisateur anonyme" }}">
+											{% endif %}
           <div>
+          {# Pseudo #}
             <div class="font-semibold text-gray-900 dark:text-gray-100">
               {{ tweet.idUser.isActive ? tweet.idUser.nickname : "Utilisateur anonyme" }}
             </div>
+
+            {# Date #}
             <div class="text-xs text-gray-500 dark:text-gray-400">
               {% set enMonth = tweet.creationTime|date('F') %}
               {% set frMonth = {
@@ -32,7 +41,11 @@
               } %}
               {{ tweet.creationTime|date('d') ~ ' ' ~ frMonth[enMonth] ~ ' ' ~ tweet.creationTime|date('H:i') }}
             </div>
-            {# Bouton modifier tweet #}
+
+
+          </div>
+          </div>
+                      {# Bouton modifier tweet #}
 						<div class="flex flex-row items-center gap-3">
 							{% if app.user %}
 								{% if app.user.id == tweet.idUser.id %}
@@ -41,7 +54,6 @@
 							{% endif %}
 
 						</div>
-          </div>
         </div>
 
         <!-- Content -->
@@ -69,13 +81,24 @@
         <!-- Comments -->
         {% if selectedTweet is defined and selectedTweet.id == tweet.id %}
           <div class="mt-4 w-full p-4 bg-gray-100 dark:bg-gray-700 rounded">
+
             <h4 class="font-semibold mb-2">Commentaires :</h4>
             {% for comment in selectedTweet.comment|sort((a, b) => b.dateTime <=> a.dateTime) %}
+
               <div id="{{ comment.id }}" class="mb-2 border-b pb-2">
+
                 <div class="flex justify-between items-center mb-2">
+
                   <div class="flex items-center gap-2">
-                    <img class="w-8 h-8 rounded-full" src="{{ comment.user.photo ? asset('uploads/photos/' ~ comment.user.photo) : asset('img/personne.png') }}">
-                    <span class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ comment.user.nickname }}</span>
+
+         
+                    	{% if comment.user.isActive and comment.user.photo is not null %}
+												<img class="w-8 h-8 rounded-full" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
+											{% else %}
+												<img class="w-8 h-8 rounded-full" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.isActive ? comment.user.name : "utilisateur anonyme" }}">
+											{% endif %}
+
+                    <span class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ comment.user.isActive ? comment.user.nickname : "Utilisateur anonyme" }}</span>
                   </div>
                   <span class="text-xs text-gray-500">
                     {% set moisAnglais = comment.dateTime|date('F') %}
@@ -99,12 +122,8 @@
               <p class="text-sm text-gray-500">Aucun commentaire pour ce tweet.</p>
             {% endfor %}
 
-            <h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
-            {{ include('comment/_form.html.twig', {
-              form: form,
-              action: path('app_comment_new', {tweet: tweet.id}),
-              button_label: 'Commenter'
-            }) }}
+	            <h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
+            {{ include('comment/_add_form.html.twig') }}
           </div>
         {% endif %}
       </div>
