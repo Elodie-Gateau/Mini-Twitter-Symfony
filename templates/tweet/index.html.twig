@@ -56,8 +56,12 @@
 						</div>
         </div>
 
-        <!-- Content -->
-        <p class="text-gray-800 dark:text-gray-200 mb-3">{{ tweet.content }}</p>
+					{# Contenu du tweet #}
+					<p class="text-gray-800 dark:text-gray-200 mb-3">
+						<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}">
+							{{ tweet.content }}
+						</a>
+					</p>
 
         <!-- Media -->
         {% if tweet.media|length > 0 %}
