@@ -12,7 +12,7 @@
         <span class="font-semibold text-gray-700 dark:text-gray-100">Exprime-toi !</span>
         <a href="{{ path('app_tweet_new') }}" class="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded-lg">Créer</a>
       </div>
-
+{% if tweets|length > 0 %}
       {% for tweet in tweets %}
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
         <!-- User info -->
@@ -173,10 +173,10 @@
           </div>
         {% endif %}
       </div>
-      {% else %}
-        <p class="text-center text-gray-500 dark:text-gray-400">Aucun tweet trouvé</p>
       {% endfor %}
-
+{% else %}
+    <p class="text-center text-gray-500 dark:text-gray-400">Aucun tweet trouvé</p>
+{% endif %}
       <!-- Pagination -->
       {% if totalPages > 1 %}
         <div class="flex justify-center mt-10 gap-4">
@@ -193,10 +193,6 @@
           {% endif %}
         </div>
       {% endif %}
-
-				<p colspan="4">Aucun tweet trouvé</p>
-
-			{% endfor %}
 
 			{# PAGINATION DES TWEETS + COMMENTAIRES #}
 
