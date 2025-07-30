@@ -62,12 +62,11 @@ final class LikeController extends AbstractController
     }
 
     #[Route('/comment/{id}/like', name: 'app_comment_like', methods: ['POST'])]
-    public function likeComment(Comment $comment, Tweet $tweet, LikeRepository $likeRepo, EntityManagerInterface $em, Request $request): Response
+    public function likeComment(Comment $comment, LikeRepository $likeRepo, EntityManagerInterface $em, Request $request): Response
     {
 
         $user = $this->getUser();
         $tweet = $comment->getTweet();
-        $idTweet = $tweet->getId();
         if ($this->isCsrfTokenValid('likeComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $like = $likeRepo->findOneBy(['comment' => $comment, 'user' => $user]);
 
@@ -77,7 +76,7 @@ final class LikeController extends AbstractController
                 $like = new Like();
                 $like->setComment($comment);
                 $like->setUser($user);
-                $like->setTweet($idTweet);
+                $like->setTweet($tweet);
                 $em->persist($like);
             }
 
