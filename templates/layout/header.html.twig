@@ -1,33 +1,22 @@
-
-
-
-<header class="z-50 h-14 fixed top-0 left-0 w-full flex items-center 
-  bg-white dark:bg-gray-900 
-  border-b border-gray-200 dark:border-gray-700 
-  px-4 transition-colors duration-300">
+<header class="z-50 h-14 fixed top-0 left-0 w-full flex items-center dark:bg-gray-900 bg-white border-b dark:border-gray-700 border-gray-200 px-4 transition-colors duration-300">
 
   <!-- Logo -->
   <div class="flex items-center gap-2">
     <a href="{{ path('app_tweet_index') }}" class="flex items-center">
-      <img src="{{ asset('img/logo-txt.png') }}" alt="Logo" class="h-35 w-auto dark:hidden">
-      <img src="{{ asset('img/logo-dark.png') }}" alt="Logo Dark" class="h-10 w-auto hidden dark:block">
+      <!-- Logo clair -->
+      <img src="{{ asset('img/logo-txt.png') }}" 
+           alt="Logo clair" 
+           class="h-35 w-auto dark:hidden transition-all duration-300">
+      <!-- Logo sombre -->
+      <img src="{{ asset('img/logo-dark.png') }}" 
+           alt="Logo sombre" 
+           class="h-35 w-auto hidden dark:block transition-all duration-300">
     </a>
   </div>
 
   <!-- Actions à droite -->
   <div class="flex items-center gap-4 ml-auto">
 
-    <!-- Toggle Dark Mode -->
-    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
-      <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 3v1m0 16v1m8.66-11.66l-.71.71M4.05 19.95l.71-.71M21 12h1M2 12H1m16.95 7.95l-.71-.71M4.05 4.05l.71.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-      </svg>
-      <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-200 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-      </svg>
-    </button>
 
     {% if is_granted('ROLE_USER') %}
     <!-- Menu Profil -->

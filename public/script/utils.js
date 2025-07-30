@@ -1,3 +1,26 @@
+// AJAX => LIKER SANS RECHARGER LA PAGE
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".like-form").forEach((form) => {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                body: new FormData(form),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.querySelector(
+                    `#like-count-${data.tweetId}`
+                ).textContent = data.likes;
+            }
+        });
+    });
+});
+
 // // AJAX => SUPPRIMER LE COMMENTAIRE HTML EN DIRECT SANS RECHARGER LA PAGE
 
 // document.addEventListener('DOMContentLoaded', () => {

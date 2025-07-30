@@ -42,18 +42,6 @@
               {{ tweet.creationTime|date('d') ~ ' ' ~ frMonth[enMonth] ~ ' ' ~ tweet.creationTime|date('H:i') }}
             </div>
 
-
-										{{ tweet.creationTime|date('d') ~ 
-
-                  ' ' ~ frMonth[enMonth] ~ ' '
-                
-                ~ tweet.creationTime|date('H:i', false) }}
-
-									{% else %}
-
-										{{ '' }}
-
-									{% endif %}
 								</h3>
 
 								{# Affiche si le tweet a déjà été signalé ou pas
@@ -92,11 +80,14 @@
 
         <!-- Actions -->
         <div class="flex justify-between items-center text-sm border-t border-gray-200 dark:border-gray-700 pt-3">
+        {# Likes #}
           <div>{{ include('tweet/_like_form.html.twig') }}</div>
+          {# Commentaires #}
           <a href="{{ path('app_tweet_index_comment', {'id': tweet.id}) }}"
              class="text-gray-600 dark:text-gray-300 hover:text-blue-500">
             {{ tweet.comment|length }} commentaire{{ tweet.comment|length > 1 ? 's' : '' }}
           </a>
+          {# Signaler #}
           <div>{{ include('tweet/_signal_form.html.twig') }}</div>
         </div>
 

@@ -24,11 +24,16 @@ final class LikeController extends AbstractController
     }
 
     #[Route('/tweet/{id}/like', name: 'app_tweet_like', methods: ['POST'])]
-    public function toggleLike(Tweet $tweet, LikeRepository $likeRepo, EntityManagerInterface $em, Request $request): Response
-    {
-
+    public function toggleLike(
+        Tweet $tweet,
+        LikeRepository $likeRepo,
+        EntityManagerInterface $em,
+        Request $request
+    ): Response {
         $user = $this->getUser();
+
         if ($this->isCsrfTokenValid('signalTweet' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+
             $like = $likeRepo->findOneBy(['tweet' => $tweet, 'user' => $user]);
 
             if ($like) {
@@ -42,6 +47,16 @@ final class LikeController extends AbstractController
 
             $em->flush();
         }
+
+        // 👉 Si la requête est AJAX, on renvoie JSON
+        if ($request->isXmlHttpRequest()) {
+            return $this->json([
+                'tweetId' => $tweet->getId(),
+                'likes' => count($tweet->getLikes())
+            ]);
+        }
+
+        // Sinon fallback (navigation normale)
         return $this->redirectToRoute('app_tweet_index');
     }
 }

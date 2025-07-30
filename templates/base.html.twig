@@ -1,45 +1,41 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Social Pets
-			{% endblock %}
-		</title>
-		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> {% block stylesheets %}{% endblock %}
-		<script src="{{ asset('script/utils.js') }}" defer></script>
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}
-		{% endblock %}
-	</head>
-	<body class="bg-white">
-		{% block header %}
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Social Pets{% endblock %}</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-    {% block stylesheets %}{% endblock %}
 
-    <!-- Configurer Tailwind pour activer dark mode via class -->
-    <script>
-      tailwind.config = {
-        darkMode: 'class'
-      }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Script Tailwind -->
+<script>
+tailwind.config = {
+  darkMode: 'media' // ou 'class'
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <script src="{{ asset('app.js') }}" defer></script>
+    <!-- Scripts JavaScript -->
+    <script src="{{ asset('script/utils.js') }}" defer></script>
+
     {% block javascripts %}
       {% block importmap %}
         {{ importmap('app') }}
       {% endblock %}
     {% endblock %}
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    {% block stylesheets %}{% endblock %}
   </head>
-  <body class="bg-gray-50 dark:bg-dark2 transition-colors duration-300">
+
+  <body class="dark:bg-gray-900 bg-gray-50 transition-colors duration-300">
     {% block header %}
       {% include 'layout/header.html.twig' %}
+      
       {% block flash %}
         <div class="flex my-5 justify-center">
           {% for label, messages in app.flashes %}
@@ -57,6 +53,7 @@
         </div>
       {% endblock %}
     {% endblock %}
+
     {% block body %}{% endblock %}
   </body>
 </html>
