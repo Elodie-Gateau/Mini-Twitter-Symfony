@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Like;
 use App\Form\LikeType;
 use App\Entity\Tweet;
+use App\Entity\Comment;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,6 +37,28 @@ final class LikeController extends AbstractController
             } else {
                 $like = new Like();
                 $like->setTweet($tweet);
+                $like->setUser($user);
+                $em->persist($like);
+            }
+
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_tweet_index');
+    }
+
+    #[Route('/comment/{id}/like', name: 'app_comment_like', methods: ['POST'])]
+    public function likeComment(Comment $comment, LikeRepository $likeRepo, EntityManagerInterface $em, Request $request): Response
+    {
+
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('likeComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+            $like = $likeRepo->findOneBy(['comment' => $comment, 'user' => $user]);
+
+            if ($like) {
+                $em->remove($like);
+            } else {
+                $like = new Like();
+                $like->setComment($comment);
                 $like->setUser($user);
                 $em->persist($like);
             }
