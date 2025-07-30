@@ -19,27 +19,61 @@ final class PanelAdminController extends AbstractController
     #[Route('/panel/admin', name: 'app_panel_admin')]
     public function index(UserRepository $userRepository, TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request): Response
     {
-        $users = $userRepository->findAll();
-        $tweets = $tweetRepository->findAll();
-        $comments = $commentRepository->findAll();
-        $signalementsCount = $tweetRepository->countByIsSignaled(true);
+        $limit = 10;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $totalUsers = count($userRepository->findAll());
+        $users = $userRepository->findBy([], [], $limit, $offset);
+
+        $totalTweets = count($tweetRepository->findAll());
+        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC'], $limit, $offset);
+
+        $totalComments = count($commentRepository->findAll());
+        $comments = $commentRepository->findBy([], [], $limit, $offset);
+
+        $signalementsCountTweets = $tweetRepository->countByIsSignaled(true);
 
         // Récupérer les tweets signalés spécifiquement
         $reportedTweets = [];
-        if ($request->query->get('section') == 'signalements') {
-            $reportedTweets = $tweetRepository->findBy(['isSignaled' => true]);
+        if ($request->query->get('section') == 'signalementsTweets') {
+            $reportedTweets = $tweetRepository->findBy(['isSignaled' => true], [], $limit, $offset);
         }
-        // Alternativement, vous pouvez toujours les charger si vous voulez les avoir disponibles peu importe la section.
-        // $reportedTweets = $tweetRepository->findBy(['isSignaled' => true]);
 
+        $signalementsCountComments = $commentRepository->countByIsSignaled(true);
+
+        // Récupérer les commentaires signalés spécifiquement
+        $reportedComments = [];
+        if ($request->query->get('section') == 'signalementsComments') {
+            $reportedComments = $commentRepository->findBy(['isSignaled' => true], [], $limit, $offset);
+        }
 
         return $this->render('panel_admin/index.html.twig', [
             'controller_name' => 'PanelAdminController',
+
             'users' => $users,
+            'totalUsersCount' => $totalUsers,
+
             'tweets' => $tweets,
-            'signalements_count' => $signalementsCount,
+            'totalTweetsCount' => $totalTweets,
+
+            'signalements_countTweets' => $signalementsCountTweets,
             'reportedTweets' => $reportedTweets,
+
             'comments' => $comments,
+            'totalCommentsCount' => $totalComments,
+
+            'signalements_countComments' => $signalementsCountComments,
+            'reportedComments' => $reportedComments,
+
+            'currentPage' => $page,
+
+            'totalPagesUsers' => ceil($totalUsers / $limit),
+            'totalPagesTweets' => ceil($totalTweets / $limit),
+            'totalPagesSignalementsTweets' => ceil($signalementsCountTweets / $limit),
+            'totalPagesComments' => ceil($totalComments / $limit),
+            'totalPagesSignalementsComments' => ceil($signalementsCountComments / $limit),
+
         ]);
     }
 
@@ -53,7 +87,20 @@ final class PanelAdminController extends AbstractController
 
         $this->addFlash('success', 'Le signalement du tweet a été retiré avec succès.');
 
-        return $this->redirectToRoute('app_panel_admin', ['section' => 'signalements']);
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'signalementsTweets']);
+    }
+
+     // Vous aurez besoin d'une action pour "dé-signaler" un commentaire si vous l'ajoutez
+    #[Route('/comment/{id}/unreport', name: 'app_comment_unreport', methods: ['GET'])]
+    public function unreportComment(Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $comment->setIsSignaled(false);
+        $entityManager->persist($comment);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Le signalement du commentaire a été retiré avec succès.');
+
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'signalementsComments']);
     }
 
     // Vous aurez besoin d'une action pour "bannir" un utilisateur
@@ -106,7 +153,7 @@ final class PanelAdminController extends AbstractController
         return $this->redirectToRoute('app_panel_admin', ['section' => 'tweets']);
     }
 
-        #[Route('/comment/{id}/delete', name: 'app_admin_comment_delete', methods: ['POST'])]
+    #[Route('/comment/{id}/delete', name: 'app_admin_comment_delete', methods: ['POST'])]
     public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
