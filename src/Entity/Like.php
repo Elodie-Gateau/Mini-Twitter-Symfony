@@ -24,8 +24,11 @@ class Like
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Tweet $tweet = null;
+
+    #[ORM\ManyToOne(inversedBy: 'likes')]
+    private ?Comment $comment = null;
 
     public function getId(): ?int
     {
@@ -52,6 +55,18 @@ class Like
     public function setTweet(?Tweet $tweet): static
     {
         $this->tweet = $tweet;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }

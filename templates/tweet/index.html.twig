@@ -43,16 +43,20 @@
             </div>
 
 								</h3>
-
-								{# Affiche si le tweet a déjà été signalé ou pas
-																																																																																																								{% if tweet.isSignaled == true %}
-																																																																																																									<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
-																																																																																																								{% endif %} #}
 							</div>
 
 						</div>
-						{# Bouton modifier tweet #}
-						<div class="flex flex-row items-center gap-3">
+
+						<div
+							class="flex flex-row items-center gap-3">
+							{# Bouton signaler le tweet #}
+							{% if app.user %}
+								{% if app.user.id != tweet.idUser.id %}
+									{{ include('tweet/_signal_form.html.twig') }}
+								{% endif %}
+							{% endif %}
+
+							{# Bouton modifier le tweet #}
 							{% if app.user %}
 								{% if app.user.id == tweet.idUser.id %}
 									<a class="self-center font-bold text-orange-500" href="{{ path('app_tweet_edit', {'id': tweet.id}) }}">Modifier</a>
@@ -119,31 +123,45 @@
 										<p>{{ comment.content }}</p>
 
 										{# Médias du commentaire #}
-										<div class="flex justify-between flex-wrap gap-1">
-											{% if comment.media|length > 0 %}
-												{% for media in comment.media %}
+										{% if comment.media|length > 0 %}
+											{% for media in comment.media %}
+												<div class="flex justify-between flex-wrap gap-1">
 													<img class="py-2 w-{{ comment.media|length > 1 ? " 40" : " 100" }}" src="{{ media.urlMedia }}" alt="">
-												{% endfor %}
+												</div>
+											{% endfor %}
+										{% endif %}
+									</div>
+
+									<div
+										class="flex flex-row justify-between gap-2 py-1 w-full">
+
+										{# Bouton liker le commentaire #}
+										{{ include('comment/_like_form.html.twig') }}
+
+										{# Bouton Signaler le commentaire #}
+										{% if app.user %}
+											{% if app.user.id != comment.user.id %}
+												{{ include('comment/_signal_form.html.twig') }}
+											{% endif %}
+										{% endif %}
+
+										{# Bouton modifier le commentaire #}
+										{% if app.user %}
+											{% if app.user.id == comment.user.id %}
+												<div class="flex flex-row gap-1">
+													<a class="leading-none text-sm text-blue-600 font-medium cursor-pointer hover:text-blue-400 duration-200 ease-in-out" href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
+												{% endif %}
 											{% endif %}
 
-											<div
-												class="flex flex-row justify-end gap-2 py-1 w-full">
-												{# Bouton modifier le commentaire #}
-												{% if app.user %}
-													{% if app.user.id == comment.user.id %}
-														<a class="leading-none text-sm text-blue-600 font-medium cursor-pointer hover:text-blue-400 duration-200 ease-in-out" href="{{ path('app_comment_edit', {'id': comment.id}) }}">Modifier</a>
-													{% endif %}
-												{% endif %}
-												{# Bouton supprimer le commentaire #}
-												{% if app.user %}
-													{% if app.user.id == comment.user.id %}
-														<div class="leading-none text-sm text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
-															{{ include('comment/_delete_form.html.twig') }}
-														</div>
-													{% endif %}
-												{% endif %}
-											</div>
-										</div>
+											{# Bouton supprimer le commentaire #}
+											{% if app.user %}
+												{% if app.user.id == comment.user.id %}
+													<div class="leading-none text-sm text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+														{{ include('comment/_delete_form.html.twig') }}
+													</div>
+												</div>
+											{% endif %}
+										{% endif %}
 									</div>
 								</div>
 							{% else %}
@@ -176,12 +194,58 @@
         </div>
       {% endif %}
 
-    {% else %}
-      <div class="flex flex-col h-screen items-center justify-center text-center">
-        <p class="text-lg mb-4 text-gray-800 dark:text-gray-100">Connectez-vous pour accéder aux tweets !</p>
-        <a href="{{ path('app_login') }}" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg">Se connecter</a>
-      </div>
-    {% endif %}
-  </main>
-</div>
+				<p colspan="4">Aucun tweet trouvé</p>
+
+			{% endfor %}
+
+			{# PAGINATION DES TWEETS + COMMENTAIRES #}
+
+			{# Pagination des tweets #}
+			{% if totalPages is defined and totalPages > 1 %}
+				<div class="flex justify-center mt-10 gap-4">
+					{% if currentPage > 1 %}
+						<a href="{{ path('app_tweet_index', {'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+					{% endif %}
+
+					{% for p in 1..totalPages %}
+						<a href="{{ path('app_tweet_index', {'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+							{{ p }}
+						</a>
+					{% endfor %}
+
+					{% if currentPage < totalPages %}
+						<a href="{{ path('app_tweet_index', {'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{# Pagination des commentaires #}
+			{% if commentTotalPages is defined and commentTotalPages > 1 %}
+				<div class="flex justify-center mt-4 gap-4">
+					{% if commentCurrentPage > 1 %}
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage - 1}) }}" class="px-3 py-1 bg-gray-200 rounded">← Précédent</a>
+					{% endif %}
+
+					{% for p in 1..commentTotalPages %}
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': p}) }}" class="px-3 py-1 rounded {{ p == commentCurrentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+							{{ p }}
+						</a>
+					{% endfor %}
+
+					{% if commentCurrentPage < commentTotalPages %}
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage + 1}) }}" class="px-3 py-1 bg-gray-200 rounded">Suivant →</a>
+					{% endif %}
+				</div>
+			{% endif %}
+
+		</section>
+
+		{# Si le visiteur n'est pas connecté avec un compte, il ne verra aucun tweet #}
+	{% else %}
+		<div class="flex flex-col h-100 items-center justify-around">
+			<p>Connectez-vous pour accéder à l'ensemble des tweets !</p>
+			<a href="{{ path('app_login')}}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Se connecter</a>
+		</div>
+
+	{% endif %}
 {% endblock %}

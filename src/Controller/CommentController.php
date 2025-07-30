@@ -28,6 +28,79 @@ final class CommentController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/comment', name: 'app_tweet_comments_index', methods: ['GET', 'POST'])]
+    public function TweetComments(
+        Request $request,
+        CommentRepository $commentRepository,
+        EntityManagerInterface $entityManager,
+        Security $security,
+        SluggerInterface $slugger,
+        int $id
+    ): Response {
+        $tweet = $entityManager->getRepository(Tweet::class)->find($id);
+
+        if (!$tweet) {
+            throw $this->createNotFoundException("Tweet non trouvé.");
+        }
+
+        // PAGINATION
+        $limit = 5;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $totalComments = $commentRepository->count(['tweet' => $tweet]);
+        $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC'], $limit, $offset);
+
+        // FORMULAIRE DE NOUVEAU COMMENTAIRE
+        $comment = new Comment();
+        $comment->setTweet($tweet);
+        $comment->setUser($security->getUser());
+        $comment->setDateTime(new \DateTime());
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $imageFile = $form->get('media')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $media = new \App\Entity\Media;
+                $media->setUrlMedia('/uploads/images/' . $newFilename);
+                $media->setComment($comment);
+
+                $entityManager->persist($media);
+                $entityManager->flush();
+                $comment->addMedium($media);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_tweet_comments_paginated', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
+        }
+
+        return $this->render('tweet/index.html.twig', [
+            'tweets' => [$tweet],
+            'selectedTweet' => $tweet,
+            'comments' => $comments,
+            'commentForm' => $form->createView(),
+            'commentCurrentPage' => $page,
+            'commentTotalPages' => ceil($totalComments / $limit),
+        ]);
+    }
+
     #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['GET', 'POST'])]
     public function new(int $tweetId, Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
