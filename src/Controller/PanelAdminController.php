@@ -19,15 +19,26 @@ final class PanelAdminController extends AbstractController
     #[Route('/panel/admin', name: 'app_panel_admin')]
     public function index(UserRepository $userRepository, TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request): Response
     {
-        $users = $userRepository->findAll();
-        $tweets = $tweetRepository->findAll();
-        $comments = $commentRepository->findAll();
-        $signalementsCount = $tweetRepository->countByIsSignaled(true);
+        $limit = 10;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+        
+        $totalUsers = count($userRepository->findAll());
+        $users = $userRepository->findBy([], [], $limit, $offset);
+
+        $totalTweets = count($tweetRepository->findAll());
+        $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC'], $limit, $offset);
+
+        $totalComments = count($commentRepository->findAll());
+        $comments = $commentRepository->findBy([], [], $limit, $offset);
+
+   $signalementsCount = $tweetRepository->countByIsSignaled(true);
 
         // Récupérer les tweets signalés spécifiquement
         $reportedTweets = [];
         if ($request->query->get('section') == 'signalements') {
-            $reportedTweets = $tweetRepository->findBy(['isSignaled' => true]);
+            // $totalReportedTweets = count($tweetRepository->findAll());
+            $reportedTweets = $tweetRepository->findBy(['isSignaled' => true], [], $limit, $offset);
         }
         // Alternativement, vous pouvez toujours les charger si vous voulez les avoir disponibles peu importe la section.
         // $reportedTweets = $tweetRepository->findBy(['isSignaled' => true]);
@@ -36,10 +47,19 @@ final class PanelAdminController extends AbstractController
         return $this->render('panel_admin/index.html.twig', [
             'controller_name' => 'PanelAdminController',
             'users' => $users,
+             'totalUsersCount' => $totalUsers, 
             'tweets' => $tweets,
+            'totalTweetsCount' => $totalTweets, 
             'signalements_count' => $signalementsCount,
             'reportedTweets' => $reportedTweets,
             'comments' => $comments,
+            'totalCommentsCount' => $totalComments, 
+            'currentPage' => $page,
+               'totalPagesUsers' => ceil($totalUsers / $limit),
+             'totalPagesTweets' => ceil($totalTweets / $limit),
+             'totalPagesSignalements' => ceil($signalementsCount / $limit),
+            'totalPagesComments' => ceil($totalComments / $limit),
+           
         ]);
     }
 
