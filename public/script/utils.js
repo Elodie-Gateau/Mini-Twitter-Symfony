@@ -1,3 +1,35 @@
+// AJAX => LIKER SANS RECHARGER LA PAGE
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".like-form").forEach((form) => {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+            })
+                .then((res) => {
+                    if (!res.ok) throw new Error("Erreur serveur");
+                    return res.json();
+                })
+                .then((data) => {
+                    const counter = document.querySelector(
+                        `#like-count-${data.tweetId}`
+                    );
+                    if (counter) {
+                        counter.textContent = data.likes;
+                    }
+                })
+                .catch(() => {
+                    alert("Une erreur est survenue lors du like.");
+                });
+        });
+    });
+});
 // // AJAX => SUPPRIMER LE COMMENTAIRE HTML EN DIRECT SANS RECHARGER LA PAGE
 
 // document.addEventListener('DOMContentLoaded', () => {
