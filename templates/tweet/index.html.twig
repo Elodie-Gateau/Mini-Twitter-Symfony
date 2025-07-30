@@ -26,13 +26,13 @@
 							{# Photo de profil #}
 							{% if tweet.idUser.photo is not null %}
 								<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
-							{% else %}
-								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
+							{% elseif tweet.idUser.photo is null or tweet.idUser.isActive == 0 %}
+								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : "anonyme"}}">
 							{% endif %}
 
 							{# Nom et date du tweet #}
 							<div class="flex flex-col">
-								<h2 class="font-bold text-xl mb-1">{{ tweet.idUser.nickname }}</h2>
+								<h2 class="font-bold text-xl mb-1">{{ tweet.idUser.isActive ? tweet.idUser.nickname : "Utilisateur anonyme" }}</h2>
 
 								{# Conversion du mois en français #}
 								{% set enMonth = tweet.creationTime|date('F') %}
@@ -142,12 +142,12 @@
 										<div class="flex flex-row gap-1 items-center">
 											{% if comment.user.photo is not null %}
 												<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
-											{% else %}
-												<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
+											{% elseif comment.user.photo is null or comment.user.isActive == 0 %}
+												<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.isActive ? comment.user.name : "personne anonyme" }}">
 											{% endif %}
 
 											{# Peudonyme du commentateur #}
-											<p class="text-sm text-gray-700 font-semibold">{{ comment.user.nickname }}</p>
+											<p class="text-sm text-gray-700 font-semibold">{{ comment.user.isActive ? comment.user.nickname : "Utilisateur anonyme" }}</p>
 										</div>
 										{# Conversion du mois en français #}
 										{% set moisAnglais = comment.dateTime|date('F') %}

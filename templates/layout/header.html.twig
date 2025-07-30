@@ -16,7 +16,9 @@
 				{% if is_granted('ROLE_USER') and app.user and app.user.id is not null %}
 					<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_profile_show', {'id': app.user.id}) }}">Profil</a>
 				{% endif %}
+				{% if is_granted('ROLE_ADMIN') %}
 				<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_panel_admin')}}">Panel Admin</a>
+				{% endif %}
 				{% if not is_granted('ROLE_USER') %}
 					<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_register')}}">S'inscrire</a>
 				{% endif %}
