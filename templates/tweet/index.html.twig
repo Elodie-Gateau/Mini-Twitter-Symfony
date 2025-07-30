@@ -25,9 +25,11 @@
 							class="flex gap-3 items-center">
 							{# Photo de profil #}
 							{% if tweet.idUser.photo is not null %}
-								<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
+
+								<a href="{{ path('app_profile_show', {'id': tweet.idUser.id}) }}"><img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}"></a>
+
 							{% elseif tweet.idUser.photo is null or tweet.idUser.isActive == 0 %}
-								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : "anonyme"}}">
+								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : " anonyme"}}">
 							{% endif %}
 
 							{# Nom et date du tweet #}
@@ -68,9 +70,9 @@
 								</h3>
 
 								{# Affiche si le tweet a déjà été signalé ou pas
-																																																																																																																{% if tweet.isSignaled == true %}
-																																																																																																																	<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
-																																																																																																																{% endif %} #}
+																																																																																																																																{% if tweet.isSignaled == true %}
+																																																																																																																																	<p class="text-gray-500 text-xs italic">(Tweet signalé)</p>
+																																																																																																																																{% endif %} #}
 							</div>
 
 						</div>
@@ -94,10 +96,10 @@
 
 
 					{# <div class="px-6 pt-4 pb-2">
-																																																																																																	<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																																																																																	<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																																																																																	<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
-																																																																																																	</div>  #}
+																																																																																																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																																											<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tag</span>
+																																																																																																											</div>  #}
 
 					{# Media du tweet #}
 					<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
@@ -143,7 +145,7 @@
 											{% if comment.user.photo is not null %}
 												<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
 											{% elseif comment.user.photo is null or comment.user.isActive == 0 %}
-												<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.isActive ? comment.user.name : "personne anonyme" }}">
+												<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.isActive ? comment.user.name : " personne anonyme" }}">
 											{% endif %}
 
 											{# Peudonyme du commentateur #}
