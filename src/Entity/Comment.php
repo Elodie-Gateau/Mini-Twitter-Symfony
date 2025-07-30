@@ -37,6 +37,9 @@ class Comment
     orphanRemoval: true)]
     private Collection $media;
 
+    #[ORM\Column]
+    private ?bool $isSignaled = null;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -121,6 +124,18 @@ class Comment
                 $medium->setComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSignaled(): ?bool
+    {
+        return $this->isSignaled;
+    }
+
+    public function setIsSignaled(bool $isSignaled): static
+    {
+        $this->isSignaled = $isSignaled;
 
         return $this;
     }

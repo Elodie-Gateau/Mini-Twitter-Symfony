@@ -126,4 +126,23 @@ final class CommentController extends AbstractController
         // return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    // SIGNALER UN TWEET
+
+    #[Route('/{id}/signal', name: 'app_comment_signalComment', methods: ['POST'])]
+    public function signalComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+
+
+        if ($this->isCsrfTokenValid('signalComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+            
+            $comment->setIsSignaled(true);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ce commentaire a bien été signalé, il est en attente de modération !');
+        }
+
+        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+    }
 }
