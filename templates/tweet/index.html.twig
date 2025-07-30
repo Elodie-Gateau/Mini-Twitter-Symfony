@@ -43,6 +43,7 @@
             </div>
 
 								</h3>
+
 							</div>
 
 						</div>
@@ -73,6 +74,7 @@
 						</a>
 					</p>
 
+
         <!-- Media -->
         {% if tweet.media|length > 0 %}
         <div class="grid grid-cols-{{ tweet.media|length > 1 ? '2' : '1' }} gap-2 mb-3">
@@ -81,6 +83,10 @@
           {% endfor %}
         </div>
         {% endif %}
+
+					{# Futur emplacement des tags
+				 <div class="px-6 pt-4 pb-2"> #}
+
 
         <!-- Actions -->
         <div class="flex justify-between items-center text-sm border-t border-gray-200 dark:border-gray-700 pt-3">

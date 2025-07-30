@@ -199,8 +199,15 @@ final class TweetController extends AbstractController
     public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+              if ($tweet->getOriginalTweet()) {
+                $originalTweet = $tweet->getOriginalTweet();
+                $originalTweet->decrementRetweetCount();
+                
+            }
+
             $entityManager->remove($tweet);
             $entityManager->flush();
+
         }
 
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
@@ -224,5 +231,46 @@ final class TweetController extends AbstractController
         }
 
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+    }
+    // RETWEET
+    #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
+   
+    public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response
+    {
+        //  @var User $currentUser
+        $currentUser = $security->getUser(); 
+
+        
+        
+        $existingRetweet = $tweetRepository->findOneBy([
+            'idUser' => $currentUser,
+            'originalTweet' => $tweet,
+        ]);
+
+        if ($existingRetweet) {
+            $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
+            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+        }
+
+       
+        $newRetweet = new Tweet();
+        $newRetweet->setIdUser($currentUser); 
+        $newRetweet->setContent($tweet->getContent()); 
+        $newRetweet->setCreationTime(new \DateTime()); 
+        $newRetweet->setOriginalTweet($tweet); 
+        $newRetweet->setRetweetCount(0);
+
+
+        $entityManager->persist($newRetweet);
+
+       
+        $tweet->incrementRetweetCount();
+     
+
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Tweet retweeté avec succès !');
+
+        return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
     }
 }

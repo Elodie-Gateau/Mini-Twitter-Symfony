@@ -49,6 +49,14 @@ class Tweet
     #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'tweet')]
     private Collection $likes;
 
+   
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?self $originalTweet = null;
+
+    #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+    private int $retweetCount = 0;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -196,6 +204,42 @@ class Tweet
             }
         }
 
+        return $this;
+    }
+
+     public function getOriginalTweet(): ?self
+    {
+        return $this->originalTweet;
+    }
+
+    public function setOriginalTweet(?self $originalTweet): static
+    {
+        $this->originalTweet = $originalTweet;
+        return $this;
+    }
+
+    public function getRetweetCount(): int
+    {
+        return $this->retweetCount;
+    }
+
+    public function setRetweetCount(int $retweetCount): static
+    {
+        $this->retweetCount = $retweetCount;
+        return $this;
+    }
+
+    public function incrementRetweetCount(): static
+    {
+        $this->retweetCount++;
+        return $this;
+    }
+
+    public function decrementRetweetCount(): static
+    {
+        if ($this->retweetCount > 0) {
+            $this->retweetCount--;
+        }
         return $this;
     }
 }
