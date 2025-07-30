@@ -1,3 +1,11 @@
+{# Formulaire de création de commentaire #}
+{% if app.user %}
+  <div class="mb-4">
+    {{ include('comment/_add_form.html.twig', { form: commentForm, tweet: tweet }) }}
+  </div>
+{% endif %}
+
+{# Liste des commentaires #}
 {% for comment in comments %}
 <div id="comment-{{ comment.id }}" class="py-4 border-t border-gray-200 dark:border-slate-600">
   <div class="flex justify-between items-center">

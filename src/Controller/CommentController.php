@@ -101,24 +101,37 @@ final class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(int $tweetId, Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
-    {
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
+    #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['POST'])]
+    public function new(
+        int $tweetId,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Security $security,
+        SluggerInterface $slugger,
+        CommentRepository $commentRepository
+    ): Response {
+        // Récupération du tweet
         $tweet = $entityManager->getRepository(Tweet::class)->find($tweetId);
+        if (!$tweet) {
+            throw $this->createNotFoundException('Tweet non trouvé.');
+        }
+
+        // Création du commentaire
+        $comment = new Comment();
         $comment->setTweet($tweet);
         $comment->setUser($security->getUser());
         $comment->setDateTime(new \DateTime());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
 
+        // Si formulaire valide
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comment);
             $entityManager->flush();
 
+            // Gestion du média
             $imageFile = $form->get('media')->getData();
-
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -127,26 +140,45 @@ final class CommentController extends AbstractController
                     $this->getParameter('images_directory'),
                     $newFilename
                 );
-                $media = new Media;
+
+                $media = new Media();
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
                 $media->setComment($comment);
 
                 $entityManager->persist($media);
-                $entityManager->flush();
                 $comment->addMedium($media);
+                $entityManager->flush();
             }
 
-            $entityManager->flush();
+            // 🔄 Si AJAX : renvoyer la liste mise à jour
+            if ($request->isXmlHttpRequest()) {
+                $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC']);
+                return $this->render('comment/_comments_list.html.twig', [
+                    'comments' => $comments,
+                    'tweet' => $tweet,
+                    'commentForm' => $this->createForm(CommentType::class, new Comment(), [
+                        'action' => $this->generateUrl('app_comment_new', ['tweetId' => $tweet->getId()])
+                    ])->createView()
+                ]);
+            }
 
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+            // Sinon redirection classique
+            return $this->redirectToRoute('app_tweet_index');
         }
 
-        return $this->render('comment/new.html.twig', [
-            'comment' => $comment,
-            'form' => $form,
-        ]);
-    }
+        // 🔄 Si formulaire invalide en AJAX : renvoyer la vue avec erreurs
+        if ($request->isXmlHttpRequest()) {
+            $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC']);
+            return $this->render('comment/_comments_list.html.twig', [
+                'comments' => $comments,
+                'tweet' => $tweet,
+                'commentForm' => $form->createView()
+            ]);
+        }
 
+        // Fallback classique
+        return $this->redirectToRoute('app_tweet_index');
+    }
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
@@ -230,7 +262,10 @@ final class CommentController extends AbstractController
         // On renvoie un fragment Twig contenant uniquement les commentaires
         return $this->render('comment/_comments_list.html.twig', [
             'comments' => $comments,
-            'tweet' => $tweet
+            'tweet' => $tweet,
+            'commentForm' => $this->createForm(CommentType::class, new Comment(), [
+                'action' => $this->generateUrl('app_comment_new', ['tweetId' => $tweet->getId()])
+            ])->createView()
         ]);
     }
 }

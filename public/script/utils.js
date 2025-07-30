@@ -63,6 +63,45 @@ document.querySelectorAll(".load-comments").forEach((button) => {
     });
 });
 
+// AJAX => Ajouter un commentaire et recharger la liste
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("submit", async (e) => {
+        // Vérifie si c'est le formulaire d'ajout de commentaire
+        if (e.target && e.target.classList.contains("add-comment-form")) {
+            e.preventDefault();
+
+            const form = e.target;
+            const tweetId = form.dataset.tweetId;
+            const formData = new FormData(form);
+            const commentsContainer = document.querySelector(
+                `#comments-container-${tweetId}`
+            );
+
+            try {
+                const res = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                });
+
+                if (!res.ok) throw new Error("Erreur serveur");
+
+                // Récupère le HTML des commentaires mis à jour
+                const html = await res.text();
+                commentsContainer.innerHTML = html;
+
+                // Marque la liste comme chargée
+                commentsContainer.dataset.loaded = "true";
+            } catch (error) {
+                console.error(error);
+                alert(
+                    "Une erreur est survenue lors de l'ajout du commentaire."
+                );
+            }
+        }
+    });
+});
+
 // // AJAX => SUPPRIMER LE COMMENTAIRE HTML EN DIRECT SANS RECHARGER LA PAGE
 
 // document.addEventListener('DOMContentLoaded', () => {
