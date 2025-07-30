@@ -222,11 +222,7 @@
 							{% endfor %}
 
 							<h5 class="mt-4 mb-3 font-semibold">Ajouter un commentaire :</h5>
-							{{ include('comment/_form.html.twig', {
-    form: form,
-    action: path('app_comment_new', {tweet: tweet.id}),
-    button_label: 'Commenter'
-}) }}
+							{{ include('comment/_add_form.html.twig') }}
 						</div>
 					{% endif %}
 				</div>

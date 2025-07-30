@@ -33,8 +33,12 @@ class Comment
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment', cascade: ['persist', 'remove'],
+    orphanRemoval: true)]
     private Collection $media;
+
+    #[ORM\Column]
+    private ?bool $isSignaled = null;
 
     public function __construct()
     {
@@ -120,6 +124,18 @@ class Comment
                 $medium->setComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSignaled(): ?bool
+    {
+        return $this->isSignaled;
+    }
+
+    public function setIsSignaled(bool $isSignaled): static
+    {
+        $this->isSignaled = $isSignaled;
 
         return $this;
     }
