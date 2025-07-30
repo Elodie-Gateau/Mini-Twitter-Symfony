@@ -239,9 +239,6 @@ final class TweetController extends AbstractController
     {
         //  @var User $currentUser
         $currentUser = $security->getUser(); 
-
-        
-        
         $existingRetweet = $tweetRepository->findOneBy([
             'idUser' => $currentUser,
             'originalTweet' => $tweet,
