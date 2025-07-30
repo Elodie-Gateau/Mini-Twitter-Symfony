@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Tweet;
 use App\Entity\User;
+use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
 use App\Repository\TweetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,13 +17,14 @@ use Doctrine\ORM\EntityManagerInterface;
 final class PanelAdminController extends AbstractController
 {
     #[Route('/panel/admin', name: 'app_panel_admin')]
-    public function index(UserRepository $userRepository, TweetRepository $tweetRepository, Request $request): Response
+    public function index(UserRepository $userRepository, TweetRepository $tweetRepository, CommentRepository $commentRepository, Request $request): Response
     {
-         $users = $userRepository->findAll();
-         $tweets = $tweetRepository->findAll();
-         $signalementsCount = $tweetRepository->countByIsSignaled(true);
+        $users = $userRepository->findAll();
+        $tweets = $tweetRepository->findAll();
+        $comments = $commentRepository->findAll();
+        $signalementsCount = $tweetRepository->countByIsSignaled(true);
 
-         // Récupérer les tweets signalés spécifiquement
+        // Récupérer les tweets signalés spécifiquement
         $reportedTweets = [];
         if ($request->query->get('section') == 'signalements') {
             $reportedTweets = $tweetRepository->findBy(['isSignaled' => true]);
@@ -35,10 +39,11 @@ final class PanelAdminController extends AbstractController
             'tweets' => $tweets,
             'signalements_count' => $signalementsCount,
             'reportedTweets' => $reportedTweets,
+            'comments' => $comments,
         ]);
     }
 
-        // Vous aurez besoin d'une action pour "dé-signaler" un tweet si vous l'ajoutez
+    // Vous aurez besoin d'une action pour "dé-signaler" un tweet si vous l'ajoutez
     #[Route('/tweet/{id}/unreport', name: 'app_tweet_unreport', methods: ['GET'])]
     public function unreportTweet(Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
@@ -51,7 +56,7 @@ final class PanelAdminController extends AbstractController
         return $this->redirectToRoute('app_panel_admin', ['section' => 'signalements']);
     }
 
-          // Vous aurez besoin d'une action pour "bannir" un utilisateur
+    // Vous aurez besoin d'une action pour "bannir" un utilisateur
     #[Route('/user/{id}/ban', name: 'app_user_ban', methods: ['GET'])]
     public function banUser(User $user, EntityManagerInterface $entityManager): Response
     {
@@ -64,7 +69,7 @@ final class PanelAdminController extends AbstractController
         return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
     }
 
-              // Vous aurez besoin d'une action pour "débannir" un utilisateur
+    // Vous aurez besoin d'une action pour "débannir" un utilisateur
     #[Route('/user/{id}/unban', name: 'app_user_unban', methods: ['GET'])]
     public function unbanUser(User $user, EntityManagerInterface $entityManager): Response
     {
@@ -76,8 +81,8 @@ final class PanelAdminController extends AbstractController
 
         return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
     }
-    
-        #[Route('/user/{id}/delete', name: 'app_admin_user_delete', methods: ['POST'])]
+
+    #[Route('/user/{id}/delete', name: 'app_admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
@@ -89,7 +94,7 @@ final class PanelAdminController extends AbstractController
         return $this->redirectToRoute('app_panel_admin', ['section' => 'users']);
     }
 
-            #[Route('/tweet/{id}/delete', name: 'app_admin_tweet_delete', methods: ['POST'])]
+    #[Route('/tweet/{id}/delete', name: 'app_admin_tweet_delete', methods: ['POST'])]
     public function deleteTweet(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
@@ -99,5 +104,19 @@ final class PanelAdminController extends AbstractController
         }
 
         return $this->redirectToRoute('app_panel_admin', ['section' => 'tweets']);
+    }
+
+        #[Route('/comment/{id}/delete', name: 'app_admin_comment_delete', methods: ['POST'])]
+    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+
+            // return new JsonResponse(['success' => true]);
+        }
+
+        // return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
+        return $this->redirectToRoute('app_panel_admin', ['section' => 'commentaires']);
     }
 }
