@@ -33,7 +33,7 @@ final class LikeController extends AbstractController
     ): Response {
         $user = $this->getUser();
 
-        if ($this->isCsrfTokenValid('signalTweet' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('likeTweet' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
 
             $like = $likeRepo->findOneBy(['tweet' => $tweet, 'user' => $user]);
 

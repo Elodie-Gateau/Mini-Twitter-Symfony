@@ -218,4 +218,19 @@ final class CommentController extends AbstractController
 
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/tweet/{id}/comments', name: 'app_tweet_comments_ajax', methods: ['GET'])]
+    public function loadComments(Tweet $tweet, CommentRepository $commentRepository): Response
+    {
+        $comments = $commentRepository->findBy(
+            ['tweet' => $tweet],
+            ['dateTime' => 'DESC']
+        );
+
+        // On renvoie un fragment Twig contenant uniquement les commentaires
+        return $this->render('comment/_comments_list.html.twig', [
+            'comments' => $comments,
+            'tweet' => $tweet
+        ]);
+    }
 }

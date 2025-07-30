@@ -30,6 +30,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// AJAX => Afficher les commentaires sans recharger la page
+
+document.querySelectorAll(".load-comments").forEach((button) => {
+    button.addEventListener("click", async () => {
+        const tweetId = button.dataset.tweetId;
+        const commentsContainer = document.querySelector(
+            `#comments-container-${tweetId}`
+        );
+
+        // Toggle : si déjà visible → on vide et on quitte
+        if (commentsContainer.dataset.loaded === "true") {
+            commentsContainer.innerHTML = "";
+            commentsContainer.dataset.loaded = "false";
+            return;
+        }
+
+        try {
+            const res = await fetch(`/tweet/${tweetId}/comments`, {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+            });
+            if (!res.ok) throw new Error("Erreur serveur");
+            const html = await res.text();
+            commentsContainer.innerHTML = html;
+            commentsContainer.dataset.loaded = "true";
+        } catch (e) {
+            console.error(e);
+            commentsContainer.innerHTML =
+                "<p class='text-red-500'>Erreur lors du chargement.</p>";
+        }
+    });
+});
+
 // // AJAX => SUPPRIMER LE COMMENTAIRE HTML EN DIRECT SANS RECHARGER LA PAGE
 
 // document.addEventListener('DOMContentLoaded', () => {
