@@ -86,8 +86,10 @@
 					</div>
 
 					{# Contenu du tweet #}
-					<p class="text-gray-700 text-base self-start py-1">
-						{{ tweet.content }}
+					<p>
+						<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-gray-700 text-base self-start py-1">
+							{{ tweet.content }}
+						</a>
 					</p>
 
 
