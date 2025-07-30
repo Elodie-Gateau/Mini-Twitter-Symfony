@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Social Pets
-			{% endblock %}
-		</title>
-		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> {% block stylesheets %}{% endblock %}
-		<script src="{{ asset('script/utils.js') }}" defer></script>
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}
-		{% endblock %}
-	</head>
-	<body class="bg-white">
-		{% block header %}
+<html lang="fr" class="{% if app.request.cookies.get('theme') == 'dark' %}dark{% endif %}">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Social Pets{% endblock %}</title>
 
-			{% include 'layout/header.html.twig' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-			{% block flash %}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-				<div class="flex my-5 justify-center">
-				{# Fait apparaître le message flash s'il y en a #}
-					{% for label, messages in app.flashes %}
-						{% for message in messages %}
-							<div class="px-4 py-2 rounded text-sm
-							{# Modifie le style du message flash en fonction du type #}
-																{% if label == 'danger' %}
-																	bg-red-100 text-red-800
-																{% elseif label == 'success' %}
-																	bg-green-100 text-green-800
-																{% elseif label == 'info' %}
-																	bg-blue-100 text-blue-800
-																{% elseif label == 'warning' %}
-																	bg-yellow-100 text-yellow-800
-																{% else %}
-																	bg-gray-100 text-gray-800
-																{% endif %}
-															">
-								{{ message }}
-							</div>
-						{% endfor %}
-					{% endfor %}
-				</div>
+    {% block stylesheets %}{% endblock %}
 
-			{% endblock %}
+    <!-- Configurer Tailwind pour activer dark mode via class -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class'
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-		{% endblock %}
-
-		{% block body %}{% endblock %}
-	</body>
+    <script src="{{ asset('app.js') }}" defer></script>
+    {% block javascripts %}
+      {% block importmap %}
+        {{ importmap('app') }}
+      {% endblock %}
+    {% endblock %}
+  </head>
+  <body class="bg-gray-50 dark:bg-dark2 transition-colors duration-300">
+    {% block header %}
+      {% include 'layout/header.html.twig' %}
+      {% block flash %}
+        <div class="flex my-5 justify-center">
+          {% for label, messages in app.flashes %}
+            {% for message in messages %}
+              <div class="px-4 py-2 rounded text-sm
+                {% if label == 'danger' %}bg-red-100 text-red-800
+                {% elseif label == 'success' %}bg-green-100 text-green-800
+                {% elseif label == 'info' %}bg-blue-100 text-blue-800
+                {% elseif label == 'warning' %}bg-yellow-100 text-yellow-800
+                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      {% endblock %}
+    {% endblock %}
+    {% block body %}{% endblock %}
+  </body>
 </html>

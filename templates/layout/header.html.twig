@@ -1,40 +1,70 @@
-<header>
-	<nav class="flex items-center justify-between flex-wrap bg-orange-400 p-6">
-		<div class="flex items-center flex-shrink-0 text-white mr-6">
-        <img src="{{ asset('img/logo-txt.png') }}" alt="Description du logo" class="w-50 h-20"/>
-		
-		</div>
-		<div class="block lg:hidden">
-			<button class="flex items-center px-3 py-2 border rounded text-orange-200 border-orange-400 hover:text-white hover:border-white">
-				<svg class="fill-current h-3 w-3" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-					<title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-			</button>
-		</div>
-		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-			<div class="text-sm lg:flex-grow">
-				<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_tweet_index')}}">Accueil</a>
-				{% if is_granted('ROLE_USER') and app.user and app.user.id is not null %}
-					<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_profile_show', {'id': app.user.id}) }}">Profil</a>
-				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
-				<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_panel_admin')}}">Panel Admin</a>
-				{% endif %}
-				{% if not is_granted('ROLE_USER') %}
-					<a class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4" href="{{ path('app_register')}}">S'inscrire</a>
-				{% endif %}
-			</div>
-			<div>
-				{% if not is_granted('ROLE_USER') %}
-					<a href="{{ path('app_login')}}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 lg:mt-0">Se connecter</a>
-				{% else %}
-					<a href="{{ path('app_logout')}}" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 lg:mt-0">Se déconnecter</a>
-				{% endif %}
-			</div>
-		
-			{% if is_granted('ROLE_USER') and app.user and app.user.photo is not empty %}
-				<img class="w-10 h-10 rounded ml-5" src="{{ asset('uploads/photos/' ~ app.user.photo) }}" alt="Photo de {{ app.user.name }}">
-				{% else %}
-					<img class="w-10 h-10 rounded ml-5" src="{{ asset('img/personne.png') }}" alt="Photo de profil">
-				{% endif %}
-	</div>
-</nav></header>
+
+
+
+<header class="z-50 h-14 fixed top-0 left-0 w-full flex items-center 
+  bg-white dark:bg-gray-900 
+  border-b border-gray-200 dark:border-gray-700 
+  px-4 transition-colors duration-300">
+
+  <!-- Logo -->
+  <div class="flex items-center gap-2">
+    <a href="{{ path('app_tweet_index') }}" class="flex items-center">
+      <img src="{{ asset('img/logo-txt.png') }}" alt="Logo" class="h-35 w-auto dark:hidden">
+      <img src="{{ asset('img/logo-dark.png') }}" alt="Logo Dark" class="h-10 w-auto hidden dark:block">
+    </a>
+  </div>
+
+  <!-- Actions à droite -->
+  <div class="flex items-center gap-4 ml-auto">
+
+    <!-- Toggle Dark Mode -->
+    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+      <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m8.66-11.66l-.71.71M4.05 19.95l.71-.71M21 12h1M2 12H1m16.95 7.95l-.71-.71M4.05 4.05l.71.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+      </svg>
+      <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-200 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+      </svg>
+    </button>
+
+    {% if is_granted('ROLE_USER') %}
+    <!-- Menu Profil -->
+    <div class="relative group">
+      <button class="flex items-center gap-2 focus:outline-none">
+        <img src="{{ app.user.photo ? asset('uploads/photos/' ~ app.user.photo) : asset('img/personne.png') }}"
+             alt="Profil"
+             class="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600 shadow cursor-pointer">
+      </button>
+
+      <!-- Dropdown -->
+      <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out z-50">
+        <div class="p-3 flex items-center gap-3 border-b border-gray-200 dark:border-gray-700">
+          <img src="{{ app.user.photo ? asset('uploads/photos/' ~ app.user.photo) : asset('img/personne.png') }}"
+               alt="Profil"
+               class="w-9 h-9 rounded-full shadow">
+          <div>
+            <p class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ app.user.nickname }}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">{{ app.user.email }}</p>
+          </div>
+        </div>
+        <div class="py-1">
+          <a href="{{ path('app_profile_show', {'id': app.user.id}) }}" 
+             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Profil</a>
+		{% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_panel_admin') }}" 
+               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+               <ion-icon name="settings-outline" class="text-lg"></ion-icon> Espace administrateur
+            </a>
+        {% endif %}
+          <a href="{{ path('app_logout') }}" 
+             class="block px-4 py-2 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10">Se déconnecter</a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <a href="{{ path('app_login') }}" class="px-3 py-1.5 rounded-lg bg-orange-500 text-white hover:bg-orange-600 text-sm">Se connecter</a>
+    {% endif %}
+  </div>
+</header>
