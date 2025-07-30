@@ -7,11 +7,10 @@
 	<div
 		x-data="{ userDropdownOpen: false, mobileNavOpen: false }">
 		<!-- Page Container -->
-		<div
-			id="page-container" class="mx-auto flex min-h-screen w-full min-w-[320px] flex-col bg-slate-100">
+		<div id="page-container" class="mx-auto flex min-h-screen w-full min-w-[320px] flex-col bg-slate-100">
+			{# Header non utilsé pour le moment #}
 			<!-- Page Header -->
-			<header id="page-header" class="z-1 flex flex-none items-center">
-				<div class="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
+				<header id="page-header" class="z-1 flex flex-none items-center"> <div class="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
 					<div
 						class="flex justify-between border-b-2 border-slate-200/50 py-6">
 
@@ -21,11 +20,11 @@
 							<!-- Header Navigation -->
 							<nav
 								class="flex items-center gap-2">{# <a href="javascript:void(0)" class="group flex items-center justify-between rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200 active:bg-indigo-100 sm:gap-2">
-																											<svg class="hi-mini hi-flag inline-block size-5 text-slate-300 group-hover:text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-																												<path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.449 6.449 0 014.271.572 7.948 7.948 0 005.965.524l2.078-.64A.75.75 0 0018 12.25v-8.5a.75.75 0 00-.904-.734l-2.38.501a7.25 7.25 0 01-4.186-.363l-.502-.2a8.75 8.75 0 00-5.053-.439l-1.475.31V2.75z"/>
-																											</svg>
-																											<span class="inline-flex size-6 items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 text-indigo-900">3</span>
-																										</a> #}
+																																																																								<svg class="hi-mini hi-flag inline-block size-5 text-slate-300 group-hover:text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+																																																																									<path d="M3.5 2.75a.75.75 0 00-1.5 0v14.5a.75.75 0 001.5 0v-4.392l1.657-.348a6.449 6.449 0 014.271.572 7.948 7.948 0 005.965.524l2.078-.64A.75.75 0 0018 12.25v-8.5a.75.75 0 00-.904-.734l-2.38.501a7.25 7.25 0 01-4.186-.363l-.502-.2a8.75 8.75 0 00-5.053-.439l-1.475.31V2.75z"/>
+																																																																								</svg>
+																																																																								<span class="inline-flex size-6 items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 text-indigo-900">3</span>
+																																																																							</a> #}
 							</nav>
 							<!-- END Header Navigation -->
 
@@ -42,11 +41,10 @@
 			<!-- Page Content -->
 			<main id="page-content" class="flex max-w-full flex-auto flex-col">
 				<div class="container mx-auto p-4 lg:p-8 xl:max-w-7xl">
-					<div
-						class="grid grid-cols-1 md:gap-20 lg:grid-cols-12">
+					<div class="grid grid-cols-1 md:gap-20 lg:grid-cols-12">
+						{# barre de navigation gauche #}
 						<!-- Navigation -->
-						<nav class="hidden lg:col-span-3 lg:block">
-							<a href="{{ path('app_panel_admin', {'section': 'dashboard'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent bg-indigo-100 px-2.5 py-2 text-sm font-semibold text-indigo-500 active:border-indigo-200">
+							<nav class="hidden lg:col-span-3 lg:block"> <a href="{{ path('app_panel_admin', {'section': 'dashboard'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent bg-indigo-100 px-2.5 py-2 text-sm font-semibold text-indigo-500 active:border-indigo-200">
 								<svg fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="hi-solid hi-home inline-block size-5 flex-none">
 									<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
 								</svg>
@@ -71,12 +69,12 @@
 									<span class="grow">Tweets</span>
 									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ totalTweetsCount }}</span>
 								</a>
-								<a href="{{ path('app_panel_admin', {'section': 'signalements'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent {% if app.request.query.get('section') == 'signalements' %}bg-indigo-100 text-indigo-500 active:border-indigo-200{% else %}text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200{% endif %} px-2.5 py-2 text-sm font-semibold">
-									<svg class="hi-mini hi-document-text inline-block size-5 flex-none {% if app.request.query.get('section') == 'signalements' %}text-indigo-500{% else %}text-slate-300 group-hover:text-indigo-500{% endif %}" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+								<a href="{{ path('app_panel_admin', {'section': 'signalementsTweets'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent {% if app.request.query.get('section') == 'signalements' %}bg-indigo-100 text-indigo-500 active:border-indigo-200{% else %}text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200{% endif %} px-2.5 py-2 text-sm font-semibold">
+									<svg class="hi-mini hi-document-text inline-block size-5 flex-none {% if app.request.query.get('section') == 'signalementsTweets' %}text-indigo-500{% else %}text-slate-300 group-hover:text-indigo-500{% endif %}" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
 										<path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clip-rule="evenodd"/>
 									</svg>
-									<span class="grow">Signalements</span>
-									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ signalements_count }}</span>
+									<span class="grow">Tweets Signalés</span>
+									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ signalements_countTweets }}</span>
 								</a>
 								<a href="{{ path('app_panel_admin', {'section': 'commentaires'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent {% if app.request.query.get('section') == 'commentaires' %}bg-indigo-100 text-indigo-500 active:border-indigo-200{% else %}text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200{% endif %} px-2.5 py-2 text-sm font-semibold">
 									<svg class="hi-mini hi-document-text inline-block size-5 flex-none {% if app.request.query.get('section') == 'commentaires' %}text-indigo-500{% else %}text-slate-300 group-hover:text-indigo-500{% endif %}" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -85,6 +83,13 @@
 									<span class="grow">Commentaires</span>
 									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ totalCommentsCount }}</span>
 								</a>
+								<a href="{{ path('app_panel_admin', {'section': 'signalementsComments'}) }}" class="group flex items-center justify-between gap-2 rounded-md border border-transparent {% if app.request.query.get('section') == 'signalements' %}bg-indigo-100 text-indigo-500 active:border-indigo-200{% else %}text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200{% endif %} px-2.5 py-2 text-sm font-semibold">
+									<svg class="hi-mini hi-document-text inline-block size-5 flex-none {% if app.request.query.get('section') == 'signalementsComments' %}text-indigo-500{% else %}text-slate-300 group-hover:text-indigo-500{% endif %}" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clip-rule="evenodd"/>
+									</svg>
+									<span class="grow">Commentaires Signalés</span>
+									<span class="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">{{ signalements_countComments }}</span>
+								</a>
 							</div>
 							<hr class="h-5 border-0"/>
 
@@ -92,9 +97,12 @@
 						<!-- END Navigation -->
 
 						<!-- Main Content -->
-						<div class="lg:col-span-9">
-							<div class="grid grid-cols-1 gap-4 sm:grid-cols-12 md:gap-6">
-								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3">
+						{# affichage de nombres #}
+
+							<div class="lg:col-span-9"> <div
+								class="grid grid-cols-1 gap-4 sm:grid-cols-10 md:gap-6">
+								{# UTILISATEURS #}
+								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-2">
 									<dl>
 										<dt class="text-2xl font-bold">{{ totalUsersCount }}</dt>
 										<dd class="text-sm font-medium text-slate-500">
@@ -102,7 +110,8 @@
 										</dd>
 									</dl>
 								</div>
-								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3">
+								{# TWEETS #}
+								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-2">
 									<dl>
 										<dt class="text-2xl font-bold">{{ totalTweetsCount }}</dt>
 										<dd class="text-sm font-medium text-slate-500">
@@ -110,15 +119,17 @@
 										</dd>
 									</dl>
 								</div>
-								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3">
+								{# TWEETS SIGNALES#}
+								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-2">
 									<dl>
-										<dt class="text-2xl font-bold">{{ signalements_count }}</dt>
+										<dt class="text-2xl font-bold">{{ signalements_countTweets }}</dt>
 										<dd class="text-sm font-medium text-slate-500">
-											Nombres de signalements
+											Nombres de tweets signalés
 										</dd>
 									</dl>
 								</div>
-								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3">
+								{# COMMENTAIRES #}
+								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-2">
 									<dl>
 										<dt class="text-2xl font-bold">{{ totalCommentsCount }}</dt>
 										<dd class="text-sm font-medium text-slate-500">
@@ -126,11 +137,21 @@
 										</dd>
 									</dl>
 								</div>
+								{# COMMENTAIRES SIGNALES#}
+								<div class="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-2">
+									<dl>
+										<dt class="text-2xl font-bold">{{ signalements_countComments }}</dt>
+										<dd class="text-sm font-medium text-slate-500">
+											Nombres de commentaires signalés
+										</dd>
+									</dl>
+								</div>
 
+								{# LISTE UTILISATEURS#}
 								{% if app.request.query.get('section') == 'users' or app.request.query.get('section') is null %}
 									<div class="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12">
 										<div class="px-6 pt-6">
-											<h2 class="text-2xl font-bold">Listes des utilisateurs</h2>
+											<h2 class="text-2xl font-bold">Liste des utilisateurs</h2>
 											<h3
 												class="text-sm font-medium text-slate-500">{# You have 6 new sales today, keep it up! #}
 											</h3>
@@ -251,28 +272,29 @@
 												</tbody>
 											</table>
 											<!-- END Alternate Responsive Table -->
-																	{# Pagination #}
-												{% if totalPagesUsers > 1 %}
-													<div class="flex justify-center mt-10 gap-4">
-														{% if currentPage > 1 %}
-															<a href="{{ path('app_panel_admin', {'section': 'users', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
-														{% endif %}
+											{# Pagination #}
+											{% if totalPagesUsers > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_panel_admin', {'section': 'users', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
 
-														{% for p in 1..totalPagesUsers %}
-															<a href="{{ path('app_panel_admin', {'section': 'users', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
-																{{ p }}
-															</a>
-														{% endfor %}
+													{% for p in 1..totalPagesUsers %}
+														<a href="{{ path('app_panel_admin', {'section': 'users', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
 
-														{% if currentPage < totalPagesUsers %}
-															<a href="{{ path('app_panel_admin', {'section': 'users', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
-														{% endif %}
-													</div>
-												{% endif %}
+													{% if currentPage < totalPagesUsers %}
+														<a href="{{ path('app_panel_admin', {'section': 'users', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										</div>
 										<!-- END Responsive Table Container -->
 									</div>
 								</div>
+								{# LISTE TWEETS#}
 							{% elseif app.request.query.get('section') == 'tweets' %}
 								<div class="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12">
 									<div class="px-6 pt-6">
@@ -337,28 +359,29 @@
 													{% endfor %}
 												</tbody>
 											</table>
-																	{# Pagination #}
-												{% if totalPagesTweets > 1 %}
-													<div class="flex justify-center mt-10 gap-4">
-														{% if currentPage > 1 %}
-															<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
-														{% endif %}
+											{# Pagination #}
+											{% if totalPagesTweets > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
 
-														{% for p in 1..totalPagesTweets %}
-															<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
-																{{ p }}
-															</a>
-														{% endfor %}
+													{% for p in 1..totalPagesTweets %}
+														<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
 
-														{% if currentPage < totalPagesTweets %}
-															<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
-														{% endif %}
-													</div>
-												{% endif %}
+													{% if currentPage < totalPagesTweets %}
+														<a href="{{ path('app_panel_admin', {'section': 'tweets', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										</div>
 									</div>
 								</div>
-							{% elseif app.request.query.get('section') == 'signalements' %}
+{# LISTE TWEETS SIGNALES#}
+							{% elseif app.request.query.get('section') == 'signalementsTweets' %}
 								<div class="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12">
 									<div class="px-6 pt-6">
 										<h2 class="text-2xl font-bold">Listes des tweets signalés</h2>
@@ -413,27 +436,28 @@
 													{% endfor %}
 												</tbody>
 											</table>
-														{# Pagination #}
-												{% if totalPagesSignalements > 1 %}
-													<div class="flex justify-center mt-10 gap-4">
-														{% if currentPage > 1 %}
-															<a href="{{ path('app_panel_admin', {'section': 'signalements', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
-														{% endif %}
+											{# Pagination #}
+											{% if totalPagesSignalementsTweets > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsTweets', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
 
-														{% for p in 1..totalPagesSignalements %}
-															<a href="{{ path('app_panel_admin', {'section': 'signalements', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
-																{{ p }}
-															</a>
-														{% endfor %}
+													{% for p in 1..totalPagesSignalementsTweets %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsTweets', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
 
-														{% if currentPage < totalPagesSignalements %}
-															<a href="{{ path('app_panel_admin', {'section': 'signalements', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
-														{% endif %}
-													</div>
-												{% endif %}
+													{% if currentPage < totalPagesSignalementsTweets %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsTweets', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										</div>
 									</div>
 								</div>
+								{# LISTE COMMENTAIRES#}
 							{% elseif app.request.query.get('section') == 'commentaires' %}
 								<div class="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12">
 									<div class="px-6 pt-6">
@@ -459,9 +483,6 @@
 														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Date
 														</th>
-														{# <th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
-																													Signalé
-																												</th> #}
 														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Actions
 														</th>
@@ -474,13 +495,6 @@
 															<td class="p-3 text-slate-600">{{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}</td>
 															<td class="p-3 text-slate-600">{{ comment.user.name }}</td>
 															<td class="p-3 text-slate-600">{{ comment.dateTime|date('d/m/Y H:i') }}</td>
-															{# <td class="p-3 text-center">
-																															{% if tweet.isSignaled %}
-																																<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Oui</span>
-																															{% else %}
-																																<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Non</span>
-																															{% endif %}
-																														</td> #}
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
 																	<a href="{{ path('app_tweet_show', {'id': comment.tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
@@ -498,27 +512,104 @@
 													{% endfor %}
 												</tbody>
 											</table>
-														{# Pagination #}
-												{% if totalPagesComments > 1 %}
-													<div class="flex justify-center mt-10 gap-4">
-														{% if currentPage > 1 %}
-															<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
-														{% endif %}
+											{# Pagination #}
+											{% if totalPagesComments > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
 
-														{% for p in 1..totalPagesComments %}
-															<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
-																{{ p }}
-															</a>
-														{% endfor %}
+													{% for p in 1..totalPagesComments %}
+														<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
 
-														{% if currentPage < totalPagesComments %}
-															<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
-														{% endif %}
-													</div>
-												{% endif %}
+													{% if currentPage < totalPagesComments %}
+														<a href="{{ path('app_panel_admin', {'section': 'commentaires', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										</div>
 									</div>
 								</div>
+								{# LISTE COMMENTAIRES SIGNALES #}
+							{% elseif app.request.query.get('section') == 'signalementsComments' %}
+								<div class="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12">
+									<div class="px-6 pt-6">
+										<h2 class="text-2xl font-bold">Listes des commentaires signalés</h2>
+										<h3 class="text-sm font-medium text-slate-500">
+											Gérez ici les commentaires qui ont été signalés par les utilisateurs.
+										</h3>
+									</div>
+									<div class="p-6">
+										<div class="min-w-full overflow-x-auto rounded-sm">
+											<table class="min-w-full align-middle text-sm">
+												<thead>
+													<tr class="border-b-2 border-slate-100">
+														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															ID
+														</th>
+														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Contenu
+														</th>
+														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Auteur
+														</th>
+														<th class="px-3 py-2 text-start text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Date
+														</th>
+														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Actions
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for reportedComment in reportedComments %}
+														<tr class="group border-b border-slate-100">
+															<td class="p-3 text-slate-600">{{ reportedComment.id }}</td>
+															<td class="p-3 text-slate-600">{{ reportedComment.content|length > 50 ? reportedComment.content|slice(0, 50) ~ '...' : reportedComment.content }}</td>
+															<td class="p-3 text-slate-600">{{ reportedComment.user.nickname }}</td>
+															<td class="p-3 text-slate-600">{{ reportedComment.dateTime|date('d/m/Y H:i') }}</td>
+															<td class="p-3 text-end">
+																<div class="inline-flex items-center gap-2">
+																	<a href="{{ path('app_tweet_show', {'id': reportedComment.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	<a href="{{ path('app_comment_unreport', {'id': reportedComment.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir retirer le signalement de ce tweet ?');">Dé-signaler</a>
+																	<form action="{{ path('app_admin_comment_delete', {'id': reportedComment.id}) }}" method="post">
+																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedComment.id) }}">
+																		<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tweet ?');">Supprimer</button>
+																	</form>
+																</div>
+															</td>
+														</tr>
+													{% else %}
+														<tr>
+															<td colspan="5" class="p-3 text-center text-slate-500">Aucun commentaire signalé trouvé.</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+											{# Pagination #}
+											{% if totalPagesSignalementsComments > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsComments', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
+
+													{% for p in 1..totalPagesSignalementsComments %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsComments', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
+
+													{% if currentPage < totalPagesSignalementsComments %}
+														<a href="{{ path('app_panel_admin', {'section': 'signalementsComments', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>	
 							{% endif %}
 						</div>
 					</div>
