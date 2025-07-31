@@ -573,7 +573,10 @@
 															<td class="p-3 text-slate-600">{{ reportedComment.dateTime|date('d/m/Y H:i') }}</td>
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
+																	{# {% for like in reportedComment.likes %}
+    																{% set tweet = like.tweet %} #}
 																	<a href="{{ path('app_tweet_show', {'id': reportedComment.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	{# {% endfor %} #}
 																	<a href="{{ path('app_comment_unreport', {'id': reportedComment.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir retirer le signalement de ce tweet ?');">Dé-signaler</a>
 																	<form action="{{ path('app_admin_comment_delete', {'id': reportedComment.id}) }}" method="post">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedComment.id) }}">
