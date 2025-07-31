@@ -29,9 +29,7 @@ final class ProfileController extends AbstractController
             'user' => $user,
         ]);
     
-        // return $this->render('tweet/show.html.twig', [
-        //     'tweet' => $tweet,
-        // ]);
+       
     }
 
     #[Route('/{id}/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
