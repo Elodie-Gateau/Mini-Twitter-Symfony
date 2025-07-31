@@ -287,6 +287,6 @@ final class TweetController extends AbstractController
 
         $this->addFlash('success', 'Tweet retweeté avec succès !');
 
-        return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+        return $this->redirectToRoute('app_tweet_edit', ['id' => $newRetweet->getId()]);
     }
 }
