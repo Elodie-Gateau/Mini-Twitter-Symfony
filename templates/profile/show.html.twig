@@ -106,79 +106,91 @@
 										<!-- Table Body -->
 										<tbody>
 
-											<tr class="group border-b border-slate-100">
-												{% if user.tweets is not empty %}
-													{% for tweet in user.tweets %}
-														{# Tri par ordre antichronologique : ajout d'un order by dans l'entité User sur relation Tweet #}
-														<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
+														<tr class="group border-b border-slate-100">
+															{% if user.tweets is not empty %}
+															{% for tweet in tweets %}
+								{# Tri par ordre antichronologique : ajout d'un order by dans l'entité User sur relation Tweet #}
+															<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
 															<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
 																<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
 																<div class="flex justify-between">
-																	<small class="text-gray-500 text-sm">Publié le
-																		{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
-																	<small class="text-gray-500 text-sm">{{ tweet.comment|length}}
-																		commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
-																	<small class="text-gray-500 text-sm">
-																		{{ tweet.likes|length }}
-																		<i class="fa-solid fa-paw "></i>
-																	</small>
-																</div>
-															</div>
-														{% endfor %}
-													{% else %}
-														<p class="text-gray-600 italic">Vous n'avez pas encore publié de tweets.</p>
-													{% endif %}
-												</tr>
-											</tr>
-										</tbody>
-										<!-- END Table Body -->
-									</tbody>
-								</table>
-								<!-- END Alternate Responsive Table -->
-							</div>
-							<!-- END Responsive Table Container -->
-						</div>
-					</div>
-				{% elseif app.request.query.get('section') == 'likes' %}
-					<div class="overflow-hidden rounded-xl border border-slate-200 bg-white lg:col-span-9">
-						<div class="px-6 pt-6">
-							<h2 class="text-2xl font-bold">Mes likes</h2>
-							<h3 class="text-sm font-medium text-slate-500"></h3>
-						</div>
-						<div
-							class="p-6">
-							<!-- Responsive Table Container -->
-							<div
-								class="min-w-full overflow-x-auto rounded-sm  flex flex-col gap-3">
-								<!-- Alternate Responsive Table -->
-								<table
-									class="min-w-full align-middle text-sm  flex flex-col gap-3">
-									<!-- Table Body -->
-									<tbody>
-
-										<tr class="group border-b border-slate-100">
-											{% if user.likes is not empty %}
-												{% for like in user.likes %}
-													{% set tweet = like.tweet %}
-													{% set comment = like.comment %}
-
-													{# Si le like concerne un commentaire #}
-													{% if comment %}
-														<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
-															<div
-																class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
-
-																<!-- Mise en avant du commentaire -->
-																<div class="bg-gray-100 border-l-4 border-blue-400 p-3 mb-3 rounded">
-																	<p class="text-sm text-gray-600 mb-1">Commentaire publié le :
-																		{{ tweet.creationtime|date('d/m/Y H:i') }}</p>
-																	<div class="flex justify-between text-sm text-gray-500">
-																		<p class="text-gray-800 italic">"{{ comment.content }}"</p>
-																		<small>{{ comment.likes|length }}
-																			<i class="fa-solid fa-paw"></i>
-																		</small>
+																<small class="text-gray-500 text-sm">Publié le
+																	{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
+																<small class="text-gray-500 text-sm">{{ tweet.comment|length}} commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
+																<small class="text-gray-500 text-sm">	{{ tweet.likes|length }} <i class="fa-solid fa-paw "></i></small>
 																	</div>
-																</div>
+																	</div>
+															{% endfor %}
+															{% else %}
+															<p class="text-gray-600 italic">Vous n'avez pas encore publié de tweets.</p>
+															{% endif %}
+														</tr>
+						
+												</tbody>
+												<!-- END Table Body -->
+											</tbody>
+										</table>
+										{# Pagination #}
+											{% if totalPagesTweets > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
+
+													{% for p in 1..totalPagesTweets %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
+
+													{% if currentPage < totalPagesTweets %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
+										<!-- END Alternate Responsive Table -->
+									</div>
+									<!-- END Responsive Table Container -->
+								</div>
+							</div>
+							{% elseif app.request.query.get('section') == 'likes' %}
+															<div class="overflow-hidden rounded-xl border border-slate-200 bg-white lg:col-span-9">
+									<div class="px-6 pt-6">
+										<h2 class="text-2xl font-bold">Mes likes</h2>
+										<h3
+											class="text-sm font-medium text-slate-500">
+										</h3>
+									</div>
+									<div
+										class="p-6">
+										<!-- Responsive Table Container -->
+										<div
+											class="min-w-full overflow-x-auto rounded-sm  flex flex-col gap-3">
+											<!-- Alternate Responsive Table -->
+											<table
+												class="min-w-full align-middle text-sm  flex flex-col gap-3">
+												<!-- Table Body -->
+												<tbody>
+
+														<tr class="group border-b border-slate-100">
+															{% if user.likes is not empty %}
+													{% for like in likes %}
+    												{% set tweet = like.tweet %}
+    												{% set comment = like.comment %}
+								
+								{# Si le like concerne un commentaire #}
+								{% if comment %}
+										<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
+										<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
+		
+									<!-- Mise en avant du commentaire -->
+									<div class="bg-gray-100 border-l-4 border-blue-400 p-3 mb-3 rounded">
+										<p class="text-sm text-gray-600 mb-1">Commentaire publié le : {{ tweet.creationtime|date('d/m/Y H:i') }}</p>
+										<div class="flex justify-between text-sm text-gray-500">
+										<p class="text-gray-800 italic">"{{ comment.content }}"</p>
+										<small>{{ comment.likes|length }} <i class="fa-solid fa-paw"></i></small>
+										</div>
+									</div>
 
 																<!-- Informations sur le tweet lié -->
 																<p class="text-gray-800 mb-2">
@@ -206,34 +218,48 @@
 																</p>
 																<p class="text-gray-800 mb-2">{{ tweet.content }}</p>
 																<div class="flex justify-between">
-																	<small class="text-gray-500 text-sm">Publié le
-																		{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
-																	<small class="text-gray-500 text-sm">{{ tweet.comment|length}}
-																		commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
-																	<small class="text-gray-500 text-sm">
-																		{{ tweet.likes|length }}
-																		<i class="fa-solid fa-paw "></i>
-																	</small>
-																</div>
-															</div>
-														{% endif %}
+																<small class="text-gray-500 text-sm">Publié le
+																	{{ tweet.creationtime|date('d/m/Y H:i') }}</small>
+																	<small class="text-gray-500 text-sm">{{ tweet.comment|length}} commentaire{{tweet.comment|length > 1 ? "s" : ""}}</small>
+																<small class="text-gray-500 text-sm">	{{ tweet.likes|length }} <i class="fa-solid fa-paw "></i></small>
+																	</div>
+																	</div>
+															{% endif %}
+															{% endfor %}
+															{% else %}
+															<p class="text-gray-600 italic">Vous n'avez pas encore liké de tweets.</p>
+															{% endif %}
+														</tr>
+						
+												</tbody>
+												<!-- END Table Body -->
+											</tbody>
+										</table>
+										{# Pagination #}
+											{% if totalPagesLikes > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
+
+													{% for p in 1..totalPagesLikes %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
 													{% endfor %}
-												{% else %}
-													<p class="text-gray-600 italic">Vous n'avez pas encore liké de tweets.</p>
-												{% endif %}
-											</tr>
-										</tr>
-									</tbody>
-									<!-- END Table Body -->
-								</tbody>
-							</table>
-							<!-- END Alternate Responsive Table -->
+
+													{% if currentPage < totalPagesLikes %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
+										<!-- END Alternate Responsive Table -->
+									</div>
+									<!-- END Responsive Table Container -->
+								</div>
+								      {% endif %}
+							</div>
 						</div>
-						<!-- END Responsive Table Container -->
-					</div>
-				{% endif %}
-			</div>
-		</div>
 
 		<!-- END Main Content -->
 
