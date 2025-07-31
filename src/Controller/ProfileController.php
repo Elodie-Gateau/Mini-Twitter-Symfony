@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Tweet;
 use App\Repository\TweetRepository;
 use App\Form\UserType;
 use App\Repository\LikeRepository;
@@ -23,7 +22,7 @@ final class ProfileController extends AbstractController
 {
 
     #[Route('/{id}', name: 'app_profile_show', methods: ['GET'])]
-    public function show(User $user, Tweet $tweet, TweetRepository $tweetRepository, LikeRepository $likeRepository, Request $request): Response
+    public function show(User $user, TweetRepository $tweetRepository, LikeRepository $likeRepository, Request $request): Response
     {
         $limit = 5;
         $page = max(1, (int) $request->query->get('page', 1));

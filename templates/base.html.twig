@@ -17,8 +17,7 @@ tailwind.config = {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Scripts JavaScript -->
-    <script src="{{ asset('script/utils.js') }}" defer></script>
+
 
     {% block javascripts %}
       {% block importmap %}
@@ -55,5 +54,7 @@ tailwind.config = {
     {% endblock %}
 
     {% block body %}{% endblock %}
+        <!-- Scripts JavaScript -->
+    <script src="{{ asset('script/utils.js') }}" defer></script>
   </body>
 </html>
