@@ -80,14 +80,14 @@
         {% if tweet.originalTweet %}
           <div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg border border-gray-200">
             <p class="text-sm mb-2">
-              <span class="font-semibold">{{ tweet.idUser.name }}</span> a retweeté :
+              <span class="font-semibold">{{ tweet.idUser.nickName }}</span> a retweeté :
             </p>
             <div class="bg-white dark:bg-slate-800 p-3 rounded border border-gray-200">
               <a href="{{ path('app_tweet_show', {'id': tweet.originalTweet.id}) }}" class="text-gray-700 dark:text-gray-300">
                 {{ tweet.originalTweet.content }}
               </a>
               <small class="block text-xs text-gray-500 mt-2">
-                Original de {{ tweet.originalTweet.idUser.name }} le {{ tweet.originalTweet.creationTime|date('d/m/Y H:i') }}
+                Original de {{ tweet.originalTweet.idUser.nickName }} le {{ tweet.originalTweet.creationTime|date('d/m/Y H:i') }}
               </small>
             </div>
           </div>
@@ -128,7 +128,7 @@
               <form action="{{ path('app_tweet_retweet', {'id': tweet.id}) }}" method="post">
                 <button type="submit" 
                   class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
-                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold">{{ tweet.retweetCount|length }}</span>
+                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount|length }} {% else %} 0 {% endif %}</span>
                   <i class="fa-solid fa-retweet text-lg"></i>
                 </button>
               </form>
