@@ -17,16 +17,25 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
 
+
+
+
 #[Route('/comment')]
 final class CommentController extends AbstractController
 {
-    #[Route(name: 'app_comment_index', methods: ['GET'])]
-    public function index(CommentRepository $commentRepository): Response
-    {
-        return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
-        ]);
-    }
+
+    // MONTRER LA LISTE DES COMMENTAIRES
+
+    // #[Route(name: 'app_comment_index', methods: ['GET'])]
+    // public function index(CommentRepository $commentRepository): Response
+    // {
+    //     return $this->render('comment/index.html.twig', [
+    //         'comments' => $commentRepository->findAll(),
+    //     ]);
+    // }
+
+
+    // MONTRER LA LISTE DES COMMENTAIRES AVEC PAGINATION + FORMULAIRE D'AJOUT DE COMMENTAIRE
 
     #[Route('/{id}/comment', name: 'app_tweet_comments_index', methods: ['GET', 'POST'])]
     public function TweetComments(
@@ -43,7 +52,7 @@ final class CommentController extends AbstractController
             throw $this->createNotFoundException("Tweet non trouvé.");
         }
 
-        // PAGINATION
+        // GESTION DE LA PAGINATION
         $limit = 5;
         $page = max(1, (int) $request->query->get('page', 1));
         $offset = ($page - 1) * $limit;
@@ -51,19 +60,22 @@ final class CommentController extends AbstractController
         $totalComments = $commentRepository->count(['tweet' => $tweet]);
         $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC'], $limit, $offset);
 
-        // FORMULAIRE DE NOUVEAU COMMENTAIRE
+        // Création du commentaire
         $comment = new Comment();
         $comment->setTweet($tweet);
         $comment->setUser($security->getUser());
         $comment->setDateTime(new \DateTime());
 
+        // Création du formulaire
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+        // Si formulaire valide, on génère le commentaire dans la base de données
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comment);
             $entityManager->flush();
 
+            // Ajout du média
             $imageFile = $form->get('media')->getData();
 
             if ($imageFile) {
@@ -78,14 +90,17 @@ final class CommentController extends AbstractController
                 $media->setUrlMedia('/uploads/images/' . $newFilename);
                 $media->setComment($comment);
 
+                // On génère le média dans la base de données et on lie le média au commentaire
                 $entityManager->persist($media);
                 $entityManager->flush();
                 $comment->addMedium($media);
             }
 
+            // On génère tout (commentaire + média) dans la base de données
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_tweet_comments_paginated', [
+            // Redirection vers la page du tweet
+            return $this->redirectToRoute('app_tweet_comments_index', [
                 'id' => $tweet->getId(),
                 'page' => 1
             ]);
@@ -101,6 +116,9 @@ final class CommentController extends AbstractController
         ]);
     }
 
+
+    // AJOUTER UN COMMENTAIRE
+
     #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['POST'])]
     public function new(
         int $tweetId,
@@ -110,6 +128,7 @@ final class CommentController extends AbstractController
         SluggerInterface $slugger,
         CommentRepository $commentRepository
     ): Response {
+
         // Récupération du tweet
         $tweet = $entityManager->getRepository(Tweet::class)->find($tweetId);
         if (!$tweet) {
@@ -179,11 +198,16 @@ final class CommentController extends AbstractController
         // Fallback classique
         return $this->redirectToRoute('app_tweet_index');
     }
+
+
+    // MODIFIER UN COMMENTAIRE
+
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+        $tweet = $comment->getTweet();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
@@ -209,7 +233,10 @@ final class CommentController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -218,9 +245,14 @@ final class CommentController extends AbstractController
         ]);
     }
 
+
+    // SUPPRIMER UN COMMENTAIRE
+
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
     {
+        $tweet = $comment->getTweet();
+
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
@@ -228,9 +260,12 @@ final class CommentController extends AbstractController
             // return new JsonResponse(['success' => true]);
         }
 
-        // return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
-        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
     }
+
 
     // SIGNALER UN TWEET
 

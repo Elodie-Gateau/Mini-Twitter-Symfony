@@ -1,6 +1,8 @@
 // AJAX => LIKER SANS RECHARGER LA PAGE
 
 document.addEventListener("DOMContentLoaded", () => {
+    const likeSound = new Audio('../audio/chien.wav'); // Remplacez par le vrai chemin de votre fichier audio
+
     document.querySelectorAll(".like-form").forEach((form) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -23,6 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (counter) {
                         counter.textContent = data.likes;
                     }
+            
+                likeSound.play().catch(error => {
+                    // Gérer les erreurs de lecture (ex: l'utilisateur n'a pas encore interagi avec la page)
+                    console.warn("Impossible de jouer le son:", error);
+                });
                 })
                 .catch(() => {
                     alert("Une erreur est survenue lors du like.");
