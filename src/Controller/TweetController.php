@@ -26,7 +26,7 @@ final class TweetController extends AbstractController
     #[Route(name: 'app_tweet_index', methods: ['GET'])]
     public function index(TweetRepository $tweetRepository, Request $request): Response
     {
-   
+
         $limit = 5;
         $page = max(1, (int) $request->query->get('page', 1));
         $offset = ($page - 1) * $limit;
@@ -41,6 +41,14 @@ final class TweetController extends AbstractController
         ]);
     }
 
+    // AFFICHE LES COMMENTAIRES EN AJAX
+    #[Route('/{id}/comments', name: 'app_tweet_comments_ajax', methods: ['GET'])]
+    public function loadComments(Tweet $tweet): Response
+    {
+        return $this->render('comment/_comments_list.html.twig', [
+            'comments' => $tweet->getComment(),
+        ]);
+    }
 
     // AJOUTER UN COMMENTAIRE A UN TWEET SUR LA PAGE D'ACCUEIL
 
@@ -199,15 +207,13 @@ final class TweetController extends AbstractController
     public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
-              if ($tweet->getOriginalTweet()) {
+            if ($tweet->getOriginalTweet()) {
                 $originalTweet = $tweet->getOriginalTweet();
                 $originalTweet->decrementRetweetCount();
-                
             }
 
             $entityManager->remove($tweet);
             $entityManager->flush();
-
         }
 
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
@@ -222,7 +228,7 @@ final class TweetController extends AbstractController
 
 
         if ($this->isCsrfTokenValid('signalTweet' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
-            
+
             $tweet->setIsSignaled(true);
             $entityManager->persist($tweet);
             $entityManager->flush();
@@ -234,11 +240,11 @@ final class TweetController extends AbstractController
     }
     // RETWEET
     #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
-   
+
     public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response
     {
         //  @var User $currentUser
-        $currentUser = $security->getUser(); 
+        $currentUser = $security->getUser();
         $existingRetweet = $tweetRepository->findOneBy([
             'idUser' => $currentUser,
             'originalTweet' => $tweet,
@@ -249,20 +255,20 @@ final class TweetController extends AbstractController
             return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
         }
 
-       
+
         $newRetweet = new Tweet();
-        $newRetweet->setIdUser($currentUser); 
-        $newRetweet->setContent($tweet->getContent()); 
-        $newRetweet->setCreationTime(new \DateTime()); 
-        $newRetweet->setOriginalTweet($tweet); 
+        $newRetweet->setIdUser($currentUser);
+        $newRetweet->setContent($tweet->getContent());
+        $newRetweet->setCreationTime(new \DateTime());
+        $newRetweet->setOriginalTweet($tweet);
         $newRetweet->setRetweetCount(0);
 
 
         $entityManager->persist($newRetweet);
 
-       
+
         $tweet->incrementRetweetCount();
-     
+
 
         $entityManager->flush();
 
