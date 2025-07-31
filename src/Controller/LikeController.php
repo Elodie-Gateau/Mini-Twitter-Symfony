@@ -82,6 +82,9 @@ final class LikeController extends AbstractController
 
             $em->flush();
         }
-        return $this->redirectToRoute('app_tweet_index');
+        return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
     }
 }
