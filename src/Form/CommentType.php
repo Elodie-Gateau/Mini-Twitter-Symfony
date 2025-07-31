@@ -32,7 +32,7 @@ class CommentType extends AbstractType
                         'message' => 'Vous devez écrire du texte',
                     ]),
                     new Length([
-                        'min' => 8,
+                        'min' => 1,
                         'max' => 280,
                         'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
                         'maxMessage' => 'Le champ ne peut pas dépasser {{ limit }} caractères',
