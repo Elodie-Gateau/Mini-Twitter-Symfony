@@ -32,7 +32,7 @@ final class ProfileController extends AbstractController
         $tweets = $paginationDataTweets['tweets'];
         $totalTweets = $paginationDataTweets['totalCountTweets'];
 
-         $paginationDataLikes = $likeRepository->findPaginatedByUser($user, $limit, $offset);
+        $paginationDataLikes = $likeRepository->findPaginatedByUser($user, $limit, $offset);
         $likes = $paginationDataLikes['likes'];
         $totalLikes = $paginationDataLikes['totalCountLikes'];
 

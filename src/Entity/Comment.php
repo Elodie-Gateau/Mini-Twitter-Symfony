@@ -47,7 +47,9 @@ class Comment
     /**
      * @var Collection<int, Like>
      */
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'comment')]
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'comment',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true)]
     private Collection $likes;
 
     public function __construct()
