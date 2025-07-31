@@ -18,18 +18,21 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 
 
-// MONTRER LA LISTE DES COMMENTAIRES
+
 
 #[Route('/comment')]
 final class CommentController extends AbstractController
 {
-    #[Route(name: 'app_comment_index', methods: ['GET'])]
-    public function index(CommentRepository $commentRepository): Response
-    {
-        return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
-        ]);
-    }
+
+    // MONTRER LA LISTE DES COMMENTAIRES
+
+    // #[Route(name: 'app_comment_index', methods: ['GET'])]
+    // public function index(CommentRepository $commentRepository): Response
+    // {
+    //     return $this->render('comment/index.html.twig', [
+    //         'comments' => $commentRepository->findAll(),
+    //     ]);
+    // }
 
 
     // MONTRER LA LISTE DES COMMENTAIRES AVEC PAGINATION + FORMULAIRE D'AJOUT DE COMMENTAIRE
@@ -74,7 +77,7 @@ final class CommentController extends AbstractController
 
             // Ajout du média
             $imageFile = $form->get('media')->getData();
-            
+
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -91,13 +94,13 @@ final class CommentController extends AbstractController
                 $entityManager->persist($media);
                 $entityManager->flush();
                 $comment->addMedium($media);
-            } 
+            }
 
             // On génère tout (commentaire + média) dans la base de données
             $entityManager->flush();
 
             // Redirection vers la page du tweet
-            return $this->redirectToRoute('app_tweet_comments_paginated', [
+            return $this->redirectToRoute('app_tweet_comments_index', [
                 'id' => $tweet->getId(),
                 'page' => 1
             ]);
@@ -204,6 +207,7 @@ final class CommentController extends AbstractController
     {
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+        $tweet = $comment->getTweet();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
@@ -229,7 +233,10 @@ final class CommentController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -242,8 +249,10 @@ final class CommentController extends AbstractController
     // SUPPRIMER UN COMMENTAIRE
 
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
     {
+        $tweet = $comment->getTweet();
+
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
@@ -251,8 +260,10 @@ final class CommentController extends AbstractController
             // return new JsonResponse(['success' => true]);
         }
 
-        // return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], Response::HTTP_FORBIDDEN);
-        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
     }
 
 

@@ -1,5 +1,5 @@
 {{ form_start(form, {
-    'action': path('app_comment_new', {'tweetId': tweet.id}),
+    'action': path('app_tweet_comments_index', {'id': tweet.id}),
     'method': 'POST'
 }) }}
 
