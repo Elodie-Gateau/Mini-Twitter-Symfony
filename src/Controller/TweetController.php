@@ -268,7 +268,7 @@ final class TweetController extends AbstractController
             $entityManager->remove($existingRetweet);
             $tweet->decrementRetweetCount();
             $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
-            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+            return $this->redirectToRoute('app_tweet_index');
         }
 
 
