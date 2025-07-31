@@ -361,54 +361,6 @@
 													{% endfor %}
 												</tbody>
 											</table>
-															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.firstname }}</td>
-															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.nickname }}</td>
-															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.age }}</td>
-															<td class="hidden p-3 text-slate-600 md:table-cell">{{ user.email }}</td>
-															<td class="p-3 text-center">
-																{% if user.isActive %}
-																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Activé</span>
-																{% else %}
-																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Désactivé</span>
-																{% endif %}
-															</td>
-															<td class="p-3 text-center">
-																{% if user.isBanned %}
-																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Oui</span>
-																{% else %}
-																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Non</span>
-																{% endif %}
-															</td>
-															<td class="p-3 text-center">
-																{% for role in user.roles %}
-																	{% if role == 'ROLE_ADMIN' %}
-																		<span class="inline-block rounded-full border border-indigo-200 bg-indigo-50 px-2 py-1 text-xs leading-4 font-semibold text-indigo-700">Admin</span>
-																	{% elseif role == 'ROLE_USER' %}
-																		<span class="inline-block rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-xs leading-4 font-semibold text-blue-700">Utilisateur</span>
-																	{% else %}
-																		<span class="inline-block rounded-full border border-gray-200 bg-gray-50 px-2 py-1 text-xs leading-4 font-semibold text-gray-700">{{ role }}</span>
-																	{% endif %}
-																{% endfor %}
-															</td>
-															<td
-																class="p-3 text-end">
-																{# Add action buttons here, e.g., view, edit, delete #}
-																<div class="inline-flex items-center gap-2">
-																	<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
-																	<form action="{{ path('app_admin_tweet_delete', {'id': tweet.id}) }}" method="post">
-																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tweet.id) }}">
-																		<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tweet ?');">Supprimer</button>
-																	</form>
-																</div>
-															</td>
-														</tr>
-													{% else %}
-														<tr>
-															<td colspan="6" class="p-3 text-center text-slate-500">Aucun tweet trouvé.</td>
-														</tr>
-													{% endfor %}
-												</tbody>
-											</table>
 											{# Pagination #}
 											{% if totalPagesTweets > 1 %}
 												<div class="flex justify-center mt-10 gap-4">
@@ -534,6 +486,9 @@
 															Date
 														</th>
 														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
+															Signalés
+														</th>
+														<th class="px-3 py-2 text-end text-sm font-semibold tracking-wider text-slate-700 uppercase">
 															Actions
 														</th>
 													</tr>
@@ -545,6 +500,13 @@
 															<td class="p-3 text-slate-600">{{ comment.content|length > 50 ? comment.content|slice(0, 50) ~ '...' : comment.content }}</td>
 															<td class="p-3 text-slate-600">{{ comment.user.name }}</td>
 															<td class="p-3 text-slate-600">{{ comment.dateTime|date('d/m/Y H:i') }}</td>
+															<td class="p-3 text-center">
+																{% if comment.isSignaled %}
+																	<span class="inline-block rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs leading-4 font-semibold text-red-700">Oui</span>
+																{% else %}
+																	<span class="inline-block rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs leading-4 font-semibold text-green-700">Non</span>
+																{% endif %}
+															</td>
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
 																	<a href="{{ path('app_tweet_show', {'id': comment.tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
