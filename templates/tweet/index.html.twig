@@ -128,7 +128,7 @@
               <form action="{{ path('app_tweet_retweet', {'id': tweet.id}) }}" method="post">
                 <button type="submit" 
                   class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
-                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold">{{ tweet.retweetCount|length }}</span>
+                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold">{{ tweet.retweetCount }}</span>
                   <i class="fa-solid fa-retweet text-lg"></i>
                 </button>
               </form>

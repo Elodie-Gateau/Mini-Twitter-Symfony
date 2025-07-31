@@ -250,7 +250,20 @@ final class TweetController extends AbstractController
             'originalTweet' => $tweet,
         ]);
 
+        if (!$currentUser) {
+            $this->addFlash('error', 'Vous devez être connecté pour retweeter.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        //Empêcher l'auto-retweet
+        if ($tweet->getIdUser() === $currentUser) {
+            $this->addFlash('warning', 'Vous ne pouvez pas retweeter vos propres messages.');
+            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+        }
+
         if ($existingRetweet) {
+            $entityManager->remove($existingRetweet);
+            $tweet->decrementRetweetCount();
             $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
             return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
         }
