@@ -261,14 +261,14 @@ final class TweetController extends AbstractController
         //Empêcher l'auto-retweet
         if ($tweet->getIdUser() === $currentUser) {
             $this->addFlash('warning', 'Vous ne pouvez pas retweeter vos propres messages.');
-            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+            return $this->redirectToRoute('app_tweet_index');
         }
 
         if ($existingRetweet) {
             $entityManager->remove($existingRetweet);
             $tweet->decrementRetweetCount();
             $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
-            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+            return $this->redirectToRoute('app_tweet_index');
         }
 
 

@@ -35,9 +35,10 @@ tailwind.config = {
   <body class="dark:bg-gray-900 bg-gray-50 transition-colors duration-300">
     {% block header %}
       {% include 'layout/header.html.twig' %}
+    {% endblock %}
       
       {% block flash %}
-        <div class="flex my-5 justify-center">
+        <div class="flex mt-15 justify-center">
           {% for label, messages in app.flashes %}
             {% for message in messages %}
               <div class="px-4 py-2 rounded text-sm
@@ -52,7 +53,6 @@ tailwind.config = {
           {% endfor %}
         </div>
       {% endblock %}
-    {% endblock %}
 
     {% block body %}{% endblock %}
   </body>
