@@ -103,7 +103,7 @@
 
 														<tr class="group border-b border-slate-100">
 															{% if user.tweets is not empty %}
-															{% for tweet in user.tweets %}
+															{% for tweet in tweets %}
 								{# Tri par ordre antichronologique : ajout d'un order by dans l'entité User sur relation Tweet #}
 															<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="block no-underline">
 															<div class="bg-blue-50 p-4 rounded-lg mb-4 last:mb-0 border border-blue-200">
@@ -125,6 +125,24 @@
 												<!-- END Table Body -->
 											</tbody>
 										</table>
+										{# Pagination #}
+											{% if totalPagesTweets > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
+
+													{% for p in 1..totalPagesTweets %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
+
+													{% if currentPage < totalPagesTweets %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										<!-- END Alternate Responsive Table -->
 									</div>
 									<!-- END Responsive Table Container -->
@@ -151,7 +169,7 @@
 
 														<tr class="group border-b border-slate-100">
 															{% if user.likes is not empty %}
-													{% for like in user.likes %}
+													{% for like in likes %}
     												{% set tweet = like.tweet %}
     												{% set comment = like.comment %}
 								
@@ -206,6 +224,24 @@
 												<!-- END Table Body -->
 											</tbody>
 										</table>
+										{# Pagination #}
+											{% if totalPagesLikes > 1 %}
+												<div class="flex justify-center mt-10 gap-4">
+													{% if currentPage > 1 %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': currentPage - 1}) }}" class="px-4 py-2 bg-gray-200 rounded">← Précédent</a>
+													{% endif %}
+
+													{% for p in 1..totalPagesLikes %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+															{{ p }}
+														</a>
+													{% endfor %}
+
+													{% if currentPage < totalPagesLikes %}
+														<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes', 'page': currentPage + 1}) }}" class="px-4 py-2 bg-gray-200 rounded">Suivant →</a>
+													{% endif %}
+												</div>
+											{% endif %}
 										<!-- END Alternate Responsive Table -->
 									</div>
 									<!-- END Responsive Table Container -->
