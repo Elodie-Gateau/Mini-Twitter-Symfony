@@ -137,12 +137,19 @@
 
           {# Commentaires #}
 
-          <button type="button" 
+          {# Lien pour afficher les commentaires en AJAX #}
+          {# <button type="button" 
                   class="load-comments text-blue-500 hover:underline mt-2 cursor-pointer"
                   data-tweet-id="{{ tweet.id }}">
               {{ tweet.comment|length }} commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
-          </button>
+          </button> #}
           
+          {# Lien pour afficher le détail du tweet avec les commentaires #}
+						<a id="comment-count-{{ tweet.id }}" class="text-blue-500 hover:underline mt-2 cursor-pointer" href="{{ path('app_tweet_comments_index', {'id': tweet.id}) }}">
+							{{ tweet.comment|length }}
+							commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
+						</a>
+
           {# Signaler #}
           {# {{ include('tweet/_signal_form.html.twig') }} #}
 
