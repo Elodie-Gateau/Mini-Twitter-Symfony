@@ -241,7 +241,7 @@ final class TweetController extends AbstractController
 
 
     // RETWEET
-    
+
     #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
 
     public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response
@@ -268,7 +268,7 @@ final class TweetController extends AbstractController
             $entityManager->remove($existingRetweet);
             $tweet->decrementRetweetCount();
             $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
-            return $this->redirectToRoute('app_tweet_show', ['id' => $tweet->getId()]);
+            return $this->redirectToRoute('app_tweet_index');
         }
 
 
