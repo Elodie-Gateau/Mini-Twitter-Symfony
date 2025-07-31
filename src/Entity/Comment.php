@@ -33,8 +33,12 @@ class Comment
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment', cascade: ['persist', 'remove'],
-    orphanRemoval: true)]
+    #[ORM\OneToMany(
+        targetEntity: Media::class,
+        mappedBy: 'comment',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
     private Collection $media;
 
     #[ORM\Column]
@@ -49,6 +53,7 @@ class Comment
     public function __construct()
     {
         $this->media = new ArrayCollection();
+        $this->isSignaled = false;
         $this->likes = new ArrayCollection();
     }
 
