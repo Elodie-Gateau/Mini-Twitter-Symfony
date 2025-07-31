@@ -22,9 +22,9 @@ final class ProfileController extends AbstractController
     #[Route('/{id}', name: 'app_profile_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        if ($user !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('Vous n\'avez pas la permission de voir ce profil.');
-        }
+        // if ($user !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+        //     throw new AccessDeniedException('Vous n\'avez pas la permission de voir ce profil.');
+        // }
         return $this->render('profile/show.html.twig', [
             'user' => $user,
         ]);

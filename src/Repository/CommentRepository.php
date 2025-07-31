@@ -15,7 +15,27 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
+    
+     public function findByIsSignaled(bool $isSignaled): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.isSignaled = :val')
+            ->setParameter('val', $isSignaled)
+            ->orderBy('t.creationTime', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
+    public function countByIsSignaled(bool $isSignaled): int
+    {
+        return $this->createQueryBuilder('t')
+            ->select('COUNT(t.id)')
+            ->andWhere('t.isSignaled = :val')
+            ->setParameter('val', $isSignaled)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     //    /**
     //     * @return Comment[] Returns an array of Comment objects
     //     */
