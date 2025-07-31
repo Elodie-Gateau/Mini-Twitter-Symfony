@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('app_comment_like', {'id': comment.id}) }}">
+<form class = "like-form" method="post" action="{{ path('app_comment_like', {'id': comment.id}) }}">
     <input type="hidden" name="_token" value="{{ csrf_token('likeComment' ~ comment.id) }}">
     <button type="submit" class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out like-form">
     {{ comment.likes|length }} <i class="fa-solid fa-paw"></i></button>
