@@ -10,27 +10,28 @@
 			class="max-w-3xl mx-auto py-8 space-y-6">
 
 			{# Bouton créer un tweet #}
-			<a href="{{ path('app_tweet_new') }}" class="block w-fit bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
+			<a href="{{ path('app_tweet_new') }}" class="block w-fit bg-orange-500 dark:bg-orange-300 hover:bg-orange-700 dark:hover:bg-orange-500 dark:hover:text-white text-white dark:text-gray-700 font-medium py-2 px-4 rounded-lg shadow-md transition">
 				Créer un tweet
 			</a>
 
 			{% for tweet in tweets %}
 				{# Cards tweet #}
 				<div
-					class="bg-white dark:bg-slate-800 rounded-lg shadow p-6 w-full space-y-4">
+					class="bg-white dark:bg-slate-600 rounded-lg shadow p-6 w-full space-y-4">
 
 					{# Entête de card #}
 					<div class="flex items-start justify-between">
 						<div
 							class="flex gap-3 items-center">
 							{# Photo de profil #}
-							{% if tweet.idUser.photo is not null %}
+							{% if tweet.idUser.photo is not null and tweet.idUser.isActive %}
 								<a href="{{ path('app_profile_show', {'id': tweet.idUser.id}) }}">
 									<img class="w-12 h-12 rounded-full object-cover border border-gray-300" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
 								</a>
-							{% elseif tweet.idUser.photo is null or tweet.idUser.isActive == 0 %}
+							{% else %}
 								<a href="{{ path('app_profile_show', {'id': tweet.idUser.id}) }}">
-									<img class="w-12 h-12 rounded-full object-cover border border-gray-300" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : 'anonyme'}}">
+									<img class="w-12 h-12 dark:hidden rounded-full object-cover border border-gray-300" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : 'anonyme'}}">
+									<img class="w-12 h-12 hidden dark:block rounded-full object-cover border border-gray-300" src="{{ asset('img/personne-dark.png') }}" alt="Photo de {{ tweet.idUser.isActive ? tweet.idUser.name : 'anonyme'}}">
 								</a>
 							{% endif %}
 
@@ -46,7 +47,7 @@
               'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'
           } %}
 
-								<p class="text-sm text-gray-500">
+								<p class="text-sm text-gray-500 dark:text-gray-200">
 									{% if tweet.creationTime %}
 										{{ tweet.creationTime|date('d') ~ ' ' ~ frMonth[enMonth] ~ ' ' ~ tweet.creationTime|date('H:i', false) }}
 									{% endif %}
@@ -64,7 +65,11 @@
 
 							{# Bouton modifier le tweet #}
 							{% if app.user and app.user.id == tweet.idUser.id %}
-								<a href="{{ path('app_tweet_edit', {'id': tweet.id}) }}" class="text-orange-500 font-medium hover:underline">Modifier</a>
+								<a href="{{ path('app_tweet_edit', {'id': tweet.id, 'from': 'index'}) }}" class="text-orange-500 dark:text-white font-medium hover:underline">Modifier</a>
+							{% endif %}
+
+							{% if app.user and app.user.id == tweet.idUser.id %}
+							{{ include('tweet/_delete_form.html.twig') }}
 							{% endif %}
 						</div>
 					</div>
@@ -82,15 +87,15 @@
 					{# Affichage du tweet original si retweet #}
 					{% if tweet.originalTweet %}
 						<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg border border-gray-200">
-							<p class="text-sm mb-2">
+							<p class="text-sm mb-2 dark:text-white">
 								<span class="font-semibold">{{ tweet.idUser.name }}</span>
 								a retweeté :
 							</p>
-							<div class="bg-white dark:bg-slate-800 p-3 rounded border border-gray-200">
-								<a href="{{ path('app_tweet_show', {'id': tweet.originalTweet.id}) }}" class="text-gray-700 dark:text-gray-300">
+							<div class="bg-white dark:bg-slate-600 p-3 rounded border border-gray-200">
+								<a href="{{ path('app_tweet_show', {'id': tweet.originalTweet.id}) }}" class="text-gray-700 dark:text-gray-200">
 									{{ tweet.originalTweet.content }}
 								</a>
-								<small class="block text-xs text-gray-500 mt-2">
+								<small class="block text-xs text-gray-500 dark:text-gray-300 mt-2">
 									Original de
 									{{ tweet.originalTweet.idUser.name }}
 									le
@@ -115,7 +120,7 @@
 
 					{# Médias du tweet #}
 						{% if tweet.media|length > 0 %}
-							<div class="flex gap-2 flex-wrap"> {% for media in tweet.media %}
+							<div class="flex gap-2 flex-wrap justify-center"> {% for media in tweet.media %}
 								<img class="rounded-lg border border-gray-200 {{ tweet.media|length > 1 ? 'w-40' : 'w-full' }}" src="{{ media.urlMedia }}" alt="">
 							{% endfor %}
 						</div>
@@ -133,8 +138,8 @@
             {% if app.user and tweet.idUser.id != app.user.id %}
               <form action="{{ path('app_tweet_retweet', {'id': tweet.id}) }}" method="post">
                 <button type="submit" 
-                  class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
-                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount|length }} {% else %} 0 {% endif %}</span>
+                  class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount }} {% else %} 0 {% endif %}</span>
                   <i class="fa-solid fa-retweet text-lg"></i>
                 </button>
               </form>
@@ -143,28 +148,17 @@
 
 						{# Commentaires #}
 
-						{# Lien pour afficher les commentaires en AJAX #}
-						{# <button type="button" 
-						                  class="load-comments text-blue-500 hover:underline mt-2 cursor-pointer"
-						                  data-tweet-id="{{ tweet.id }}">
-						              {{ tweet.comment|length }} commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
-						          </button> #}
-
 						{# Lien pour afficher le détail du tweet avec les commentaires #}
-							<a id="comment-count-{{ tweet.id }}" class="text-blue-500 hover:underline mt-2 cursor-pointer" href="{{ path('app_tweet_comments_index', {'id': tweet.id}) }}"> {{ tweet.comment|length }}
+							<a id="comment-count-{{ tweet.id }}" class="text-blue-500 dark:text-blue-200 hover:underline mt-2 cursor-pointer text-base" href="{{ path('app_tweet_comments_index', {'id': tweet.id}) }}"> {{ tweet.comment|length }}
 							commentaire{{ tweet.comment|length > 1 ? "s" : "" }}
 						</a>
-
-						{# Signaler #}
-						{# {{ include('tweet/_signal_form.html.twig') }} #}
-
 
 					</div>
 					<div id="comments-container-{{ tweet.id }}"></div>
 					{# Section commentaires si sélectionné #}
 					{% if selectedTweet is defined and selectedTweet.id == tweet.id %}
-						<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg space-y-4">
-							<h5 class="font-medium">Ajouter un commentaire :</h5>
+						<div class="bg-gray-50 dark:bg-slate-500 p-4 rounded-lg space-y-4">
+							<h5 class="font-medium dark:text-white">Ajouter un commentaire :</h5>
 
 							{# Ajouter un commentaire #}
 							{% if commentForm is defined %}
@@ -172,7 +166,7 @@
 							{% endif %}
 
 							{# Affichage des commentaires #}
-							<h4 class="font-semibold mt-4">Commentaires :</h4>
+							<h4 class="font-semibold mt-4 dark:text-white">Commentaires :</h4>
 							{% for comment in comments|sort((a, b) => b.dateTime <=> a.dateTime) %}
 								<div id="{{ comment.id }}" class="py-4 border-t border-gray-200 dark:border-slate-600">
 									<div
@@ -181,13 +175,13 @@
 										{# Photo de profil du commentateur #}
 										<div class="flex items-center gap-2">
 											{% if comment.user.photo is not null %}
-												<img class="w-8 h-8 rounded-full" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="">
+												<img class="w-10 rounded-full" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="">
 											{% else %}
-												<img class="w-8 h-8 rounded-full" src="{{ asset('img/personne.png') }}" alt="">
+												<img class="w-10 rounded-full" src="{{ asset('img/personne.png') }}" alt="">
 											{% endif %}
 
 											{# Peudonyme du commentateur #}
-											<p class="text-sm font-medium">{{ comment.user.isActive ? comment.user.nickname : "Utilisateur anonyme" }}</p>
+											<p class="text-base font-medium dark:text-white">{{ comment.user.isActive ? comment.user.nickname : "Utilisateur anonyme" }}</p>
 										</div>
 
 										{# Date du commentaire #}
@@ -198,13 +192,13 @@
                   'July': 'Juillet', 'August': 'Août', 'September': 'Septembre',
                   'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'
                 } %}
-										<p class="text-xs text-gray-500">
+										<p class="text-sm text-gray-500 dark:text-white">
 											{{ comment.dateTime|date('d') ~ ' ' ~ moisFr[moisAnglais] ~ ' ' ~ comment.dateTime|date('H:i') }}
 										</p>
 									</div>
 
 									{# Texte du commentaire #}
-									<p class="mt-2 text-gray-700 dark:text-gray-300">{{ comment.content }}</p>
+									<p class="mt-2 text-gray-700 dark:text-gray-200">{{ comment.content }}</p>
 
 									{# Médias du commentaire #}
 									{% if comment.media|length > 0 %}
@@ -216,7 +210,7 @@
 									{% endif %}
 
 									<div
-										class="flex justify-between items-center mt-2 text-xs">
+										class="flex justify-between items-center mt-2 text-base">
 										{# Liker le commentaire #}
 										{{ include('comment/_like_form.html.twig') }}
 
@@ -224,14 +218,17 @@
 										{% if app.user and app.user.id != comment.user.id %}
 											{{ include('comment/_signal_form.html.twig') }}
 										{% endif %}
-
-										{# Modifier le commentaire #}
+										
 										{% if app.user and app.user.id == comment.user.id %}
-											<a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="text-blue-500 hover:underline">Modifier</a>
+										<div class="flex gap-4">
+										{# Modifier le commentaire #}
+										
+											<a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="text-blue-500 dark:text-blue-200 hover:underline">Modifier</a>
 
 											{# Supprimer le commentaire #}
 											{{ include('comment/_delete_form.html.twig') }}
 										{% endif %}
+										</div>
 									</div>
 								</div>
 
@@ -295,9 +292,12 @@
 
 			{# Si le visiteur n'est pas connecté avec un compte, il ne verra aucun tweet #}
 		{% else %}
-			<div class="flex flex-col h-100 items-center justify-around">
-				<p>Connectez-vous pour accéder à l'ensemble des tweets !</p>
-				<a href="{{ path('app_login')}}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Se connecter</a>
+		<div class="flex w-full gap-6 justify-between items-center p-5">
+			<img class="object-cover w-1/2 h-auto rounded-lg" src="{{ asset('img/image-accueil.png') }}" alt="Image d'accueil">
+			
+			<div class="flex flex-col w-1/2 items-center justify-center text-center px-6 dark:text-white">
+				<p class="text-2xl font-semibold mb-6">Connectez-vous pour accéder à l'ensemble des tweets !</p>
+				<a href="{{ path('app_login')}}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition">Se connecter</a>
 			</div>
 
 		{% endif %}
