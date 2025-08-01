@@ -249,7 +249,7 @@ final class TweetController extends AbstractController
 
     #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
 
-    public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response
+    public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security, Request $request): Response
     {
         //  @var User $currentUser
         $currentUser = $security->getUser();
@@ -257,44 +257,46 @@ final class TweetController extends AbstractController
             'idUser' => $currentUser,
             'originalTweet' => $tweet,
         ]);
+        $form = $this->createForm(TweetType::class, $tweet);
+        $form->handleRequest($request);
+         
 
-        if (!$currentUser) {
-            $this->addFlash('error', 'Vous devez être connecté pour retweeter.');
-            return $this->redirectToRoute('app_login');
+            if (!$currentUser) {
+                $this->addFlash('error', 'Vous devez être connecté pour retweeter.');
+                return $this->redirectToRoute('app_login');
+            }
+
+            //Empêcher l'auto-retweet
+            if ($tweet->getIdUser() === $currentUser) {
+                $this->addFlash('warning', 'Vous ne pouvez pas retweeter vos propres messages.');
+                return $this->redirectToRoute('app_tweet_index');
+            }
+
+            if ($existingRetweet) {
+                $entityManager->remove($existingRetweet);
+                $tweet->decrementRetweetCount();
+                $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
+                return $this->redirectToRoute('app_tweet_index');
+            } else {
+
+                $newRetweet = new Tweet();
+                $newRetweet->setIdUser($currentUser);
+                $newRetweet->setContent($tweet->getContent());
+                $newRetweet->setCreationTime(new \DateTime());
+                $newRetweet->setOriginalTweet($tweet);
+                $newRetweet->setRetweetCount(0);
+
+
+                $entityManager->persist($newRetweet);
+                $entityManager->flush();
+
+                $tweet->incrementRetweetCount();
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Modifiez le contenu avant de valider !');
+            }
+
+            return $this->redirectToRoute('app_tweet_edit', ['id' => $newRetweet->getId()]);
         }
 
-        //Empêcher l'auto-retweet
-        if ($tweet->getIdUser() === $currentUser) {
-            $this->addFlash('warning', 'Vous ne pouvez pas retweeter vos propres messages.');
-            return $this->redirectToRoute('app_tweet_index');
-        }
-
-        if ($existingRetweet) {
-            $entityManager->remove($existingRetweet);
-            $tweet->decrementRetweetCount();
-            $this->addFlash('warning', 'Vous avez déjà retweeté ce message.');
-            return $this->redirectToRoute('app_tweet_index');
-        }
-
-
-        $newRetweet = new Tweet();
-        $newRetweet->setIdUser($currentUser);
-        $newRetweet->setContent($tweet->getContent());
-        $newRetweet->setCreationTime(new \DateTime());
-        $newRetweet->setOriginalTweet($tweet);
-        $newRetweet->setRetweetCount(0);
-
-
-        $entityManager->persist($newRetweet);
-
-
-        $tweet->incrementRetweetCount();
-
-
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Tweet retweeté avec succès !');
-
-        return $this->redirectToRoute('app_tweet_edit', ['id' => $newRetweet->getId()]);
-    }
 }
