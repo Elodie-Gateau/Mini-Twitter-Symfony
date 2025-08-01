@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints\File;
 
 class RegistrationFormType extends AbstractType
@@ -86,7 +87,7 @@ class RegistrationFormType extends AbstractType
 
             // CHAMP : ÂGE
 
-            ->add('age', null, [
+            ->add('age', NumberType::class, [
                 'attr' => ['class' => 'dark:bg-gray-400 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
                 'label' => 'Age :',
                 'label_attr' => ['class' => 'block text-gray-700 dark:text-white text-sm font-bold my-2'],
