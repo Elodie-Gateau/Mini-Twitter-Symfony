@@ -7,28 +7,42 @@
 {% endblock %}
 
 {% block body %}
-	<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mt-8 p-6 md:p-8">
-		<h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b-2 border-blue-200 pb-2">Détails du Tweet de
-			{{ tweet.idUser.name }}
+	<div class="max-w-4xl mx-auto bg-white dark:bg-gray-600 rounded-xl shadow-lg mt-8 p-6 md:p-8">
+
+		<h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6 border-b-2 border-orange-200 pb-2 flex gap-2">
 			{% if tweet.idUser.photo is not null %}
 				<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ tweet.idUser.photo) }}" alt="Photo de {{ tweet.idUser.name }}">
 			{% else %}
 				<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ tweet.idUser.name }}">
 			{% endif %}
+
+		Détails du Tweet de {{ tweet.idUser.name }}
+
 		</h2>
 
 
-		<div class="bg-blue-50 p-4 rounded-lg mb-4 border border-blue-200">
-			<p class="text-gray-800 mb-2 text-lg">{{ tweet.content }}</p>
-			<small class="text-gray-500 text-sm">Publié le
+		<div class="bg-orange-50 dark:bg-gray-400 p-4 rounded-lg mb-4 border border-orange-200">
+			<p class="text-gray-800 dark:text-white mb-2 text-lg p-3">{{ tweet.content }}</p>
+
+			<div class="flex justify-between">
+			<small class="text-gray-500 dark:text-gray-200 text-sm">Publié le
 				{{ tweet.creationTime|date('d/m/Y H:i') }}</small>
-			{% if tweet.retweetCount > 0 %}
-				<p class="text-gray-600 text-sm mt-2">{{ tweet.retweetCount }}
-					retweets</p>
-			{% endif %}
+
+			<div class="flex gap-2 text-grey-600 dark:text-white items-center">
+			{# Likes #}
+				<span id="like-count-{{ tweet.id }}" class=" font-semibold">{{ tweet.likes|length }}</span>
+				<i class="fa-solid fa-paw "></i>
+
+			{# Retweets #}
+				<span id="like-count-{{ tweet.id }}" class=" font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount }} {% else %} 0 {% endif %}</span>
+         		<i class="fa-solid fa-retweet "></i>
+				{# <p class="text-gray-600 text-sm mt-2">{{ tweet.retweetCount }}
+					retweets</p> #}
+			</div>
+			</div>
 		</div>
 		{# section medias #}
-		<h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4 border-b border-gray-200 pb-2">Photos</h3>
+		<h3 class="text-xl font-semibold text-gray-700 dark:text-white mt-8 mb-4 border-b border-gray-200 pb-2">Photos</h3>
 
 		<div class="flex w-100 justify-center gap-1 p-6 flex-wrap">
 			{% if tweet.media|length > 0 %}
@@ -41,25 +55,39 @@
 		</div>
 
 		{# section commentaires #}
-		<h3 class="text-xl font-semibold text-gray-700 mt-8 mb-4 border-b border-gray-200 pb-2">Commentaires</h3>
+		<h3 class="text-xl font-semibold text-gray-700 dark:text-white mt-8 mb-4 border-b border-gray-200 pb-2">Commentaires</h3>
 
 		{% if tweet.comment is not empty %}
 			{% for comment in tweet.comment %}
-				<div class="bg-gray-100 p- rounded-lg mb-3 border border-gray-200">
-					<p class="text-gray-700 mb-1">{{ comment.content }}</p>
-					<small class="text-gray-500 text-xs">
-						<div class="flex flex-col">
-							<h4 class="font-bold text-xl mb-1">{{ comment.user.nickname }}</h4>
+				<div class="bg-gray-100 dark:bg-gray-500 p- rounded-lg mb-3 border border-gray-200">
+					
+					<div class="text-gray-500 dark:text-white flex justify-between">
+				
+							<div class="flex gap-2 p-3">
+
 
 							{% if comment.user.photo is not null %}
-								<img class="w-10 h-10 rounded mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
+								<img class="w-10 h-10 rounded-full mr-2" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="Photo de {{ comment.user.name }}">
 							{% else %}
-								<img class="w-10 h-10 rounded mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
+								<img class="w-10 h-10 rounded-full mr-2" src="{{ asset('img/personne.png') }}" alt="Photo de {{ comment.user.name }}">
 							{% endif %}
-						</div>
-						Publié le
-						{{ comment.dateTime|date('d/m/Y H:i') }}
-					</small>
+
+							<h4 class="font-bold text-xl mb-1">{{ comment.user.nickname }}</h4>
+							</div>
+						<small class="p-2">Publié le
+						{{ comment.dateTime|date('d/m/Y H:i') }}</small>
+					</div>
+					
+
+								<div class="flex gap-2 text-grey-600 dark:text-white items-center justify-between p-2">
+								
+								<p class="text-gray-700 dark:text-white mb-1 p-3">{{ comment.content }}</p>
+			{# Likes #}
+			<div>
+				<span id="like-count-{{ comment.id }}">{{ comment.likes|length }}</span>
+				<i class="fa-solid fa-paw "></i>
+			</div>
+			</div>
 				</div>
 			{% endfor %}
 		{% else %}
@@ -68,17 +96,31 @@
 
 
 	</div>
-	<div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{ path('app_panel_admin')}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded cursor-pointer mt-2">Retour au panel Admin</a>
-		{% else %}
-			<a href="{{ path('app_profile_show', {'id': tweet.idUser.id}) }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded cursor-pointer mt-2">Retour au profil de {{ tweet.idUser.name }}</a>
+	<div>
+					{% if app.request.query.get('from') == 'profil_tweet' %}
+					<a href="{{ path('app_profile_show', {'id': app.user.id, 'section': 'tweets'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'profil_likes' %}
+					<a href="{{ path('app_profile_show', {'id': app.user.id, 'section': 'likes'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'admin_tweets' %}
+					<a href="{{ path('app_panel_admin', {'section': 'tweets'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'admin_reportedtweets' %}
+					<a href="{{ path('app_panel_admin', {'section': 'signalementsTweets'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'admin_comments' %}
+					<a href="{{ path('app_panel_admin', {'section': 'commentaires'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'admin_reportedcomments' %}
+					<a href="{{ path('app_panel_admin', {'section': 'signalementsComments'}) }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+				{% elseif app.request.query.get('from') == 'index_retweet' %}
+					<a href="{{ path('app_tweet_index') }}" class="text-lg font-bold dark:text-white bg-transparent hover:bg-orange-500 text-orange-700 font-semibold hover:text-white py-2 px-4 cursor-pointer mt-2"><i class="fa-solid fa-arrow-left"></i> Retour</i></a>
+				{% endif %}
+	</div>
 
-			<a href="{{ path('app_tweet_index') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded cursor-pointer mt-2">Retour à la liste</a>
+
+	<div class="max-w-4xl mx-auto mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+		
 			{% if app.user and tweet.idUser.id == app.user.id %}
 				<a href="{{ path('app_tweet_edit', {'id': tweet.id, 'from': 'show'}) }}" class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded cursor-pointer mt-2">Modifier</a>
 				{{ include('tweet/_delete_form.html.twig') }}
 			{% endif %}
-		{% endif %}
+
 	</div>
 {% endblock %}
