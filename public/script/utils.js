@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const reportedTweetId = this.dataset.reportedTweetId;
             const commentId = this.dataset.commentId; // Accède à data-tweet-id
             const reportedCommentId = this.dataset.reportedCommentId;
+            const deleteUserId = this.dataset.deleteUserId;
 
             // Personnalise le message de la modale en fonction des données disponibles
 
@@ -111,7 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 let message = `Êtes-vous sûr de vouloir supprimer le commentaire`;
                 message += ` ? Cette action est irréversible.`;
                 modalMessage.textContent = message;
-            } else {
+            } else if (deleteUserId) {
+                // Il s'agit d'une suppression de tweet normal (si vous avez un tel bouton ailleurs)
+                let message = `Êtes-vous sûr de vouloir supprimer le compte`;
+                // message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            }else {
                 // Message de secours si aucun ID spécifique n'est trouvé
                 modalMessage.textContent = `Êtes-vous sûr de vouloir supprimer ? Cette action est irréversible.`;
             }
@@ -139,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalReport = document.getElementById('reportConfirmationModal');
     const confirmReportBtn = document.getElementById('confirmReportBtn');
     const cancelReportBtn = document.getElementById('cancelReportBtn');
+    const modalTitleReport = document.getElementById('modalTitleReport');
     const modalMessageReport = document.getElementById('modalMessageReport');
     let formToSubmitReport = null;
 
@@ -148,28 +155,35 @@ document.addEventListener("DOMContentLoaded", () => {
             formToSubmitReport = this.closest('form'); // Récupère le formulaire parent
 
             // Récupérer les données du bouton cliqué
-            const reportedTweetId = this.dataset.reportedTweetId;
-            const reportedCommentId = this.dataset.reportedCommentId;
+            const reportTweetId = this.dataset.reportTweetId;
+            const reportCommentId = this.dataset.reportCommentId;
 
             // Personnalise le message de la modale en fonction des données disponibles
-            if (reportedTweetId) {
+            if (reportTweetId) {
                 // Il s'agit d'une suppression de tweet signalé
-                let message = `Êtes-vous sûr de vouloir dé-signaler ce tweet`;
+                let message = `Êtes-vous sûr de vouloir signaler ce tweet`;
+                 let title = 'Confirmer le signalement'
+                 let button = 'Signaler'
                 // if (tweetContent) {
                 // Si le contenu est disponible, l'ajoute au message
                 //     message += ` avec le contenu : "${tweetContent}"`;
                 // }
                 message += ` ? Cette action est irréversible.`;
                 modalMessageReport.textContent = message;
-            } else if (reportedCommentId) {
-                // Il s'agit d'une suppression de tweet signalé
-                let message = `Êtes-vous sûr de vouloir dé-signaler ce commentaire`;
+                modalTitleReport.textContent = title;
+                confirmReportBtn.textContent = button;
+            } else if (reportCommentId) {
+                 let message = `Êtes-vous sûr de vouloir signaler ce commentaire`;
+                 let title = 'Confirmer le signalement'
+                 let button = 'Signaler'
                 // if (tweetContent) {
                 // Si le contenu est disponible, l'ajoute au message
                 //     message += ` avec le contenu : "${tweetContent}"`;
                 // }
                 message += ` ? Cette action est irréversible.`;
                 modalMessageReport.textContent = message;
+                modalTitleReport.textContent = title;
+                confirmReportBtn.textContent = button;
             } else {
                 // Message de secours si aucun ID spécifique n'est trouvé
                 modalMessageReport.textContent = `Êtes-vous sûr de vouloir dé-signaler ? Cette action est irréversible.`;
@@ -190,6 +204,50 @@ document.addEventListener("DOMContentLoaded", () => {
         modalReport.classList.add('hidden'); // Masque la modale
         formToSubmitReport = null; // Efface la référence du formulaire
     });
+
+    // ---------------------------------------------
+    // LOGIQUE POUR LA MODALE DE DÉ-SIGNALEMENT (AVEC LIEN)
+    // ---------------------------------------------
+    const unreportLinkButtons = document.querySelectorAll('.unreport-link-button');
+    const unreportModal = document.getElementById('unreportConfirmationModal');
+    const confirmUnreportBtn = document.getElementById('confirmUnreportBtn');
+    const cancelUnreportBtn = document.getElementById('cancelUnreportBtn');
+    const unreportModalMessage = document.getElementById('unreportModalMessage');
+    let unreportUrlToRedirect = null; // Variable pour stocker l'URL du lien
+
+    unreportLinkButtons.forEach(link => { // Maintenant, on itère sur les liens <a>
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // TRÈS IMPORTANT : Empêche la redirection immédiate du lien
+
+            unreportUrlToRedirect = this.dataset.unreportUrl; // Récupère l'URL complète du lien
+            const unreportTweetId = this.dataset.unreportTweetId; // Récupère l'ID pour le message
+            const unreportCommentId = this.dataset.unreportCommentId; // Récupère l'ID pour le message
+
+            if (unreportTweetId) {
+            let message = `Êtes-vous sûr de vouloir retirer le signalement du tweet ?`;
+            unreportModalMessage.textContent = message;
+            }else if (unreportCommentId) {
+             let message = `Êtes-vous sûr de vouloir retirer le signalement du commentaire ?`;
+            unreportModalMessage.textContent = message;
+            }else{   
+            unreportModalMessage.textContent = `Êtes-vous sûr de vouloir dé-signaler ?`;          
+            }
+            unreportModal.classList.remove('hidden'); // Affiche la modale de dé-signalement
+        });
+    });
+
+    confirmUnreportBtn.addEventListener('click', function () {
+        if (unreportUrlToRedirect) {
+            window.location.href = unreportUrlToRedirect; // Redirige vers l'URL du lien
+        }
+        unreportModal.classList.add('hidden');
+    });
+
+    cancelUnreportBtn.addEventListener('click', function () {
+        unreportModal.classList.add('hidden');
+        unreportUrlToRedirect = null; // Efface l'URL
+    });
+
 });
 
 

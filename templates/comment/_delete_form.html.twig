@@ -1,4 +1,6 @@
-<form method="post" class="delete-comment-form" data-comment-id="{{ comment.id }}" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');">
+<form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" class="delete-tweet-form">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-    <button class="cursor-pointer text-gray-700 dark:text-white"><i class="fa-solid fa-trash"></i></button>
+    <button class="text-orange-500 dark:text-white font-medium hover:underline cursor-pointer delete-tweet-button"
+    data-comment-id="{{ comment.id }}"
+    ><i class="fa-solid fa-trash"></i></button>
 </form>
