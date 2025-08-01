@@ -15,11 +15,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
-
-
-
+#[IsGranted('ROLE_USER')]
 #[Route('/comment')]
 final class CommentController extends AbstractController
 {
@@ -137,15 +135,16 @@ final class CommentController extends AbstractController
 
         // Création du commentaire
         $comment = new Comment();
-        $comment->setTweet($tweet);
-        $comment->setUser($security->getUser());
-        $comment->setDateTime(new \DateTime());
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         // Si formulaire valide
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $comment->setTweet($tweet);
+            $comment->setUser($security->getUser());
+            $comment->setDateTime(new \DateTime());
+            
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -205,38 +204,44 @@ final class CommentController extends AbstractController
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        $tweet = $comment->getTweet();
+        if ($security->getUser() == $comment->getUser()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+            $tweet = $comment->getTweet();
 
-            $imageFile = $form->get('media')->getData();
-
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('images_directory'),
-                    $newFilename
-                );
-                $media = new Media;
-                $media->setUrlMedia('/uploads/images/' . $newFilename);
-                $media->setComment($comment);
-
-                $entityManager->persist($media);
+            if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
-                $comment->addMedium($media);
+
+                $imageFile = $form->get('media')->getData();
+
+                if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                    $media = new Media;
+                    $media->setUrlMedia('/uploads/images/' . $newFilename);
+                    $media->setComment($comment);
+
+                    $entityManager->persist($media);
+                    $entityManager->flush();
+                    $comment->addMedium($media);
+                }
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_tweet_comments_index', [
+                    'id' => $tweet->getId(),
+                    'page' => 1
+                ]);
             }
-
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_tweet_comments_index', [
-                'id' => $tweet->getId(),
-                'page' => 1
-            ]);
+        } else {
+            $this->addFlash('danger', "Vous n'avez pas le droit de consulter ou de modifier cette page");
+            return $this->redirectToRoute('app_tweet_index');
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -249,11 +254,11 @@ final class CommentController extends AbstractController
     // SUPPRIMER UN COMMENTAIRE
 
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
+    public function delete(Request $request, Security $security, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
     {
         $tweet = $comment->getTweet();
 
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+        if ($security->isGranted('ROLE_ADMIN') || $security->getUser() == $tweet->getIdUser() && $this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
 
@@ -261,9 +266,9 @@ final class CommentController extends AbstractController
         }
 
         return $this->redirectToRoute('app_tweet_comments_index', [
-                'id' => $tweet->getId(),
-                'page' => 1
-            ]);
+            'id' => $tweet->getId(),
+            'page' => 1
+        ]);
     }
 
 
@@ -272,7 +277,6 @@ final class CommentController extends AbstractController
     #[Route('/{id}/signal', name: 'app_comment_signalComment', methods: ['POST'])]
     public function signalComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
-
 
         if ($this->isCsrfTokenValid('signalComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
 
