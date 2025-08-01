@@ -55,8 +55,8 @@ final class TweetController extends AbstractController
     #[Route('/{id}/comment', name: 'app_tweet_index_comment', methods: ['GET', 'POST'])]
     public function index_comment(int $id, TweetRepository $tweetRepository, Request $request, EntityManagerInterface $em): Response
     {
-        
-    // $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
+
+        // $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
         $selectedTweet = $tweetRepository->find($id);
 
         $comment = new Comment();
@@ -205,9 +205,9 @@ final class TweetController extends AbstractController
     // SUPPRIMER UN TWEET
 
     #[Route('/{id}', name: 'app_tweet_delete', methods: ['POST'])]
-    public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Security $security, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+        if ($security->isGranted('ROLE_ADMIN') || $security->getUser() == $tweet->getIdUser() && $this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
             if ($tweet->getOriginalTweet()) {
                 $originalTweet = $tweet->getOriginalTweet();
                 $originalTweet->decrementRetweetCount();
@@ -215,10 +215,13 @@ final class TweetController extends AbstractController
 
             $entityManager->remove($tweet);
             $entityManager->flush();
-        }
 
-        $this->addFlash('success', 'Ce tweet a bien été supprimé !');
-        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Ce tweet a bien été supprimé !');
+            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash('danger', 'Un problème de sécurité empêche la suppression de ce tweet');
+            return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
 
@@ -243,7 +246,7 @@ final class TweetController extends AbstractController
 
 
     // RETWEET
-    
+
     #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
 
     public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response

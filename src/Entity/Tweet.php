@@ -28,15 +28,6 @@ class Tweet
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idUser = null;
 
-    #[Assert\NotBlank(message: 'Vous devez écrire du texte')]
-    #[Assert\Length(
-        min: 1,
-        max: 280,
-        minMessage: 'Le champ doit contenir au moins {{ limit }} caractères',
-        maxMessage: 'Le champ ne peut pas dépasser {{ limit }} caractères',
-        normalizer: 'trim'
-    )]
-
     /**
      * @var Collection<int, Media>
      */
@@ -58,8 +49,8 @@ class Tweet
     #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'tweet')]
     private Collection $likes;
 
-
-    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist', 'remove'])]
+   
+    #[ORM\ManyToOne(targetEntity: self::class)]
     #[ORM\JoinColumn(nullable: true)]
     private ?self $originalTweet = null;
 
@@ -216,7 +207,7 @@ class Tweet
         return $this;
     }
 
-    public function getOriginalTweet(): ?self
+     public function getOriginalTweet(): ?self
     {
         return $this->originalTweet;
     }

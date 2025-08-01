@@ -5,13 +5,13 @@
 
 {% block body %}
 	<div class="flex justify-center py-8">
-		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-			<h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
+		<div class="bg-white dark:bg-gray-500 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<h1 class="h3 mb-5 font-bold dark:text-white">S'inscrire</h1>
 
 			{{ form_errors(registrationForm) }}
 
 			{{ form_start(registrationForm) }}
-			<div class="block text-gray-700 text-sm font-bold mb-2">
+			<div class="block text-gray-700 !dark:text-white text-sm font-bold mb-2">
 
 				{{ form_row(registrationForm.photo) }}
 
@@ -89,7 +89,7 @@
 				{% endif %}
 
 				<div class="flex justify-center mt-4">
-					<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
+					<button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
 				</div>
 				{{ form_end(registrationForm) }}
 			</div>

@@ -135,15 +135,16 @@ final class CommentController extends AbstractController
 
         // Création du commentaire
         $comment = new Comment();
-        $comment->setTweet($tweet);
-        $comment->setUser($security->getUser());
-        $comment->setDateTime(new \DateTime());
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         // Si formulaire valide
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $comment->setTweet($tweet);
+            $comment->setUser($security->getUser());
+            $comment->setDateTime(new \DateTime());
+            
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -253,11 +254,11 @@ final class CommentController extends AbstractController
     // SUPPRIMER UN COMMENTAIRE
 
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
+    public function delete(Request $request, Security $security, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
     {
         $tweet = $comment->getTweet();
 
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+        if ($security->isGranted('ROLE_ADMIN') || $security->getUser() == $tweet->getIdUser() && $this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
 
