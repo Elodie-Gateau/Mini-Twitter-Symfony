@@ -134,17 +134,17 @@
 							{# Likes #}
 							{{ include('tweet/_like_form.html.twig') }}
 
-            {# Retweeter #}
-            {% if app.user and tweet.idUser.id != app.user.id %}
-              <form action="{{ path('app_tweet_retweet', {'id': tweet.id}) }}" method="post">
-                <button type="submit" 
-                  class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
-                  <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount }} {% else %} 0 {% endif %}</span>
-                  <i class="fa-solid fa-retweet text-lg"></i>
-                </button>
-              </form>
-            {% endif %}
-          </div>
+         		  	{# Retweeter #}
+         		  	{% if app.user and tweet.idUser.id != app.user.id %}
+         		  	  	<form action="{{ path('app_tweet_retweet', {'id': tweet.id}) }}" method="post">
+         		  	  	 	<button type="submit" 
+         		  	  	 	  	class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+         		  	  	 	  	<span id="like-count-{{ tweet.id }}" class="text-lg font-semibold"> {% if tweet.retweetCount %} {{ tweet.retweetCount }} {% else %} 0 {% endif %}</span>
+         		  	  	 	  	<i class="fa-solid fa-retweet text-lg"></i>
+         		  	  	 	</button>
+         		  	  	</form>
+         		  	{% endif %}
+         		</div>
 
 						{# Commentaires #}
 
