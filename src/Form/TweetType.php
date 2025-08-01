@@ -3,17 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Tweet;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TweetType extends AbstractType
 {
@@ -24,18 +19,6 @@ class TweetType extends AbstractType
                 'label' => 'Message (280 caractères max.)',
                 'attr' => [
                     'rows' => 5,
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez écrire du texte',
-                    ]),
-                    new Length([
-                        'min' => 1,
-                        'max' => 280,
-                        'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
-                        'maxMessage' => 'Le champ ne peut pas dépasser {{ limit }} caractères',
-                        'normalizer' => 'trim',
-                    ]),
                 ],
             ])
             ->add('media', FileType::class, [

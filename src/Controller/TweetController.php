@@ -8,7 +8,6 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\TweetType;
 use App\Repository\TweetRepository;
-use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
-
-
-// TRI DES TWEETS PAR PAGINATION
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/tweet')]
+#[IsGranted('ROLE_USER')]
 final class TweetController extends AbstractController
 {
+
+    // TRI DES TWEETS PAR PAGINATION
     #[Route(name: 'app_tweet_index', methods: ['GET'])]
     public function index(TweetRepository $tweetRepository, Request $request): Response
     {
@@ -55,7 +55,8 @@ final class TweetController extends AbstractController
     #[Route('/{id}/comment', name: 'app_tweet_index_comment', methods: ['GET', 'POST'])]
     public function index_comment(int $id, TweetRepository $tweetRepository, Request $request, EntityManagerInterface $em): Response
     {
-        // $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
+        
+    // $tweets = $tweetRepository->findBy([], ['creationTime' => 'DESC']);
         $selectedTweet = $tweetRepository->find($id);
 
         $comment = new Comment();
@@ -127,6 +128,7 @@ final class TweetController extends AbstractController
 
             $entityManager->flush();
 
+            $this->addFlash('success', 'Ce tweet a bien été ajouté !');
             return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -153,8 +155,6 @@ final class TweetController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tweet_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tweet $tweet, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-
-        dump($tweet->getIdUser());
 
         if ($security->getUser() == $tweet->getIdUser()) {
 
@@ -187,6 +187,7 @@ final class TweetController extends AbstractController
 
                 $entityManager->flush();
 
+                $this->addFlash('success', 'Ce tweet a bien été modifié !');
                 return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
             }
 
@@ -207,7 +208,6 @@ final class TweetController extends AbstractController
     public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
-            
             if ($tweet->getOriginalTweet()) {
                 $originalTweet = $tweet->getOriginalTweet();
                 $originalTweet->decrementRetweetCount();
@@ -217,6 +217,7 @@ final class TweetController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Ce tweet a bien été supprimé !');
         return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -242,7 +243,7 @@ final class TweetController extends AbstractController
 
 
     // RETWEET
-
+    
     #[Route('/{id}/retweet', name: 'app_tweet_retweet', methods: ['POST'])]
 
     public function retweet(Tweet $tweet, EntityManagerInterface $entityManager, TweetRepository $tweetRepository, Security $security): Response

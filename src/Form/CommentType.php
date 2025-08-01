@@ -10,8 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -27,18 +25,6 @@ class CommentType extends AbstractType
                 'attr' => ['hidden' => true],
             ])
             ->add('content', TextareaType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez écrire du texte',
-                    ]),
-                    new Length([
-                        'min' => 1,
-                        'max' => 280,
-                        'minMessage' => 'Le champ doit contenir au moins {{ limit }} caractères',
-                        'maxMessage' => 'Le champ ne peut pas dépasser {{ limit }} caractères',
-                        'normalizer' => 'trim',
-                    ]),
-                ],
                 'attr' => [
                     'class' => "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500",
                 ],

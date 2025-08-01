@@ -15,11 +15,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
-
-
-
+#[IsGranted('ROLE_USER')]
 #[Route('/comment')]
 final class CommentController extends AbstractController
 {
@@ -205,38 +203,44 @@ final class CommentController extends AbstractController
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        $tweet = $comment->getTweet();
+        if ($security->getUser() == $comment->getUser()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+            $tweet = $comment->getTweet();
 
-            $imageFile = $form->get('media')->getData();
-
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('images_directory'),
-                    $newFilename
-                );
-                $media = new Media;
-                $media->setUrlMedia('/uploads/images/' . $newFilename);
-                $media->setComment($comment);
-
-                $entityManager->persist($media);
+            if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
-                $comment->addMedium($media);
+
+                $imageFile = $form->get('media')->getData();
+
+                if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                    $media = new Media;
+                    $media->setUrlMedia('/uploads/images/' . $newFilename);
+                    $media->setComment($comment);
+
+                    $entityManager->persist($media);
+                    $entityManager->flush();
+                    $comment->addMedium($media);
+                }
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_tweet_comments_index', [
+                    'id' => $tweet->getId(),
+                    'page' => 1
+                ]);
             }
-
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_tweet_comments_index', [
-                'id' => $tweet->getId(),
-                'page' => 1
-            ]);
+        } else {
+            $this->addFlash('danger', "Vous n'avez pas accès à cette page");
+            return $this->redirectToRoute('app_tweet_index');
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -261,9 +265,9 @@ final class CommentController extends AbstractController
         }
 
         return $this->redirectToRoute('app_tweet_comments_index', [
-                'id' => $tweet->getId(),
-                'page' => 1
-            ]);
+            'id' => $tweet->getId(),
+            'page' => 1
+        ]);
     }
 
 

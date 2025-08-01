@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,6 +31,15 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[Assert\NotBlank(message: 'Vous devez écrire du texte')]
+    #[Assert\Length(
+        min: 1,
+        max: 280,
+        minMessage: 'Le champ doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le champ ne peut pas dépasser {{ limit }} caractères',
+        normalizer: 'trim'
+    )]
+
     /**
      * @var Collection<int, Media>
      */
@@ -47,9 +57,12 @@ class Comment
     /**
      * @var Collection<int, Like>
      */
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'comment',
+    #[ORM\OneToMany(
+        targetEntity: Like::class,
+        mappedBy: 'comment',
         cascade: ['persist', 'remove'],
-        orphanRemoval: true)]
+        orphanRemoval: true
+    )]
     private Collection $likes;
 
     public function __construct()
