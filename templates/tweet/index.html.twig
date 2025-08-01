@@ -77,7 +77,7 @@
 					{# Retweet avec commentaire #}
 					{% if tweet.originalTweet and tweet.content %}
 						<p>
-							<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-gray-700 dark:text-gray-300">
+							<a href="{{ path('app_tweet_show', {'id': tweet.id, 'from':'index_retweet'}) }}" class="text-gray-700 dark:text-gray-300">
 								{{ tweet.content }}
 							</a>
 						</p>
@@ -92,7 +92,7 @@
 								a retweeté :
 							</p>
 							<div class="bg-white dark:bg-slate-600 p-3 rounded border border-gray-200">
-								<a href="{{ path('app_tweet_show', {'id': tweet.originalTweet.id}) }}" class="text-gray-700 dark:text-gray-200">
+								<a href="{{ path('app_tweet_show', {'id': tweet.originalTweet.id, 'from':'index_retweet'}) }}" class="text-gray-700 dark:text-gray-200">
 									{{ tweet.originalTweet.content }}
 								</a>
 								<small class="block text-xs text-gray-500 dark:text-gray-300 mt-2">
@@ -105,7 +105,7 @@
 						</div>
 					{% else %}
 						<p>
-							<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-gray-700 dark:text-gray-300">
+							<a href="{{ path('app_tweet_show', {'id': tweet.id, 'from':'index_retweet'}) }}" class="text-gray-700 dark:text-gray-300">
 								{{ tweet.content }}
 							</a>
 						</p>
@@ -255,7 +255,7 @@
 					{% endif %}
 
 					{% for p in 1..totalPages %}
-						<a href="{{ path('app_tweet_index', {'page': p}) }}" class="px-3 py-1 rounded {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
+						<a href="{{ path('app_tweet_index', {'page': p}) }}" class="px-3 py-1 rounded flex items-center justify-center {{ p == currentPage ? 'bg-orange-500 text-white' : 'bg-gray-200' }}">
 							{{ p }}
 						</a>
 					{% endfor %}
@@ -270,19 +270,19 @@
 			{% if commentTotalPages is defined and commentTotalPages > 1 %}
 				<div class="flex justify-center mt-6 gap-2">
 					{% if commentCurrentPage > 1 %}
-						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage - 1}) }}" class="px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition">
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage - 1}) }}" class="px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition flex items-center justify-center">
 							← Précédent
 						</a>
 					{% endif %}
 
 					{% for p in 1..commentTotalPages %}
-						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': p}) }}" class="px-3 py-1 rounded-full text-sm font-medium transition {{ p == commentCurrentPage ? 'bg-orange-500 text-white' : 'bg-gray-100 hover:bg-gray-200' }}">
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': p}) }}" class="px-3 py-1 rounded-full text-sm font-medium transition flex items-center justify-center {{ p == commentCurrentPage ? 'bg-orange-500 text-white' : 'bg-gray-100 hover:bg-gray-200' }}">
 							{{ p }}
 						</a>
 					{% endfor %}
 
 					{% if commentCurrentPage < commentTotalPages %}
-						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage + 1}) }}" class="px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition">
+						<a href="{{ path('app_tweet_comments_index', {'id': selectedTweet.id, 'page': commentCurrentPage + 1}) }}" class="px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition flex items-center justify-center">
 							Suivant →
 						</a>
 					{% endif %}
