@@ -1,4 +1,6 @@
-<form method="post" action="{{ path('app_comment_signalComment', {'id': comment.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir signaler ce commentaire ?');">
+<form method="post" action="{{ path('app_comment_signalComment', {'id': comment.id}) }}" class="delete-tweet-form">
     <input type="hidden" name="_token" value="{{ csrf_token('signalComment' ~ comment.id) }}">
-    <button class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">Signaler</button>
+    <button class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out report-button"
+    data-report-comment-id="{{ comment.id }}"
+    >Signaler</button>
 </form>
