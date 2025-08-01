@@ -41,7 +41,7 @@ class TweetType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '5M',
+                        'maxSize' => '5000k',
                         'maxSizeMessage' => "L'image ne peut pas dépasser {{ limit }} Mo",
                         'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'video/mp4'],
                         'mimeTypesMessage' => 'Veuillez choisir un fichier de format jpg, jpeg, png, webp, gif ou mp4',
