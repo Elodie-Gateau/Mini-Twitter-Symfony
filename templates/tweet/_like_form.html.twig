@@ -1,6 +1,6 @@
 <form method="post" action="{{ path('app_tweet_like', {'id': tweet.id}) }}" class="like-form">
     <input type="hidden" name="_token" value="{{ csrf_token('likeTweet' ~ tweet.id) }}">
-    <button type="submit" class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
+    <button type="submit" class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">
         <span id="like-count-{{ tweet.id }}" class="text-lg font-semibold">{{ tweet.likes|length }}</span> <i class="fa-solid fa-paw text-lg"></i>
     </button>
 </form>

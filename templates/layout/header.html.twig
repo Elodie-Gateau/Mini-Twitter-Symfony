@@ -1,4 +1,4 @@
-<header class="z-50 h-14 fixed top-0 left-0 w-full flex items-center dark:bg-gray-900 bg-white border-b dark:border-gray-700 border-gray-200 px-4 transition-colors duration-300">
+<header class="z-50 h-14 fixed top-0 left-0 w-full flex items-center dark:bg-gray-600 bg-white border-b dark:border-gray-700 border-gray-200 px-4 transition-colors duration-300">
 
   <!-- Logo -->
   <div class="flex items-center gap-2">
@@ -24,7 +24,10 @@
       <button class="flex items-center gap-2 focus:outline-none">
         <img src="{{ app.user.photo ? asset('uploads/photos/' ~ app.user.photo) : asset('img/personne.png') }}"
              alt="Profil"
-             class="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-600 shadow cursor-pointer">
+             class="dark:hidden h-12 rounded-full border border-gray-300 dark:border-gray-600 shadow cursor-pointer">
+        <img src="{{ app.user.photo ? asset('uploads/photos/' ~ app.user.photo) : asset('img/personne-dark.png') }}"
+             alt="Profil"
+             class="hidden dark:block h-12 rounded-full border border-gray-300 dark:border-gray-600 shadow cursor-pointer">
       </button>
 
       <!-- Dropdown -->
