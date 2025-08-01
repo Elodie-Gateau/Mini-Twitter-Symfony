@@ -1,38 +1,52 @@
 // AJAX => LIKER SANS RECHARGER LA PAGE
 
 document.addEventListener("DOMContentLoaded", () => {
-    const likeSound = new Audio('../audio/chien.wav'); // Remplacez par le vrai chemin de votre fichier audio
 
-    document.querySelectorAll(".like-form").forEach((form) => {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+    const likeSound = new Audio('/audio/chien.wav');
 
-            const formData = new FormData(form);
-            fetch(form.action, {
+    const handleLike = async (form) => {
+        // Crée un objet FormData à partir du formulaire pour envoyer les données.
+        const formData = new FormData(form);
+
+        // Récupère le type d'entité ('tweet' ou 'comment') et son ID depuis les attributs de données du formulaire.
+        const type = form.dataset.type;
+        const id = form.dataset.id;
+
+        try {
+            // Envoie une requête POST au serveur sans recharger la page.
+            const res = await fetch(form.action, {
                 method: "POST",
                 body: formData,
                 headers: { "X-Requested-With": "XMLHttpRequest" },
-            })
-                .then((res) => {
-                    if (!res.ok) throw new Error("Erreur serveur");
-                    return res.json();
-                })
-                .then((data) => {
-                    const counter = document.querySelector(
-                        `#like-count-${data.tweetId}`
-                    );
-                    if (counter) {
-                        counter.textContent = data.likes;
-                    }
+            });
 
-                    likeSound.play().catch(error => {
-                        // Gérer les erreurs de lecture (ex: l'utilisateur n'a pas encore interagi avec la page)
-                        console.warn("Impossible de jouer le son:", error);
-                    });
-                })
-                .catch(() => {
-                    alert("Une erreur est survenue lors du like.");
-                });
+            if (!res.ok) {
+                throw new Error("Erreur serveur");
+            }
+
+            const data = await res.json();
+
+            const counter = document.querySelector(`#like-count-${id}`);
+
+            if (counter) {
+                counter.textContent = data.likes;
+            }
+
+            likeSound.play().catch(error => {
+                console.warn("Impossible de jouer le son:", error);
+            });
+
+        } catch (error) {
+            // Ce bloc gère toutes les erreurs, qu'elles proviennent de la requête fetch ou d'autres opérations.
+            alert("Une erreur est survenue lors du like.");
+            console.error("Erreur lors du like:", error);
+        }
+    };
+
+    document.querySelectorAll('.like-form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleLike(form);
         });
     });
 
