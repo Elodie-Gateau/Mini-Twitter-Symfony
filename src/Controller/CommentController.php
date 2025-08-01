@@ -239,7 +239,7 @@ final class CommentController extends AbstractController
                 ]);
             }
         } else {
-            $this->addFlash('danger', "Vous n'avez pas accès à cette page");
+            $this->addFlash('danger', "Vous n'avez pas le droit de consulter ou de modifier cette page");
             return $this->redirectToRoute('app_tweet_index');
         }
 
@@ -276,7 +276,6 @@ final class CommentController extends AbstractController
     #[Route('/{id}/signal', name: 'app_comment_signalComment', methods: ['POST'])]
     public function signalComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
-
 
         if ($this->isCsrfTokenValid('signalComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
 
