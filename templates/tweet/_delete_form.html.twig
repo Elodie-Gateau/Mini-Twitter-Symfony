@@ -1,4 +1,6 @@
-<form method="post" action="{{ path('app_tweet_delete', {'id': tweet.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?');">
+<form method="post" action="{{ path('app_tweet_delete', {'id': tweet.id}) }}" class="delete-tweet-form">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tweet.id) }}">
-    <button class="text-orange-500 dark:text-white font-medium hover:underline cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+    <button class="text-orange-500 dark:text-white font-medium hover:underline cursor-pointer delete-tweet-button"
+    data-tweet-id="{{ tweet.id }}"
+    ><i class="fa-solid fa-trash"></i></button>
 </form>
