@@ -33,11 +33,31 @@ darkMode: 'media' // ou 'class'
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> {% block stylesheets %}{% endblock %}
 		</head>
 
-		<body class="dark:bg-gray-900 bg-gray-50 transition-colors duration-300">
-			{% block header %}
-				{% include 'layout/header.html.twig' %}
-			{% endblock %}
+  		<body class="dark:bg-gray-700 bg-gray-50 transition-colors duration-300">
+  		  {% block header %}
+  		    {% include 'layout/header.html.twig' %}
+  		  {% endblock %}
+		
+  		    {% block flash %}
+  		      <div class="flex mt-25 justify-center">
+  		        {% for label, messages in app.flashes %}
+  		          {% for message in messages %}
+  		            <div class="px-4 py-2 rounded text-sm
+  		              {% if label == 'danger' %}bg-red-100 text-red-800
+  		              {% elseif label == 'success' %}bg-green-100 text-green-800
+  		              {% elseif label == 'info' %}bg-blue-100 text-blue-800
+  		              {% elseif label == 'warning' %}bg-yellow-100 text-yellow-800
+  		              {% else %}bg-gray-100 text-gray-800{% endif %}">
+  		              {{ message }}
+  		            </div>
+  		          {% endfor %}
+  		        {% endfor %}
+  		      </div>
+  		    {% endblock %}
 
+
+<<<<<<< HEAD
+=======
 			{% block flash %}
 				<div class="flex mt-15 justify-center">
 					{% for label, messages in app.flashes %}
@@ -54,6 +74,7 @@ darkMode: 'media' // ou 'class'
 					{% endfor %}
 				</div>
 			{% endblock %}
+>>>>>>> c352960018f692d0bcabec5da0b2a8116cc32db2
 			{# FENETRE MODALE SUPPRESSION #}
 			<div id="deleteConfirmationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
 				<div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">

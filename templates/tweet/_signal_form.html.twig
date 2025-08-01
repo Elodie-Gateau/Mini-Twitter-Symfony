@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_tweet_signalTweet', {'id': tweet.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir signaler ce message ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('signalTweet' ~ tweet.id) }}">
-    <button class="text-red-600 font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">Signaler</button>
+    <button class="text-red-600 dark:text-white font-medium cursor-pointer hover:text-red-400 duration-200 ease-in-out">Signaler</button>
 </form>
