@@ -346,7 +346,7 @@
 																class="p-3 text-end">
 																{# Add action buttons here, e.g., view, edit, delete #}
 																<div class="inline-flex items-center gap-2">
-																	<a href="{{ path('app_tweet_show', {'id': tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	<a href="{{ path('app_tweet_show', {'id': tweet.id, 'from' : 'admin_tweets'}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<form action="{{ path('app_admin_tweet_delete', {'id': tweet.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tweet.id) }}">
 																		<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium delete-tweet-button" data-tweet-id="{{ tweet.id }}">Supprimer</button>
@@ -422,7 +422,7 @@
 															<td class="p-3 text-slate-600">{{ reportedTweet.creationTime|date('d/m/Y H:i') }}</td>
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
-																	<a href="{{ path('app_tweet_show', {'id': reportedTweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	<a href="{{ path('app_tweet_show', {'id': reportedTweet.id, 'from' : 'admin_reportedtweets'}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<a href="{{ path('app_tweet_unreport', {'id': reportedTweet.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium unreport-link-button"
 																	data-unreport-url="{{ path('app_tweet_unreport', {'id': reportedTweet.id}) }}"
 																	data-unreport-tweet-id="{{ reportedTweet.id }}"
@@ -512,7 +512,7 @@
 															</td>
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
-																	<a href="{{ path('app_tweet_show', {'id': comment.tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	<a href="{{ path('app_tweet_show', {'id': comment.tweet.id, 'from' : 'admin_comments'}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<form action="{{ path('app_admin_comment_delete', {'id': comment.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
 																		<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium delete-tweet-button" data-comment-id="{{ comment.id }}">Supprimer</button>
@@ -588,11 +588,16 @@
 															<td class="p-3 text-slate-600">{{ reportedComment.dateTime|date('d/m/Y H:i') }}</td>
 															<td class="p-3 text-end">
 																<div class="inline-flex items-center gap-2">
+<<<<<<< HEAD
+																	<a href="{{ path('app_tweet_show', {'id': reportedComment.tweet.id, 'from' : 'admin_reportedcomments'}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
+																	<a href="{{ path('app_comment_unreport', {'id': reportedComment.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium" onclick="return confirm('Êtes-vous sûr de vouloir retirer le signalement de ce tweet ?');">Dé-signaler</a>
+=======
 																	<a href="{{ path('app_tweet_show', {'id': reportedComment.tweet.id}) }}" class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<a href="{{ path('app_comment_unreport', {'id': reportedComment.id}) }}" class="text-green-600 hover:text-green-900 text-sm font-medium unreport-link-button"
 																	data-unreport-url="{{ path('app_comment_unreport', {'id': reportedComment.id}) }}"
 																	data-unreport-comment-id="{{ reportedComment.id }}"
 																	>Dé-signaler</a>
+>>>>>>> d0afe1786ad8149352f3124e6e3d3c6d7b502894
 																	<form action="{{ path('app_admin_comment_delete', {'id': reportedComment.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedComment.id) }}">
 																		<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium delete-tweet-button" data-reported-comment-id="{{ reportedComment.id }}">Supprimer</button>
