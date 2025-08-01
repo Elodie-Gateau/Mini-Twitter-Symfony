@@ -37,7 +37,7 @@ class Tweet
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet')]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet', cascade: ['persist', 'remove'])]
     private Collection $comment;
 
     #[ORM\Column]
