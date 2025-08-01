@@ -37,7 +37,7 @@ class Tweet
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet')]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet', cascade: ['persist', 'remove'])]
     private Collection $comment;
 
     #[ORM\Column]
@@ -50,7 +50,7 @@ class Tweet
     private Collection $likes;
 
    
-    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\ManyToOne(targetEntity: self::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?self $originalTweet = null;
 

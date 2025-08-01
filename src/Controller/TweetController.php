@@ -207,6 +207,7 @@ final class TweetController extends AbstractController
     public function delete(Request $request, Tweet $tweet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $tweet->getId(), $request->getPayload()->getString('_token'))) {
+            
             if ($tweet->getOriginalTweet()) {
                 $originalTweet = $tweet->getOriginalTweet();
                 $originalTweet->decrementRetweetCount();
