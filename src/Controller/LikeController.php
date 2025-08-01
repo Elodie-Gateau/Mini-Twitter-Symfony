@@ -82,9 +82,14 @@ final class LikeController extends AbstractController
 
             $em->flush();
         }
-        return $this->redirectToRoute('app_tweet_comments_index', [
-                'id' => $tweet->getId(),
-                'page' => 1
+        // 👉 Si la requête est AJAX, on renvoie JSON
+        if ($request->isXmlHttpRequest()) {
+            return $this->json([
+                'tweetId' => $comment->getId(),
+                'likes' => count($comment->getLikes())
             ]);
+        }
+         // Sinon fallback (navigation normale)
+        return $this->redirectToRoute('app_tweet_index');
     }
 }
