@@ -143,6 +143,25 @@ class RegistrationFormType extends AbstractType
                 'label_attr' => ['class' => 'block text-gray-700 dark:text-white text-sm font-bold my-2']
             ])
 
+            // CHAMP : PHOTO DE PROFIL
+
+            ->add('photo', FileType::class, [
+                'label' => 'Photo de profil',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5000k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Image trop lourde',
+                    ])
+                ],
+                'attr' => ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-white leading-tight focus:outline-none focus:shadow-outline'],
+                'label_attr' => ['class' => 'block text-gray-700 dark:text-white  text-sm font-bold my-2']
+            ])
+
 
 
             // CHAMP : ACCEPTER LES CONDITIONS D'UTILISATION
@@ -155,7 +174,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
                 'label' => 'Accepter les conditions : ',
-                'label_attr' => ['class' => 'inline-flex items-center text-gray-700 dark:text-white dark:bg-gray-400 text-sm font-bold my-2 cursor-pointer'],
+                'label_attr' => ['class' => 'inline-flex items-center text-gray-700 dark:text-white  text-sm font-bold my-2 cursor-pointer'],
                 'row_attr' => ['class' => 'flex items-center'],
                 'label_html' => true,
                 'attr' => ['class' => 'ml-2'],
