@@ -23,7 +23,7 @@ class Comment
     private ?\DateTime $dateTime = null;
 
     #[ORM\ManyToOne(inversedBy: 'comment')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Tweet $tweet = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const formData = new FormData(form);        
+            const formData = new FormData(form);
             fetch(form.action, {
                 method: "POST",
                 body: formData,
@@ -24,18 +24,162 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (counter) {
                         counter.textContent = data.likes;
                     }
-            
-                likeSound.play().catch(error => {
-                    // Gérer les erreurs de lecture (ex: l'utilisateur n'a pas encore interagi avec la page)
-                    console.warn("Impossible de jouer le son:", error);
-                });
+
+                    likeSound.play().catch(error => {
+                        // Gérer les erreurs de lecture (ex: l'utilisateur n'a pas encore interagi avec la page)
+                        console.warn("Impossible de jouer le son:", error);
+                    });
                 })
                 .catch(() => {
                     alert("Une erreur est survenue lors du like.");
                 });
         });
     });
+
+    // // ---------------------------------------------
+    // FENETRE MODALE DE SUPPRESSION
+    // // ---------------------------------------------
+    const deleteButtons = document.querySelectorAll('.delete-tweet-button'); // Ajoutez une classe à votre bouton de suppression
+    const modal = document.getElementById('deleteConfirmationModal');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+    const modalMessage = document.getElementById('modalMessage');
+    let formToSubmit = null;
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault(); // Empêche la soumission de formulaire par défaut
+            formToSubmit = this.closest('form'); // Récupère le formulaire parent
+
+            // Récupérer les données du bouton cliqué
+            const userId = this.dataset.userId; // Accède à data-tweet-id
+            const tweetId = this.dataset.tweetId; // Accède à data-tweet-id
+            const reportedTweetId = this.dataset.reportedTweetId;
+            const commentId = this.dataset.commentId; // Accède à data-tweet-id
+            const reportedCommentId = this.dataset.reportedCommentId;
+
+            // Personnalise le message de la modale en fonction des données disponibles
+
+            if (userId) {
+                // Il s'agit d'une suppression de tweet signalé
+                let message = `Êtes-vous sûr de vouloir supprimer cet utilisateur`;
+                // if (tweetContent) {
+                // Si le contenu est disponible, l'ajoute au message
+                //     message += ` avec le contenu : "${tweetContent}"`;
+                // }
+                message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            } else if (reportedTweetId) {
+                // Il s'agit d'une suppression de tweet signalé
+                let message = `Êtes-vous sûr de vouloir supprimer ce tweet signalé`;
+                // if (tweetContent) {
+                // Si le contenu est disponible, l'ajoute au message
+                //     message += ` avec le contenu : "${tweetContent}"`;
+                // }
+                message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            } else if (tweetId) {
+                // Il s'agit d'une suppression de tweet normal (si vous avez un tel bouton ailleurs)
+                let message = `Êtes-vous sûr de vouloir supprimer le tweet`;
+                message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            } else if (reportedCommentId) {
+                // Il s'agit d'une suppression de tweet signalé
+                let message = `Êtes-vous sûr de vouloir supprimer ce commentaire signalé`;
+                // if (tweetContent) {
+                // Si le contenu est disponible, l'ajoute au message
+                //     message += ` avec le contenu : "${tweetContent}"`;
+                // }
+                message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            } else if (commentId) {
+                // Il s'agit d'une suppression de tweet normal (si vous avez un tel bouton ailleurs)
+                let message = `Êtes-vous sûr de vouloir supprimer le commentaire`;
+                message += ` ? Cette action est irréversible.`;
+                modalMessage.textContent = message;
+            } else {
+                // Message de secours si aucun ID spécifique n'est trouvé
+                modalMessage.textContent = `Êtes-vous sûr de vouloir supprimer ? Cette action est irréversible.`;
+            }
+
+            modal.classList.remove('hidden'); // Affiche la modale
+        });
+    });
+
+    confirmDeleteBtn.addEventListener('click', function () {
+        if (formToSubmit) {
+            formToSubmit.submit(); // Soumet le formulaire
+        }
+        modal.classList.add('hidden'); // Masque la modale
+    });
+
+    cancelDeleteBtn.addEventListener('click', function () {
+        modal.classList.add('hidden'); // Masque la modale
+        formToSubmit = null; // Efface la référence du formulaire
+    });
+
+    // // ---------------------------------------------
+    // FENETRE MODALE DE SIGNALEMENT
+    // // ---------------------------------------------
+    const reportButtons = document.querySelectorAll('.report-button'); // Ajoutez une classe à votre bouton de suppression
+    const modalReport = document.getElementById('reportConfirmationModal');
+    const confirmReportBtn = document.getElementById('confirmReportBtn');
+    const cancelReportBtn = document.getElementById('cancelReportBtn');
+    const modalMessageReport = document.getElementById('modalMessageReport');
+    let formToSubmitReport = null;
+
+    reportButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault(); // Empêche la soumission de formulaire par défaut
+            formToSubmitReport = this.closest('form'); // Récupère le formulaire parent
+
+            // Récupérer les données du bouton cliqué
+            const reportedTweetId = this.dataset.reportedTweetId;
+            const reportedCommentId = this.dataset.reportedCommentId;
+
+            // Personnalise le message de la modale en fonction des données disponibles
+            if (reportedTweetId) {
+                // Il s'agit d'une suppression de tweet signalé
+                let message = `Êtes-vous sûr de vouloir dé-signaler ce tweet`;
+                // if (tweetContent) {
+                // Si le contenu est disponible, l'ajoute au message
+                //     message += ` avec le contenu : "${tweetContent}"`;
+                // }
+                message += ` ? Cette action est irréversible.`;
+                modalMessageReport.textContent = message;
+            } else if (reportedCommentId) {
+                // Il s'agit d'une suppression de tweet signalé
+                let message = `Êtes-vous sûr de vouloir dé-signaler ce commentaire`;
+                // if (tweetContent) {
+                // Si le contenu est disponible, l'ajoute au message
+                //     message += ` avec le contenu : "${tweetContent}"`;
+                // }
+                message += ` ? Cette action est irréversible.`;
+                modalMessageReport.textContent = message;
+            } else {
+                // Message de secours si aucun ID spécifique n'est trouvé
+                modalMessageReport.textContent = `Êtes-vous sûr de vouloir dé-signaler ? Cette action est irréversible.`;
+            }
+
+            modalReport.classList.remove('hidden'); // Affiche la modale
+        });
+    });
+
+    confirmReportBtn.addEventListener('click', function () {
+        if (formToSubmitReport) {
+            formToSubmitReport.submit(); // Soumet le formulaire
+        }
+        modalReport.classList.add('hidden'); // Masque la modale
+    });
+
+    cancelReportBtn.addEventListener('click', function () {
+        modalReport.classList.add('hidden'); // Masque la modale
+        formToSubmitReport = null; // Efface la référence du formulaire
+    });
 });
+
+
+
 
 // AJAX => Afficher les commentaires sans recharger la page
 

@@ -89,7 +89,12 @@ class RegistrationFormType extends AbstractType
             ->add('age', null, [
                 'attr' => ['class' => 'dark:bg-gray-400 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'],
                 'label' => 'Age :',
-                'label_attr' => ['class' => 'block text-gray-700 dark:text-white text-sm font-bold my-2']
+                'label_attr' => ['class' => 'block text-gray-700 dark:text-white text-sm font-bold my-2'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "Veuillez saisir un age",
+                    ]),
+                ],
             ])
 
 
@@ -154,45 +159,7 @@ class RegistrationFormType extends AbstractType
                 'row_attr' => ['class' => 'flex items-center'],
                 'label_html' => true,
                 'attr' => ['class' => 'ml-2'],
-            ])
-
-
-            // CHAMP : PHOTO DE PROFIL
-
-            ->add('photo', FileType::class, [
-                'label' => 'Photo de profil',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '5000k',
-                        'mimeTypes' => [
-                            'image/*',
-                        ],
-                        'mimeTypesMessage' => 'Image trop lourde',
-                    ])
-                ],
-                'attr' => ['class' => 'shadow appearance-none dark:bg-gray-400 border rounded w-full py-2 px-3 text-gray-700 dark:text-white leading-tight focus:outline-none focus:shadow-outline'],
-                'label_attr' => ['class' => 'block text-gray-700 dark:text-white text-sm font-bold my-2']
-            ])
-
-
-            // CHAMP : ACCEPTER LES CONDITIONS
-
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-                'label' => 'Accepter les conditions : ',
-                'label_attr' => ['class' => 'inline-flex items-center text-gray-700 dark:text-white text-sm font-bold my-2 cursor-pointer'],
-                'row_attr' => ['class' => 'flex items-center'],
-                'label_html' => true,
-                'attr' => ['class' => 'ml-2'],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
