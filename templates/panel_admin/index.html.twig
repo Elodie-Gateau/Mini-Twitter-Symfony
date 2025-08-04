@@ -260,7 +260,7 @@
 																		{% endif %}
 																		<form action="{{ path('app_admin_user_delete', {'id': user.id}) }}" method="post" class="delete-tweet-form">
 																			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-																			<button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium delete-tweet-button" data-user-id="{{ user.id }}">Supprimer</button>
+																			<button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 text-sm font-medium delete-tweet-button cursor-pointer" data-user-id="{{ user.id }}"><i class="fa-solid fa-trash"></i></button>
 																		</form>
 
 																	</div>
@@ -349,7 +349,7 @@
 																	<a href="{{ path('app_tweet_show', {'id': tweet.id, 'from' : 'admin_tweets'}) }}" class="dark:text-indigo-200 text-indigo-600 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<form action="{{ path('app_admin_tweet_delete', {'id': tweet.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tweet.id) }}">
-																		<button type="submit" class="text-red-600 dark:text-red-500 hover:text-red-900 text-sm font-medium delete-tweet-button" data-tweet-id="{{ tweet.id }}">Supprimer</button>
+																		<button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 text-sm font-medium delete-tweet-button cursor-pointer" data-tweet-id="{{ tweet.id }}"><i class="fa-solid fa-trash"></i></button>
 																	</form>
 																</div>
 															</td>
@@ -429,7 +429,7 @@
 																	>Dé-signaler</a>
 																	<form action="{{ path('app_admin_tweet_delete', {'id': reportedTweet.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedTweet.id) }}">
-																		<button type="submit" class="text-red-600 dark:text-red-500 hover:text-red-900 text-sm font-medium delete-tweet-button" data-reported-tweet-id="{{ reportedTweet.id }}">Supprimer</button>
+																		<button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 text-sm font-medium delete-tweet-button cursor-pointer" data-reported-tweet-id="{{ reportedTweet.id }}"><i class="fa-solid fa-trash"></i></button>
 																	</form>
 																</div>
 															</td>
@@ -515,7 +515,7 @@
 																	<a href="{{ path('app_tweet_show', {'id': comment.tweet.id, 'from' : 'admin_comments'}) }}" class="text-indigo-600 dark:text-indigo-200 hover:text-indigo-900 text-sm font-medium">Voir</a>
 																	<form action="{{ path('app_admin_comment_delete', {'id': comment.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-																		<button type="submit" class="text-red-600 dark:text-red-500 hover:text-red-900 text-sm font-medium delete-tweet-button" data-comment-id="{{ comment.id }}">Supprimer</button>
+																		<button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 text-sm font-medium delete-tweet-button cursor-pointer" data-comment-id="{{ comment.id }}"><i class="fa-solid fa-trash"></i></button>
 																	</form>
 																</div>
 															</td>
@@ -595,7 +595,7 @@
 																	>Dé-signaler</a>
 																	<form action="{{ path('app_admin_comment_delete', {'id': reportedComment.id}) }}" method="post" class="delete-tweet-form">
 																		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reportedComment.id) }}">
-																		<button type="submit" class="text-red-600 dark:text-red-500 hover:text-red-900 text-sm font-medium delete-tweet-button" data-reported-comment-id="{{ reportedComment.id }}">Supprimer</button>
+																		<button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 text-sm font-medium delete-tweet-button cursor-pointer" data-reported-comment-id="{{ reportedComment.id }}"><i class="fa-solid fa-trash"></i></button>
 																	</form>
 																</div>
 															</td>
