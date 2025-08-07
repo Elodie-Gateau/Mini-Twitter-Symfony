@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<div class="flex justify-center py-8">
+<div class="flex w-full gap-6 items-center p-5">
+			<img class="object-cover w-1/2 h-auto rounded-lg" src="{{ asset('img/image-accueil.png') }}" alt="Image d'accueil">
+	<div class="flex justify-center py-8 w-full">
 	
 		<form class="bg-white dark:bg-gray-500 shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
 
@@ -46,5 +48,6 @@
 			</div>
 		</form>
 		
+	</div>
 	</div>
 {% endblock %}

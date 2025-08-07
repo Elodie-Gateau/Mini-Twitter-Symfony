@@ -174,7 +174,7 @@
 
 										{# Photo de profil du commentateur #}
 										<div class="flex items-center gap-2">
-											{% if comment.user.photo is not null %}
+											{% if comment.user.photo is not null and comment.user.isActive %}
 												<img class="w-10 rounded-full" src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="">
 											{% else %}
 												<img class="w-10 rounded-full" src="{{ asset('img/personne.png') }}" alt="">
