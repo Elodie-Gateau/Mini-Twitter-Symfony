@@ -4,12 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	<div class="flex justify-center py-8">
+<div class="flex w-full gap-6 items-center p-5">
+			<img class="object-cover w-1/2 h-auto rounded-lg" src="{{ asset('img/image-accueil.png') }}" alt="Image d'accueil">
+	<div class="flex justify-center py-8 w-full">
 	
 		<form class="bg-white dark:bg-gray-500 shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
 
 		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			<div class="text-red-500 font-bold dark:text-red-400">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
 
@@ -17,8 +19,8 @@
 
 		{% if app.user and app.user.isActive %}
 			<div class="mb-3">
-				Vous êtes connecté en tant que 
-				{{ app.user.userIdentifier }},
+				<p>Vous êtes actuellement connecté en tant que 
+				{{ app.user.userIdentifier }},</p>
 				<a href="{{ path('app_logout') }}">Se déconnecter</a>
 			</div>
 		{% endif %}
@@ -46,5 +48,6 @@
 			</div>
 		</form>
 		
+	</div>
 	</div>
 {% endblock %}

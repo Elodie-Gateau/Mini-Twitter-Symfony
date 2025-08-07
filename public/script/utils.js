@@ -1,8 +1,7 @@
 // AJAX => LIKER SANS RECHARGER LA PAGE
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    const likeSound = new Audio('/audio/chien.wav');
+    const likeSound = new Audio("/audio/chien.wav");
 
     const handleLike = async (form) => {
         // Crée un objet FormData à partir du formulaire pour envoyer les données.
@@ -32,10 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 counter.textContent = data.likes;
             }
 
-            likeSound.play().catch(error => {
+            likeSound.play().catch((error) => {
                 console.warn("Impossible de jouer le son:", error);
             });
-
         } catch (error) {
             // Ce bloc gère toutes les erreurs, qu'elles proviennent de la requête fetch ou d'autres opérations.
             alert("Une erreur est survenue lors du like.");
@@ -43,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    document.querySelectorAll('.like-form').forEach(form => {
-        form.addEventListener('submit', (e) => {
+    document.querySelectorAll(".like-form").forEach((form) => {
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
             handleLike(form);
         });
@@ -53,17 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // // ---------------------------------------------
     // FENETRE MODALE DE SUPPRESSION
     // // ---------------------------------------------
-    const deleteButtons = document.querySelectorAll('.delete-tweet-button'); // Ajoutez une classe à votre bouton de suppression
-    const modal = document.getElementById('deleteConfirmationModal');
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-    const modalMessage = document.getElementById('modalMessage');
+    const deleteButtons = document.querySelectorAll(".delete-tweet-button"); // Ajoutez une classe à votre bouton de suppression
+    const modal = document.getElementById("deleteConfirmationModal");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const modalMessage = document.getElementById("modalMessage");
     let formToSubmit = null;
 
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
+    deleteButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
             event.preventDefault(); // Empêche la soumission de formulaire par défaut
-            formToSubmit = this.closest('form'); // Récupère le formulaire parent
+            formToSubmit = this.closest("form"); // Récupère le formulaire parent
 
             // Récupérer les données du bouton cliqué
             const userId = this.dataset.userId; // Accède à data-tweet-id
@@ -117,42 +115,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 let message = `Êtes-vous sûr de vouloir supprimer le compte`;
                 // message += ` ? Cette action est irréversible.`;
                 modalMessage.textContent = message;
-            }else {
+            } else {
                 // Message de secours si aucun ID spécifique n'est trouvé
                 modalMessage.textContent = `Êtes-vous sûr de vouloir supprimer ? Cette action est irréversible.`;
             }
 
-            modal.classList.remove('hidden'); // Affiche la modale
+            modal.classList.remove("hidden"); // Affiche la modale
         });
     });
 
-    confirmDeleteBtn.addEventListener('click', function () {
+    confirmDeleteBtn.addEventListener("click", function () {
         if (formToSubmit) {
             formToSubmit.submit(); // Soumet le formulaire
         }
-        modal.classList.add('hidden'); // Masque la modale
+        modal.classList.add("hidden"); // Masque la modale
     });
 
-    cancelDeleteBtn.addEventListener('click', function () {
-        modal.classList.add('hidden'); // Masque la modale
+    cancelDeleteBtn.addEventListener("click", function () {
+        modal.classList.add("hidden"); // Masque la modale
         formToSubmit = null; // Efface la référence du formulaire
     });
 
     // // ---------------------------------------------
     // FENETRE MODALE DE SIGNALEMENT
     // // ---------------------------------------------
-    const reportButtons = document.querySelectorAll('.report-button'); // Ajoutez une classe à votre bouton de suppression
-    const modalReport = document.getElementById('reportConfirmationModal');
-    const confirmReportBtn = document.getElementById('confirmReportBtn');
-    const cancelReportBtn = document.getElementById('cancelReportBtn');
-    const modalTitleReport = document.getElementById('modalTitleReport');
-    const modalMessageReport = document.getElementById('modalMessageReport');
+    const reportButtons = document.querySelectorAll(".report-button"); // Ajoutez une classe à votre bouton de suppression
+    const modalReport = document.getElementById("reportConfirmationModal");
+    const confirmReportBtn = document.getElementById("confirmReportBtn");
+    const cancelReportBtn = document.getElementById("cancelReportBtn");
+    const modalTitleReport = document.getElementById("modalTitleReport");
+    const modalMessageReport = document.getElementById("modalMessageReport");
     let formToSubmitReport = null;
 
-    reportButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
+    reportButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
             event.preventDefault(); // Empêche la soumission de formulaire par défaut
-            formToSubmitReport = this.closest('form'); // Récupère le formulaire parent
+            formToSubmitReport = this.closest("form"); // Récupère le formulaire parent
 
             // Récupérer les données du bouton cliqué
             const reportTweetId = this.dataset.reportTweetId;
@@ -162,8 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reportTweetId) {
                 // Il s'agit d'une suppression de tweet signalé
                 let message = `Êtes-vous sûr de vouloir signaler ce tweet`;
-                 let title = 'Confirmer le signalement'
-                 let button = 'Signaler'
+                let title = "Confirmer le signalement";
+                let button = "Signaler";
                 // if (tweetContent) {
                 // Si le contenu est disponible, l'ajoute au message
                 //     message += ` avec le contenu : "${tweetContent}"`;
@@ -173,9 +171,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalTitleReport.textContent = title;
                 confirmReportBtn.textContent = button;
             } else if (reportCommentId) {
-                 let message = `Êtes-vous sûr de vouloir signaler ce commentaire`;
-                 let title = 'Confirmer le signalement'
-                 let button = 'Signaler'
+                let message = `Êtes-vous sûr de vouloir signaler ce commentaire`;
+                let title = "Confirmer le signalement";
+                let button = "Signaler";
                 // if (tweetContent) {
                 // Si le contenu est disponible, l'ajoute au message
                 //     message += ` avec le contenu : "${tweetContent}"`;
@@ -189,34 +187,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 modalMessageReport.textContent = `Êtes-vous sûr de vouloir dé-signaler ? Cette action est irréversible.`;
             }
 
-            modalReport.classList.remove('hidden'); // Affiche la modale
+            modalReport.classList.remove("hidden"); // Affiche la modale
         });
     });
 
-    confirmReportBtn.addEventListener('click', function () {
+    confirmReportBtn.addEventListener("click", function () {
         if (formToSubmitReport) {
             formToSubmitReport.submit(); // Soumet le formulaire
         }
-        modalReport.classList.add('hidden'); // Masque la modale
+        modalReport.classList.add("hidden"); // Masque la modale
     });
 
-    cancelReportBtn.addEventListener('click', function () {
-        modalReport.classList.add('hidden'); // Masque la modale
+    cancelReportBtn.addEventListener("click", function () {
+        modalReport.classList.add("hidden"); // Masque la modale
         formToSubmitReport = null; // Efface la référence du formulaire
     });
 
     // ---------------------------------------------
     // LOGIQUE POUR LA MODALE DE DÉ-SIGNALEMENT (AVEC LIEN)
     // ---------------------------------------------
-    const unreportLinkButtons = document.querySelectorAll('.unreport-link-button');
-    const unreportModal = document.getElementById('unreportConfirmationModal');
-    const confirmUnreportBtn = document.getElementById('confirmUnreportBtn');
-    const cancelUnreportBtn = document.getElementById('cancelUnreportBtn');
-    const unreportModalMessage = document.getElementById('unreportModalMessage');
+    const unreportLinkButtons = document.querySelectorAll(
+        ".unreport-link-button"
+    );
+    const unreportModal = document.getElementById("unreportConfirmationModal");
+    const confirmUnreportBtn = document.getElementById("confirmUnreportBtn");
+    const cancelUnreportBtn = document.getElementById("cancelUnreportBtn");
+    const unreportModalMessage = document.getElementById(
+        "unreportModalMessage"
+    );
     let unreportUrlToRedirect = null; // Variable pour stocker l'URL du lien
 
-    unreportLinkButtons.forEach(link => { // Maintenant, on itère sur les liens <a>
-        link.addEventListener('click', function (event) {
+    unreportLinkButtons.forEach((link) => {
+        // Maintenant, on itère sur les liens <a>
+        link.addEventListener("click", function (event) {
             event.preventDefault(); // TRÈS IMPORTANT : Empêche la redirection immédiate du lien
 
             unreportUrlToRedirect = this.dataset.unreportUrl; // Récupère l'URL complète du lien
@@ -224,34 +227,53 @@ document.addEventListener("DOMContentLoaded", () => {
             const unreportCommentId = this.dataset.unreportCommentId; // Récupère l'ID pour le message
 
             if (unreportTweetId) {
-            let message = `Êtes-vous sûr de vouloir retirer le signalement du tweet ?`;
-            unreportModalMessage.textContent = message;
-            }else if (unreportCommentId) {
-             let message = `Êtes-vous sûr de vouloir retirer le signalement du commentaire ?`;
-            unreportModalMessage.textContent = message;
-            }else{   
-            unreportModalMessage.textContent = `Êtes-vous sûr de vouloir dé-signaler ?`;          
+                let message = `Êtes-vous sûr de vouloir retirer le signalement du tweet ?`;
+                unreportModalMessage.textContent = message;
+            } else if (unreportCommentId) {
+                let message = `Êtes-vous sûr de vouloir retirer le signalement du commentaire ?`;
+                unreportModalMessage.textContent = message;
+            } else {
+                unreportModalMessage.textContent = `Êtes-vous sûr de vouloir dé-signaler ?`;
             }
-            unreportModal.classList.remove('hidden'); // Affiche la modale de dé-signalement
+            unreportModal.classList.remove("hidden"); // Affiche la modale de dé-signalement
         });
     });
 
-    confirmUnreportBtn.addEventListener('click', function () {
+    confirmUnreportBtn.addEventListener("click", function () {
         if (unreportUrlToRedirect) {
             window.location.href = unreportUrlToRedirect; // Redirige vers l'URL du lien
         }
-        unreportModal.classList.add('hidden');
+        unreportModal.classList.add("hidden");
     });
 
-    cancelUnreportBtn.addEventListener('click', function () {
-        unreportModal.classList.add('hidden');
+    cancelUnreportBtn.addEventListener("click", function () {
+        unreportModal.classList.add("hidden");
         unreportUrlToRedirect = null; // Efface l'URL
     });
-
 });
 
+// MENU TOGGLE
 
+document.addEventListener("DOMContentLoaded", () => {
+    const profileBtn = document.getElementById("profileMenuButton");
+    const profileMenu = document.getElementById("profileDropdown");
 
+    if (profileBtn && profileMenu) {
+        profileBtn.addEventListener("click", () => {
+            profileMenu.classList.toggle("hidden");
+        });
+
+        // Fermer si clic à l’extérieur
+        document.addEventListener("click", (e) => {
+            if (
+                !profileBtn.contains(e.target) &&
+                !profileMenu.contains(e.target)
+            ) {
+                profileMenu.classList.add("hidden");
+            }
+        });
+    }
+});
 
 // AJAX => Afficher les commentaires sans recharger la page
 
