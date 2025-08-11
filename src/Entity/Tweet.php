@@ -31,19 +31,37 @@ class Tweet
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tweet')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tweet', cascade: ['persist', 'remove'])]
     private Collection $media;
 
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet')]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'tweet', cascade: ['persist', 'remove'])]
     private Collection $comment;
+
+    #[ORM\Column]
+    private ?bool $isSignaled = false;
+
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'tweet')]
+    private Collection $likes;
+
+   
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?self $originalTweet = null;
+
+    #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+    private int $retweetCount = 0;
 
     public function __construct()
     {
         $this->media = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +162,84 @@ class Tweet
             }
         }
 
+        return $this;
+    }
+
+    public function isSignaled(): ?bool
+    {
+        return $this->isSignaled;
+    }
+
+    public function setIsSignaled(bool $isSignaled): static
+    {
+        $this->isSignaled = $isSignaled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setTweet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getTweet() === $this) {
+                $like->setTweet(null);
+            }
+        }
+
+        return $this;
+    }
+
+     public function getOriginalTweet(): ?self
+    {
+        return $this->originalTweet;
+    }
+
+    public function setOriginalTweet(?self $originalTweet): static
+    {
+        $this->originalTweet = $originalTweet;
+        return $this;
+    }
+
+    public function getRetweetCount(): int
+    {
+        return $this->retweetCount;
+    }
+
+    public function setRetweetCount(int $retweetCount): static
+    {
+        $this->retweetCount = $retweetCount;
+        return $this;
+    }
+
+    public function incrementRetweetCount(): static
+    {
+        $this->retweetCount++;
+        return $this;
+    }
+
+    public function decrementRetweetCount(): static
+    {
+        if ($this->retweetCount > 0) {
+            $this->retweetCount--;
+        }
         return $this;
     }
 }

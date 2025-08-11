@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/media')]
 final class MediaController extends AbstractController
 {
@@ -71,7 +73,7 @@ final class MediaController extends AbstractController
     #[Route('/{id}', name: 'app_media_delete', methods: ['POST'])]
     public function delete(Request $request, Media $medium, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$medium->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $medium->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($medium);
             $entityManager->flush();
         }

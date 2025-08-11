@@ -75,10 +75,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?float $age = null;
 
+    #[ORM\Column]
+    private ?bool $isBanned = null;
+
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'user')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->isActive = true;
+        $this->isBanned = false;
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -315,6 +327,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAge(float $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function isBanned(): ?bool
+    {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): static
+    {
+        $this->isBanned = $isBanned;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
 
         return $this;
     }

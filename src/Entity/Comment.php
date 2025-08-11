@@ -23,7 +23,7 @@ class Comment
     private ?\DateTime $dateTime = null;
 
     #[ORM\ManyToOne(inversedBy: 'comment')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Tweet $tweet = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
@@ -33,12 +33,30 @@ class Comment
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'comment')]
+    #[ORM\OneToMany(
+        targetEntity: Media::class,
+        mappedBy: 'comment',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
     private Collection $media;
+
+    #[ORM\Column]
+    private ?bool $isSignaled = false;
+
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'comment',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true)]
+    private Collection $likes;
 
     public function __construct()
     {
         $this->media = new ArrayCollection();
+        $this->isSignaled = false;
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +136,48 @@ class Comment
             // set the owning side to null (unless already changed)
             if ($medium->getComment() === $this) {
                 $medium->setComment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isSignaled(): ?bool
+    {
+        return $this->isSignaled;
+    }
+
+    public function setIsSignaled(bool $isSignaled): static
+    {
+        $this->isSignaled = $isSignaled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getComment() === $this) {
+                $like->setComment(null);
             }
         }
 

@@ -4,63 +4,244 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Entity\Media;
+use App\Entity\Tweet;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
+#[IsGranted('ROLE_USER')]
 #[Route('/comment')]
 final class CommentController extends AbstractController
 {
-    #[Route(name: 'app_comment_index', methods: ['GET'])]
-    public function index(CommentRepository $commentRepository): Response
-    {
-        return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    // MONTRER LA LISTE DES COMMENTAIRES
+
+    // #[Route(name: 'app_comment_index', methods: ['GET'])]
+    // public function index(CommentRepository $commentRepository): Response
+    // {
+    //     return $this->render('comment/index.html.twig', [
+    //         'comments' => $commentRepository->findAll(),
+    //     ]);
+    // }
+
+
+    // MONTRER LA LISTE DES COMMENTAIRES AVEC PAGINATION + FORMULAIRE D'AJOUT DE COMMENTAIRE
+
+    #[Route('/{id}/comment', name: 'app_tweet_comments_index', methods: ['GET', 'POST'])]
+    public function TweetComments(
+        Request $request,
+        CommentRepository $commentRepository,
+        EntityManagerInterface $entityManager,
+        Security $security,
+        SluggerInterface $slugger,
+        int $id
+    ): Response {
+        $tweet = $entityManager->getRepository(Tweet::class)->find($id);
+
+        if (!$tweet) {
+            throw $this->createNotFoundException("Tweet non trouvé.");
+        }
+
+        // GESTION DE LA PAGINATION
+        $limit = 5;
+        $page = max(1, (int) $request->query->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $totalComments = $commentRepository->count(['tweet' => $tweet]);
+        $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC'], $limit, $offset);
+
+        // Création du commentaire
         $comment = new Comment();
+        $comment->setTweet($tweet);
+        $comment->setUser($security->getUser());
+        $comment->setDateTime(new \DateTime());
+
+        // Création du formulaire
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+        // Si formulaire valide, on génère le commentaire dans la base de données
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+            // Ajout du média
+            $imageFile = $form->get('media')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $media = new \App\Entity\Media;
+                $media->setUrlMedia('/uploads/images/' . $newFilename);
+                $media->setComment($comment);
+
+                // On génère le média dans la base de données et on lie le média au commentaire
+                $entityManager->persist($media);
+                $entityManager->flush();
+                $comment->addMedium($media);
+            }
+
+            // On génère tout (commentaire + média) dans la base de données
+            $entityManager->flush();
+
+            // Redirection vers la page du tweet
+            return $this->redirectToRoute('app_tweet_comments_index', [
+                'id' => $tweet->getId(),
+                'page' => 1
+            ]);
         }
 
-        return $this->render('comment/new.html.twig', [
-            'comment' => $comment,
-            'form' => $form,
+        return $this->render('tweet/index.html.twig', [
+            'tweets' => [$tweet],
+            'selectedTweet' => $tweet,
+            'comments' => $comments,
+            'commentForm' => $form->createView(),
+            'commentCurrentPage' => $page,
+            'commentTotalPages' => ceil($totalComments / $limit),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
-    public function show(Comment $comment): Response
-    {
-        return $this->render('comment/show.html.twig', [
-            'comment' => $comment,
-        ]);
-    }
 
-    #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
-    {
+    // AJOUTER UN COMMENTAIRE
+
+    #[Route('/new/{tweetId}', name: 'app_comment_new', methods: ['POST'])]
+    public function new(
+        int $tweetId,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Security $security,
+        SluggerInterface $slugger,
+        CommentRepository $commentRepository
+    ): Response {
+
+        // Récupération du tweet
+        $tweet = $entityManager->getRepository(Tweet::class)->find($tweetId);
+        if (!$tweet) {
+            throw $this->createNotFoundException('Tweet non trouvé.');
+        }
+
+        // Création du commentaire
+        $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+        // Si formulaire valide
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $comment->setTweet($tweet);
+            $comment->setUser($security->getUser());
+            $comment->setDateTime(new \DateTime());
+            
+            $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+            // Gestion du média
+            $imageFile = $form->get('media')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+
+                $media = new Media();
+                $media->setUrlMedia('/uploads/images/' . $newFilename);
+                $media->setComment($comment);
+
+                $entityManager->persist($media);
+                $comment->addMedium($media);
+                $entityManager->flush();
+            }
+
+            // 🔄 Si AJAX : renvoyer la liste mise à jour
+            if ($request->isXmlHttpRequest()) {
+                $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC']);
+                return $this->render('comment/_comments_list.html.twig', [
+                    'comments' => $comments,
+                    'tweet' => $tweet,
+                    'commentForm' => $this->createForm(CommentType::class, new Comment(), [
+                        'action' => $this->generateUrl('app_comment_new', ['tweetId' => $tweet->getId()])
+                    ])->createView()
+                ]);
+            }
+
+            // Sinon redirection classique
+            return $this->redirectToRoute('app_tweet_index');
+        }
+
+        // 🔄 Si formulaire invalide en AJAX : renvoyer la vue avec erreurs
+        if ($request->isXmlHttpRequest()) {
+            $comments = $commentRepository->findBy(['tweet' => $tweet], ['dateTime' => 'DESC']);
+            return $this->render('comment/_comments_list.html.twig', [
+                'comments' => $comments,
+                'tweet' => $tweet,
+                'commentForm' => $form->createView()
+            ]);
+        }
+
+        // Fallback classique
+        return $this->redirectToRoute('app_tweet_index');
+    }
+
+
+    // MODIFIER UN COMMENTAIRE
+
+    #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
+    {
+        if ($security->getUser() == $comment->getUser()) {
+
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+            $tweet = $comment->getTweet();
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush();
+
+                $imageFile = $form->get('media')->getData();
+
+                if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                    $media = new Media;
+                    $media->setUrlMedia('/uploads/images/' . $newFilename);
+                    $media->setComment($comment);
+
+                    $entityManager->persist($media);
+                    $entityManager->flush();
+                    $comment->addMedium($media);
+                }
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_tweet_comments_index', [
+                    'id' => $tweet->getId(),
+                    'page' => 1
+                ]);
+            }
+        } else {
+            $this->addFlash('danger', "Vous n'avez pas le droit de consulter ou de modifier cette page");
+            return $this->redirectToRoute('app_tweet_index');
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -69,14 +250,61 @@ final class CommentController extends AbstractController
         ]);
     }
 
+
+    // SUPPRIMER UN COMMENTAIRE
+
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Security $security, Comment $comment, EntityManagerInterface $entityManager, int $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->getPayload()->getString('_token'))) {
+        $tweet = $comment->getTweet();
+
+        if ($security->isGranted('ROLE_ADMIN') || $security->getUser() == $tweet->getIdUser() && $this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($comment);
             $entityManager->flush();
+
+            // return new JsonResponse(['success' => true]);
         }
 
-        return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_tweet_comments_index', [
+            'id' => $tweet->getId(),
+            'page' => 1
+        ]);
+    }
+
+
+    // SIGNALER UN TWEET
+
+    #[Route('/{id}/signal', name: 'app_comment_signalComment', methods: ['POST'])]
+    public function signalComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+
+        if ($this->isCsrfTokenValid('signalComment' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+
+            $comment->setIsSignaled(true);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ce commentaire a bien été signalé, il est en attente de modération !');
+        }
+
+        return $this->redirectToRoute('app_tweet_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/tweet/{id}/comments', name: 'app_tweet_comments_ajax', methods: ['GET'])]
+    public function loadComments(Tweet $tweet, CommentRepository $commentRepository): Response
+    {
+        $comments = $commentRepository->findBy(
+            ['tweet' => $tweet],
+            ['dateTime' => 'DESC']
+        );
+
+        // On renvoie un fragment Twig contenant uniquement les commentaires
+        return $this->render('comment/_comments_list.html.twig', [
+            'comments' => $comments,
+            'tweet' => $tweet,
+            'commentForm' => $this->createForm(CommentType::class, new Comment(), [
+                'action' => $this->generateUrl('app_comment_new', ['tweetId' => $tweet->getId()])
+            ])->createView()
+        ]);
     }
 }

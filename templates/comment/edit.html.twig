@@ -1,13 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Comment{% endblock %}
+{% block title %}Modifier le commentaire
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Comment</h1>
+	<h1 class="mt-15 mb-2 text-4xl font-bold text-orange-500 text-center">Modifier le commentaire</h1>
 
-    {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="flex justify-center">
 
-    <a href="{{ path('app_comment_index') }}">back to list</a>
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col flex-wrap justify-center w-150">
 
-    {{ include('comment/_delete_form.html.twig') }}
+			<div class="mb-4">
+
+				{{ include('comment/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+				<div class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white text-center py-2 px-4 border border-red-500 hover:border-transparent rounded cursor-pointer w-full mt-2">
+					{{ include('comment/_delete_form.html.twig') }}
+				</div>
+
+				<div
+					class="flex flex-row flex-wrap items-end justify-start gap-5 mt-10 mb-5">
+
+					{# Fait apparaître les médias du commentaire s'il y en a #}
+					{% if comment.media %}
+						{% for media in comment.media %}
+							<div class="flex flex-col flex-wrap items-center">
+								<div class="h30 w-30">
+									<img class="rounded-full size-fit w-{{ comment.media|length > 1 ? " 50" : " 100" }}" src="{{ media.urlMedia }}" alt="">
+								</div>
+								{# Permet de supprimer chaque média individuellement #}
+								<form method="post" action="{{ path('app_media_delete', {'id': media.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce média ?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ media.id) }}">
+									<button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded cursor-pointer mt-2">Supprimer</button>
+								</form>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+
+				<a href="{{ path('app_tweet_index') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-5">Retour à la liste</a>
+
+			</div>
+		</div>
+	</div>
+
 {% endblock %}

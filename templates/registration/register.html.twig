@@ -5,22 +5,71 @@
 
 {% block body %}
 	<div class="flex justify-center py-8">
-		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-			<h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
+		<div class="bg-white dark:bg-gray-500 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<h1 class="h3 mb-5 font-bold dark:text-white">S'inscrire</h1>
 
 			{{ form_errors(registrationForm) }}
 
 			{{ form_start(registrationForm) }}
-			<div class="block text-gray-700 text-sm font-bold mb-2">
+			<div class="block text-gray-700 !dark:text-white text-sm font-bold mb-2">
 
 				{{ form_row(registrationForm.photo) }}
-				{{ form_row(registrationForm.name) }}
-				{{ form_row(registrationForm.firstname) }}
-				{{ form_row(registrationForm.nickname) }}
-				{{ form_row(registrationForm.age) }}
-				{{ form_row(registrationForm.email) }}
-				{{ form_label(registrationForm.plainPassword) }}{# Affiche juste le label #}
-				{{ form_widget(registrationForm.plainPassword) }}{# Affiche juste le champ de saisie #}
+
+				{{ form_label(registrationForm.name) }}
+				{{ form_widget(registrationForm.name) }}
+				{% if form_errors(registrationForm.name) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.name) }}
+					</div>
+				{% endif %}
+
+				{{ form_label(registrationForm.firstname) }}
+				{{ form_widget(registrationForm.firstname) }}
+				{% if form_errors(registrationForm.firstname) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.firstname) }}
+					</div>
+				{% endif %}
+
+				{{ form_label(registrationForm.nickname) }}
+					{{ form_widget(registrationForm.nickname) }}
+					{% if form_errors(registrationForm.nickname) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.nickname) }}
+					</div>
+				{% endif %}
+
+				{{ form_label(registrationForm.age) }}
+					{{ form_widget(registrationForm.age) }}
+					{% if form_errors(registrationForm.age) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.age) }}
+					</div>
+				{% endif %}
+
+				{{ form_label(registrationForm.email) }}
+					{{ form_widget(registrationForm.email) }}
+					{% if form_errors(registrationForm.email) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.email) }}
+					</div>
+				{% endif %}
+
+
+				{{ form_label(registrationForm.plainPassword) }}
+				{# Affiche juste le label #}
+				{{ form_widget(registrationForm.plainPassword) }}
+				{# Affiche juste le champ de saisie #}
 				{% if form_errors(registrationForm.plainPassword) %}
 					<div
 						class="text-red-500 text-sm mt-2">
@@ -28,9 +77,19 @@
 						{{ form_errors(registrationForm.plainPassword) }}
 					</div>
 				{% endif %}
-				{{ form_row(registrationForm.agreeTerms) }}
+
+				{{ form_label(registrationForm.agreeTerms) }}
+					{{ form_widget(registrationForm.agreeTerms) }}
+					{% if form_errors(registrationForm.agreeTerms) %}
+					<div
+						class="text-red-500 text-sm mt-2">
+						{# Add your desired classes for red text here #}
+						{{ form_errors(registrationForm.agreeTerms) }}
+					</div>
+				{% endif %}
+
 				<div class="flex justify-center mt-4">
-					<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
+					<button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
 				</div>
 				{{ form_end(registrationForm) }}
 			</div>
