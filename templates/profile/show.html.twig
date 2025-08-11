@@ -55,35 +55,37 @@
 		</div>
 
 		<!-- Page Content -->
-		{# <main id="page-content" class="flex flex-col ">
-			<div class="w-full mx-auto "> #}
-				<div class="w-full max-w-4xl bg-white dark:bg-gray-600 rounded-lg flex flex-row md:flex-col">
+
+<div class="w-full max-w-4xl bg-white dark:bg-gray-600 rounded-lg flex flex-col md:flex-row">
+
 					<!-- Navigation Above Table -->
-					<nav class="w-full md:w-1/4 p-2 pt-4">
-						<div class="flex flex-col md:flex-row w-full md:w-auto flex-wrap justify-center md:justify-start gap-2 mb-4">
-							<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets'}) }}" class="group dark:text-white flex items-center justify-between gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-orange-100 hover:text-orange-600 active:border-orange-200">
-								<i class="fa-solid fa-message text-slate-300 group-hover:text-orange-500"></i>
-								<span class="flex-1 text-left text-base sm:text-lg">Mes tweets</span>
-								<span class="inline-flex items-center justify-center rounded-full border border-orange-200 bg-gray-50 px-2 text-xs text-orange-900">{{ app.user.tweets|length }}</span>
-							</a>
-							<a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes'}) }}" class="group dark:text-white flex items-center justify-between gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-orange-100 hover:text-orange-600 active:border-orange-200">
-								<i class="fa-solid fa-paw size-5 text-slate-300 group-hover:text-orange-500"></i>
-								<span class="flex-1 text-left text-base sm:text-lg">Mes Likes</span>
-								<span class="inline-flex items-center justify-center rounded-full border border-orange-200 bg-gray-50 px-2 text-xs text-orange-900">{{ app.user.likes|length }}</span>
-							</a>
-						</div>
-					</nav>
+    <nav class="w-full md:w-1/4 p-4 flex flex-row md:flex-col justify-center md:justify-start gap-2 order-1 md:order-none">
+        <a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'tweets'}) }}" 
+           class="group flex items-center justify-between w-full md:w-auto gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-orange-100 hover:text-orange-600 active:border-orange-200">
+            <i class="fa-solid fa-message text-slate-300 group-hover:text-orange-500"></i>
+            <span class="flex-1 text-left text-base sm:text-lg">Mes tweets</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-orange-200 bg-gray-50 px-2 text-xs text-orange-900">{{ app.user.tweets|length }}</span>
+        </a>
+        
+        <a href="{{ path('app_profile_show', {'id': app.user.id,'section': 'likes'}) }}" 
+           class="group flex items-center justify-between w-full md:w-auto gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-orange-100 hover:text-orange-600 active:border-orange-200">
+            <i class="fa-solid fa-paw size-5 text-slate-300 group-hover:text-orange-500"></i>
+            <span class="flex-1 text-left text-base sm:text-lg">Mes Likes</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-orange-200 bg-gray-50 px-2 text-xs text-orange-900">{{ app.user.likes|length }}</span>
+        </a>
+    </nav>
 					<!-- END Navigation -->
 
 					<!-- Main Content -->
+					    <div class="w-full md:w-3/4">
 					{% if app.request.query.get('section') == 'tweets' or app.request.query.get('section') is null %}
-						<div class="w-full md:w-3/4 overflow-hidden rounded-xl bg-white dark:bg-gray-500">
-							<div class="px-6 pt-6">
+						<div class="w-full overflow-hidden rounded-xl bg-white dark:bg-gray-500">
+							<div class="w-full px-6 pt-6">
 								<h2 class="text-2xl font-bold dark:text-white">Mes tweets</h2>
 								{# <h3 class="text-sm font-medium text-slate-500"></h3> #}
 							</div>
 							<div
-								class="p-6">
+								class="w-full p-6">
 								<!-- Responsive Table Container -->
 								<div
 									class="min-w-full overflow-x-auto rounded-sm  flex flex-col gap-3">
@@ -144,7 +146,7 @@
 								</div>
 							</div>
 							{% elseif app.request.query.get('section') == 'likes' %}
-								<div class="w-full md:w-3/4 overflow-hidden rounded-xl border border-slate-200 bg-white dark:bg-gray-500">
+								<div class="w-full overflow-hidden rounded-xl bg-white dark:bg-gray-500">
 									<div class="px-6 pt-6">
 										<h2 class="text-2xl font-bold dark:text-white">Mes likes</h2>
 										{# <h3 class="text-sm font-medium text-slate-500"></h3> #}
@@ -247,6 +249,8 @@
 									<!-- END Responsive Table Container -->
 								</div>
 								      {% endif %}
+									      </div>
+
 							</div>
 						</div>
 
